@@ -1,0 +1,21 @@
+{
+  "name": "new-nasional-elektronik-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/formbody": "^7.4.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "fastify-log": "^1.2.2",
+    "fastify-mongoose-api": "^1.2.23",
+    "mongoose": "^8.7.0"
+  },
+  "type": "module"
+}
