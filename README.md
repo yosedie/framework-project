@@ -1,4 +1,13 @@
-# framework-project
+# framework-project + SDP
+#tutorial inisialisasi singkat:
+npm install nodemon -g
+npm install fastify@4
+npm install @fastify/formbody@7.4.0
+npm install fastify-mongoose-api
+npm install mongoose
+npm install fastify-log
+...
+
 
 ## Deskripsi
 Framework ini dirancang untuk mempermudah pengembangan aplikasi web dengan menyediakan alat, pustaka, dan struktur untuk membangun aplikasi yang skalabel dan mudah dikelola.
