@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import logoWhite from '../public/logo_white.png'
-import logoTokopedia from '../public/logo_tokopedia.png'
+// import logoTokopedia from '../public/logo_tokopedia.png'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: 'transparent',
@@ -36,7 +36,7 @@ function Footer() {
                   Connect with us
                 </b>
               </Typography>
-              <Image
+              {/* <Image
                 draggable={false}
                 src={logoTokopedia}
                 alt="Example"
@@ -45,7 +45,7 @@ function Footer() {
                 style={{
                   cursor: "pointer"
                 }}
-              />
+              /> */}
             </Item>
           </Grid>
           <Grid size={4}>
