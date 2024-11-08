@@ -17,7 +17,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image';
 import logoWhite from '../public/logo_white.png'
 
-const pages = ['Products', 'Events', 'About us'];
+const pages = ['Products', 'Events'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
