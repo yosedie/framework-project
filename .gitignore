@@ -9,3 +9,8 @@ new-nasional-elektronik-frontend/.next/trace
 node_modules/
 .DS_Store
 /new-nasional-elektronik-frontend/.next
+/new-nasional-elektronik-frontend/.next
+/new-nasional-elektronik-frontend/.next/cache
+/new-nasional-elektronik-frontend/.next/cache/webpack
+/new-nasional-elektronik-frontend/.next/cache/webpack/client-development
+*.gz

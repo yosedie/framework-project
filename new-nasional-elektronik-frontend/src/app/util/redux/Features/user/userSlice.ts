@@ -1,19 +1,24 @@
 'use client';
-
-import { createSlice } from "@reduxjs/toolkit";
+import { ProductStruct } from "@/app/types/types";
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {
-    jwt_token: string
+    jwt_token: string,
+    shopping_cart: ProductStruct[],
 }
 
 const initialState: UserState = {
-    jwt_token: ""
+    jwt_token: "",
+    shopping_cart: [],
 }
 
 export const counterSlice = createSlice({
     name: 'counter',
     initialState,
     reducers: {
+        addToCart: (state, action: PayloadAction<ProductStruct>) => {
+            state.shopping_cart.push(action.payload)
+        },
         login: (state, action) => {
             state.jwt_token = action.payload
         },
@@ -23,6 +28,6 @@ export const counterSlice = createSlice({
     }
 })
 
-export const {login, logout} = counterSlice.actions
+export const {addToCart, login, logout} = counterSlice.actions
 
 export default counterSlice.reducer

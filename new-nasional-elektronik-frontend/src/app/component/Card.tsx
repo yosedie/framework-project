@@ -12,12 +12,13 @@ import Grid from '@mui/material/Grid2';
 type ImgMediaCardProps = {
   title?: string;
   description?: string;
+  image_url?: string;
   isDescriptionTitle?: boolean;
   isHorizontal?: boolean;
   fullWidth?: boolean;
   withImage?: boolean;
   marginTopParam?: string;
-  onClickCard?: () => void;
+  onClickCard?: (data: any) => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -34,6 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ImgMediaCard({ 
   title, 
   description,
+  image_url,
   isDescriptionTitle, 
   isHorizontal,
   fullWidth,
@@ -57,7 +59,7 @@ export default function ImgMediaCard({
                       component="img"
                       alt="green iguana"
                       height="140"
-                      image="/static/images/cards/contemplative-reptile.jpg"
+                      image={image_url}
                     />
                   </Item>
                 </Grid>
@@ -132,7 +134,7 @@ export default function ImgMediaCard({
               component="img"
               alt="green iguana"
               height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
+              image={image_url}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">

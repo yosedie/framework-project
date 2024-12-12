@@ -78,7 +78,6 @@ export default function Login() {
             ...loginData
         });
         if(response.data.status) {
-            alert(response.data.data.jwt_token)
             dispatch(login(response.data.data.jwt_token))
             execToast(ToastStatus.SUCCESS, response.data.message)
             router.push("/products")

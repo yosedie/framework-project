@@ -43,7 +43,6 @@ function ResponsiveAppBar() {
     };
 
     const handleRoute = (paramPage: String) => {
-        alert(account)
         router.push(`/${paramPage}`)
     };
 

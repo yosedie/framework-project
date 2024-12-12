@@ -27,8 +27,9 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { AccountStruct, loginAccount } from '../util/redux/Features/account/accountSlice';
+import { UserState, login } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
+import { ProductStruct } from '../types/types';
 
 // COMPONENT
 import AppBar from '../component/AppBar'
@@ -57,7 +58,7 @@ const productsName = ["Test", "Test2"]
 
 export default function Login() {
   const router = useRouter()
-  const count = useSelector((state: RootState) => state.counter.value)
+  const shoppingCart = useSelector((state: RootState) => state.user.shopping_cart)
   const dispatch = useDispatch()
 
   const [loginData, setLoginData] = React.useState({
@@ -81,10 +82,7 @@ export default function Login() {
             ...loginData
         });
         if(response.data.status) {
-            const savedData: AccountStruct = {
-                jwt_token: response.data.data.jwt_token,
-            }
-            dispatch(loginAccount(savedData))
+            dispatch(login(response.data.data.jwt_token))
             execToast(ToastStatus.SUCCESS, response.data.message)
             router.push("/products")
         } else {
@@ -120,16 +118,34 @@ export default function Login() {
             <Typography variant="h5" color='black'>
                 Shopping Cart
             </Typography>
+            {
+                shoppingCart.length === 0 && (
+                    <Typography variant="h6" color='black' textAlign={"center"}>
+                        Cart masih kosong, silahkan <Link href="#" onClick={() => handleRoute("products")}>
+                            berbelanja
+                        </Link> terlebih dahulu !
+                    </Typography>
+                )
+            }
+            {
+                shoppingCart.map((data: ProductStruct, index) => {
+                    return (
+                        <Card 
+                            key={`${data.id_produk}_${index}`}
+                            title={data.nama_produk}
+                            description={data.deskripsi}
+                            image_url={data.gambar_url}
+                            isDescriptionTitle={true}
+                            isHorizontal={true}
+                            fullWidth={true}
+                            withImage={true}
+                        />
+                    )
+                })
+            }
             <Card 
-                title='test'
-                description='test'
-                isHorizontal={true}
-                fullWidth={true}
-                withImage={true}
-            /> <br />
-            <Card 
-                title='Total Purchased Item : 12'
-                description='Grand Total : Rp. 1.000.000'
+                title={`Total Purchased Item : ${shoppingCart.length}`}
+                description={`Grand Total: Rp. ${shoppingCart.reduce((total, product) => total + product.harga, 0)}`}
                 isDescriptionTitle={true}
                 isHorizontal={true}
                 fullWidth={true}
