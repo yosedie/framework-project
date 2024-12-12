@@ -8,6 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
+import Box from '@mui/material/Box';
 
 type ImgMediaCardProps = {
   title?: string;
@@ -15,10 +16,12 @@ type ImgMediaCardProps = {
   image_url?: string;
   isDescriptionTitle?: boolean;
   isHorizontal?: boolean;
+  isActionDelete?: boolean;
   fullWidth?: boolean;
   withImage?: boolean;
   marginTopParam?: string;
   onClickCard?: (data: any) => void;
+  onDeleteClickCard?: (data: any) => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -38,10 +41,12 @@ export default function ImgMediaCard({
   image_url,
   isDescriptionTitle, 
   isHorizontal,
+  isActionDelete,
   fullWidth,
   withImage,
   marginTopParam,
-  onClickCard 
+  onClickCard,
+  onDeleteClickCard
 }: ImgMediaCardProps) {
   return (
     <Card sx={{ maxWidth: fullWidth ? "100%" : 345, marginTop: marginTopParam }}>
@@ -66,22 +71,42 @@ export default function ImgMediaCard({
                 <Grid size={fullWidth ? 10 : 6}>
                   <Item sx={{boxShadow: "none"}}>
                     {/* <CardContent> */}
-                      <Typography gutterBottom variant="h5" component="div" color='black' textAlign={"left"}>
-                        {title}
-                      </Typography>
-                      {
-                        isDescriptionTitle
-                        ? (
-                          <Typography gutterBottom variant="h5" component="div" color='black' textAlign={"left"}>
+                    <Typography gutterBottom variant="h5" component="div" color='black' textAlign={"left"}>
+                      {title}
+                    </Typography>
+                    {
+                      isActionDelete
+                      ? (
+                        <>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography 
+                              variant={isDescriptionTitle ? "h5" : "body2"} 
+                              color={isDescriptionTitle ? "black" : "text.secondary"} 
+                              textAlign={isDescriptionTitle ? "left" : "justify"}
+                              sx={{ flex: 1 }}
+                            >
+                              {description}
+                            </Typography>
+                            <Button variant="contained" sx={{ marginLeft: 'auto', marginRight: "1.5%" }} color="error" onClick={onDeleteClickCard}>
+                              Delete
+                            </Button>
+                          </Box>
+                        </>
+                      )
+                      : (
+                        <>
+                          <Typography 
+                            variant={isDescriptionTitle ? "h5" : "body2"} 
+                            color={isDescriptionTitle ? "black" : "text.secondary"} 
+                            textAlign={isDescriptionTitle ? "left" : "justify"}
+                            sx={{ flex: 1 }}
+                          >
                             {description}
                           </Typography>
-                        )
-                        : (
-                          <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: "justify" }}>
-                            {description}
-                          </Typography>
-                        )
-                      }
+                        </>
+                      )
+                    }
+                    
                     {/* </CardContent> */}
                   </Item>
                 </Grid>
@@ -116,8 +141,8 @@ export default function ImgMediaCard({
               <Grid size={6}>
                   <Item sx={{boxShadow: "none", textAlign: "right "}}>
                     {/* <CardContent> */}
-                    <Button variant="contained" sx={{width: "175px"}}>Next</Button> <br />
-                    <Button variant="contained" sx={{width: "175px", marginTop: ".5%"}} color="error">
+                    <Button variant="contained" sx={{width: "175px"}} onClick={onClickCard}>Next</Button> <br />
+                    <Button variant="contained" sx={{width: "175px", marginTop: ".5%"}} color="error" onClick={onDeleteClickCard}>
                       Delete all items
                     </Button>
                     {/* </CardContent> */}

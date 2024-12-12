@@ -19,6 +19,12 @@ export const counterSlice = createSlice({
         addToCart: (state, action: PayloadAction<ProductStruct>) => {
             state.shopping_cart.push(action.payload)
         },
+        removeFromCart: (state, action: PayloadAction<number>) => {
+            state.shopping_cart.splice(action.payload, 1)
+        },
+        removeAllFromCart: (state, _) => {
+            state.shopping_cart = []
+        },
         login: (state, action) => {
             state.jwt_token = action.payload
         },
@@ -28,6 +34,12 @@ export const counterSlice = createSlice({
     }
 })
 
-export const {addToCart, login, logout} = counterSlice.actions
+export const {
+    addToCart, 
+    removeFromCart, 
+    removeAllFromCart, 
+    login, 
+    logout
+} = counterSlice.actions
 
 export default counterSlice.reducer

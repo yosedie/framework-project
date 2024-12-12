@@ -17,6 +17,10 @@ export interface LoginData {
 export interface RegisterData {
 
 }
+export interface MidtransTokenData {
+    token: string;
+    redirect_url: string;
+}
 
 export interface ApiResponse<T> {
     status: boolean;

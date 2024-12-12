@@ -48,6 +48,11 @@ export default function RootLayout({
           {children}
         </Providers>
       </body>
+      {/* <script
+        type="text/javascript"
+        src="https://app.stg.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-t9vamsHp5lVGoR8Z">
+      </script> */}
     </html>
   );
 }
