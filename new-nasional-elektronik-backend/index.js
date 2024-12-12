@@ -1,9 +1,11 @@
 'use strict'
 
 import Fastify from 'fastify';
+import cors from 'cors';
 import fastifyLog from 'fastify-log';
 import fastifyMongooseAPI from 'fastify-mongoose-api';
 import fastifyFormbody from '@fastify/formbody';
+import fastifyCors from 'fastify-cors';
 import mongoose from 'mongoose';
 import { configDotenv } from 'dotenv';
 import routes from './router.js';
@@ -16,6 +18,11 @@ const start = async () => {
     fastify.register(routes);
     fastify.register(fastifyLog);
     fastify.register(fastifyFormbody);
+    fastify.register(fastifyCors, { 
+        origin: '*',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    })      
     fastify.register(fastifyMongooseAPI, {
         models: mongooseConnection.models,
         prefix: '/api/',

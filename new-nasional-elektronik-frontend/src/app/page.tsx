@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from './GlobalRedux/store';
+import type { RootState } from './util/redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementByAmount } from './GlobalRedux/Features/counter/counterSlice';
+import { increment, decrement, incrementByAmount } from './util/redux/Features/counter/counterSlice';
 
 // COMPONENT
 import AppBar from './component/AppBar'

@@ -10,11 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fastify/formbody": "^7.4.0",
+    "@fastify/formbody": "^6.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "fastify": "^4.28.1",
+    "fastify": "^3.29.5",
+    "fastify-cors": "^6.0.3",
     "fastify-log": "^1.2.2",
     "fastify-mongoose-api": "^1.2.23",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0"
   },
   "type": "module"

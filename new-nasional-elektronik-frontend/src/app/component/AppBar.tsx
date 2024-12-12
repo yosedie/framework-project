@@ -17,11 +17,21 @@ import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image';
 import logoWhite from '../public/logo_white.png'
 
+import type { RootState } from '../util/redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutAccount } from '../util/redux/Features/account/accountSlice';
+import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
+
+
 const pages = ['Products', 'Events'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Shopping Cart', 'Transaction History', 'Security', 'Logout'];
+const settingsGuest = ['Login', 'Register'];
 
 function ResponsiveAppBar() {
+    const account = useSelector((state: RootState) => state.account.account)
+    const dispatch = useDispatch()
     const router = useRouter()
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -40,8 +50,10 @@ function ResponsiveAppBar() {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
+    const handleUserMenu = (page: string) => {
+      if(typeof page === 'string') {
+        handleRoute(page.toLowerCase())
+      }
     };
 
     return (
@@ -145,7 +157,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -162,13 +174,25 @@ function ResponsiveAppBar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={() => setAnchorElUser(null)}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
+              {
+              (account !== null 
+                ? settings
+                : settingsGuest)
+                  .map((setting) => (
+                    <MenuItem key={setting} onClick={() => {
+                      if(setting === "Logout") {
+                        dispatch(logoutAccount({}))
+                      } else {
+                        handleUserMenu(setting.replace(/\s+/g, ''))
+                      }
+                      setAnchorElUser(null);
+                    }}>
+                      <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                    </MenuItem>
+                  ))
+              }
             </Menu>
           </Box>
         </Toolbar>

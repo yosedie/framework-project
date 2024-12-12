@@ -14,9 +14,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from '../GlobalRedux/store';
+import type { RootState } from '../util/redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementByAmount } from '../GlobalRedux/Features/counter/counterSlice';
+import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 // COMPONENT
 import AppBar from '../component/AppBar'
@@ -43,10 +43,19 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const productsName = ["Test", "Test2"]
 
-export default function Home() {
+export default function Products() {
   const router = useRouter()
-  const count = useSelector((state: RootState) => state.counter.value)
+//   const count = useSelector((state: RootState) => state.counter.value)
+  const account = useSelector((state: RootState) => state.account.account)
   const dispatch = useDispatch()
+
+  const handleAddToCart = (): void => {
+    if(account?.jwt_token !== undefined) {
+
+    } else {
+        router.push("/login")
+    }
+  };
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -85,22 +94,22 @@ export default function Home() {
             <Grid container size={9}>
                 <Grid size={3}>
                     <Item>
-                        <Card />
+                        <Card onClickCard={handleAddToCart} />
                     </Item>
                 </Grid>
                 <Grid size={3}>
                     <Item>
-                        <Card />
+                        <Card onClickCard={handleAddToCart} />
                     </Item>
                 </Grid>
                 <Grid size={3}>
                     <Item>
-                        <Card />
+                        <Card onClickCard={handleAddToCart} />
                     </Item>
                 </Grid>
                 <Grid size={3}>
                     <Item>
-                        <Card />
+                        <Card onClickCard={handleAddToCart} />
                     </Item>
                 </Grid>
             </Grid>
