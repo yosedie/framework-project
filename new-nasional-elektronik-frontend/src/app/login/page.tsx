@@ -22,7 +22,7 @@ import Link from '@mui/material/Link';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from '../util/redux/reducers';
+import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { AccountStruct, loginAccount } from '../util/redux/Features/account/accountSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';

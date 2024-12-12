@@ -28,7 +28,7 @@ const settings = ['Profile', 'Shopping Cart', 'Transaction History', 'Security',
 const settingsGuest = ['Login', 'Register'];
 
 function ResponsiveAppBar() {
-    const account = useSelector((state: RootState) => state.account.account)
+    const account = useSelector((state: RootState) => state.account_redux.account)
     const dispatch = useDispatch()
     const router = useRouter()
 
@@ -177,7 +177,7 @@ function ResponsiveAppBar() {
               onClose={() => setAnchorElUser(null)}
             >
               {
-              (account !== null 
+              (account
                 ? settings
                 : settingsGuest)
                   .map((setting) => (

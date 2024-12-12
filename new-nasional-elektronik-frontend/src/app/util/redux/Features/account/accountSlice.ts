@@ -1,32 +1,33 @@
-'use client';
-
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AccountStruct {
-    jwt_token: string,
+  jwt_token: string;
 }
 
-interface AccountState {
-    account: AccountStruct | null,
+export interface AccountState {
+  account: AccountStruct;
 }
 
 const initialState: AccountState = {
-    account: null,
-}
+  account: {
+    jwt_token: ""
+  },
+};
 
-export const counterSlice = createSlice({
-    name: 'counter',
-    initialState,
-    reducers: {
-        loginAccount: (state, action: PayloadAction<AccountStruct>) => {
-            state.account = action.payload
-        },
-        logoutAccount: (state, _) => {
-            state.account = null
-        },
-    }
-})
+const accountSlice = createSlice({
+  name: 'account',
+  initialState,
+  reducers: {
+    loginAccount: (state, action: PayloadAction<AccountStruct>) => {
+      state.account = action.payload;
+    },
+    logoutAccount: (state, _) => {
+      state.account = {
+        jwt_token: ""
+      };
+    },
+  },
+});
 
-export const {loginAccount, logoutAccount} = counterSlice.actions
-
-export default counterSlice.reducer
+export const { loginAccount, logoutAccount } = accountSlice.actions;
+export default accountSlice.reducer;

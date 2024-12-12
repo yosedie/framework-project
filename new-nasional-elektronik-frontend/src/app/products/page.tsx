@@ -14,7 +14,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from '../util/redux/reducers';
+import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
@@ -46,7 +46,7 @@ const productsName = ["Test", "Test2"]
 export default function Products() {
   const router = useRouter()
 //   const count = useSelector((state: RootState) => state.counter.value)
-  const account = useSelector((state: RootState) => state.account.account)
+  const account = useSelector((state: RootState) => state.account?.account)
   const dispatch = useDispatch()
 
   const handleAddToCart = (): void => {

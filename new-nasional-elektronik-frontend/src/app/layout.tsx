@@ -4,9 +4,9 @@ import "./globals.css";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './util/redux/store';
+import { Providers } from "./GlobalRedux/provider";
+// import { PersistGate } from 'redux-persist/integration/react';
+// import { store, persistor } from './util/redux/store';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -44,11 +44,9 @@ export default function RootLayout({
         pauseOnHover
         theme="light"
       />
-        <Provider store={store}>
-          <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-            {children}
-          </PersistGate>
-        </Provider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

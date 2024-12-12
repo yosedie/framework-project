@@ -8,3 +8,4 @@ new-nasional-elektronik-frontend/.next/trace
 .next/
 node_modules/
 .DS_Store
+/new-nasional-elektronik-frontend/.next

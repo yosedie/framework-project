@@ -14,7 +14,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from '../util/redux/reducers';
+import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 

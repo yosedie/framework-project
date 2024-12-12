@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import styles from './page.module.css'
 
 // REDUX
-import type { RootState } from './util/redux/reducers';
+import type { RootState } from './util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementByAmount } from './util/redux/Features/counter/counterSlice';
 
@@ -44,8 +44,8 @@ export default function Home() {
       <button 
         className={styles.button}
         onClick={() => dispatch(incrementByAmount(2))}
-      >Increment by 2</button>
-      <button onClick={() => router.push("/admin")}>
+      >Increment by 2</button> */}
+      {/* <button onClick={() => router.push("/admin")}>
         to Admin
       </button> */}
       <Image
