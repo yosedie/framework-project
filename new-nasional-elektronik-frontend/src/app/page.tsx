@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -24,14 +24,39 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 import MainPage from './public/home_page.png'
 
+type User = {
+  email: string;
+  jwt_token: string;
+};
+
 export default function Home() {
-  const router = useRouter()
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser) as User);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('user');
+    setUser(null); // Reset user state
+    router.push('/login');
+  };
 
   return (
    <>
     <AppBar />
+    {user ? (
+        <Box sx={{ padding: 2 }}>
+          <Typography variant="h6">Selamat Datang, {user.email}</Typography>
+          <button onClick={handleLogout}>Logout</button>
+        </Box>
+      ) : (
+        <Typography variant="h6">Silakan login untuk melanjutkan</Typography>
+      )}
     {/* <button 
         className={styles.button}
         onClick={() => dispatch(increment())}

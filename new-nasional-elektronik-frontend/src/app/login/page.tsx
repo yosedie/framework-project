@@ -74,22 +74,31 @@ export default function Login() {
  };
  async function loginHandler(): Promise<LoginData> {
     try {
-        const response = await axios.post<ApiResponse<LoginData>>(`/login`, {
-            ...loginData
-        });
-        if(response.data.status) {
-            dispatch(login(response.data.data.jwt_token))
-            execToast(ToastStatus.SUCCESS, response.data.message)
-            router.push("/products")
-        } else {
-            execToast(ToastStatus.ERROR, response.data.message)
-        }
-        return response.data.data;
+      const response = await axios.post<ApiResponse<LoginData>>('/login', loginData);
+  
+      if (response.data.status) {
+        const token = response.data.data.jwt_token;
+  
+        // Simpan data login ke Session Storage
+        const userData = {
+          email: loginData.email,
+          jwt_token: token
+        };
+        sessionStorage.setItem('user', JSON.stringify(userData));
+  
+        dispatch(login(response.data.data.jwt_token));
+        execToast(ToastStatus.SUCCESS, response.data.message);
+        router.push('/products');
+      } else {
+        execToast(ToastStatus.ERROR, response.data.message);
+      }
+  
+      return response.data.data;
     } catch (error) {
-        execToast(ToastStatus.ERROR, JSON.stringify(error))
-        throw error;
+      execToast(ToastStatus.ERROR, JSON.stringify(error));
+      throw error;
     }
- }
+  }  
 
   return (
    <Box sx={{backgroundColor: "white"}}>
