@@ -19,7 +19,7 @@ import logoWhite from '../public/logo_white.png'
 
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutAccount } from '../util/redux/Features/account/accountSlice';
+import { logout } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 
@@ -28,7 +28,7 @@ const settings = ['Profile', 'Shopping Cart', 'Transaction History', 'Security',
 const settingsGuest = ['Login', 'Register'];
 
 function ResponsiveAppBar() {
-    const account = useSelector((state: RootState) => state.account_redux.account)
+    const account = useSelector((state: RootState) => state.user.jwt_token)
     const dispatch = useDispatch()
     const router = useRouter()
 
@@ -43,6 +43,7 @@ function ResponsiveAppBar() {
     };
 
     const handleRoute = (paramPage: String) => {
+        alert(account)
         router.push(`/${paramPage}`)
     };
 
@@ -177,13 +178,13 @@ function ResponsiveAppBar() {
               onClose={() => setAnchorElUser(null)}
             >
               {
-              (account
+              (account !== ""
                 ? settings
                 : settingsGuest)
                   .map((setting) => (
                     <MenuItem key={setting} onClick={() => {
                       if(setting === "Logout") {
-                        dispatch(logoutAccount({}))
+                        dispatch(logout({}))
                       } else {
                         handleUserMenu(setting.replace(/\s+/g, ''))
                       }

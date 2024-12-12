@@ -24,7 +24,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { AccountStruct, loginAccount } from '../util/redux/Features/account/accountSlice';
+import { UserState, login } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 // COMPONENT
@@ -78,10 +78,8 @@ export default function Login() {
             ...loginData
         });
         if(response.data.status) {
-            const savedData: AccountStruct = {
-                jwt_token: response.data.data.jwt_token,
-            }
-            dispatch(loginAccount(savedData))
+            alert(response.data.data.jwt_token)
+            dispatch(login(response.data.data.jwt_token))
             execToast(ToastStatus.SUCCESS, response.data.message)
             router.push("/products")
         } else {

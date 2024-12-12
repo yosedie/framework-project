@@ -4,7 +4,7 @@ import "./globals.css";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Providers } from "./GlobalRedux/provider";
+import { Providers } from "./util/redux/provider";
 // import { PersistGate } from 'redux-persist/integration/react';
 // import { store, persistor } from './util/redux/store';
 
