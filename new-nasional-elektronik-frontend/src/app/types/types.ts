@@ -1,3 +1,12 @@
+// enum
+
+export enum Role {
+    User,
+    Seller,
+    Admin
+}
+
+// interface
 export interface ProductStruct {
     id_produk: string,
     nama_produk: string,
@@ -10,8 +19,17 @@ export interface ProductStruct {
     status: string,
 }
 
+export interface VerifyTokenData {
+    role: string;
+}
+
+export interface AddData {
+
+}
+
 export interface LoginData {
     jwt_token: string;
+    role: string;
 }
 
 export interface RegisterData {

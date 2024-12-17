@@ -27,7 +27,8 @@ const login = (fastify) => async (request, reply) => {
             response.message = "Login sukses !";
             var token = jwt.sign({ userID: user._id.toString() }, process.env.private_key_jwt, { algorithm: 'HS512' });
             response.data = {
-                jwt_token: token
+                jwt_token: token,
+                role: user.role,
             }
         } else {
             response.message = "Email atau password salah!";

@@ -10,6 +10,10 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 
+import type { RootState } from '../util/redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { Role } from '../types/types';
+
 type ImgMediaCardProps = {
   title?: string;
   description?: string;
@@ -48,6 +52,7 @@ export default function ImgMediaCard({
   onClickCard,
   onDeleteClickCard
 }: ImgMediaCardProps) {
+  const role = useSelector((state: RootState) => state.user.role)
   return (
     <Card sx={{ maxWidth: fullWidth ? "100%" : 345, marginTop: marginTopParam }}>
       {
@@ -171,7 +176,52 @@ export default function ImgMediaCard({
             </CardContent>
             <CardActions>
               {/* <Button size="small">View</Button> */}
-              <Button variant="contained" size="small" sx={{margin: "0 auto"}} fullWidth onClick={onClickCard}>Add to Cart</Button>
+              {
+                role === "" || role === "user"
+                ? (
+                  <Button 
+                    variant="contained" 
+                    size="small" 
+                    sx={{margin: "0 auto"}} 
+                    fullWidth 
+                    onClick={onClickCard}
+                  >
+                    Add to Cart
+                  </Button>
+                )
+                : (
+                  <Grid container size={12} spacing={6}>
+                    <Grid size={6}>
+                      <Item sx={{boxShadow: "0"}}>
+                        <Button 
+                          variant="contained" 
+                          color="warning"
+                          size="small" 
+                          sx={{margin: "0 auto"}} 
+                          fullWidth 
+                          onClick={onClickCard}
+                        >
+                          Edit
+                        </Button>
+                      </Item>
+                    </Grid>
+                    <Grid size={6}>
+                      <Item sx={{boxShadow: "0"}}>
+                        <Button 
+                          variant="contained" 
+                          color="error"
+                          size="small" 
+                          sx={{margin: "0 auto"}} 
+                          fullWidth 
+                          onClick={onDeleteClickCard}
+                        >
+                          Delete
+                        </Button>
+                      </Item>
+                    </Grid>
+                  </Grid>
+                )
+              }
             </CardActions>
           </>
         )

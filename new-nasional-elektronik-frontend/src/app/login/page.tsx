@@ -78,6 +78,7 @@ export default function Login() {
   
       if (response.data.status) {
         const token = response.data.data.jwt_token;
+        const role = response.data.data.role;
   
         // Simpan data login ke Session Storage
         const userData = {
@@ -88,7 +89,13 @@ export default function Login() {
   
         dispatch(login(response.data.data.jwt_token));
         execToast(ToastStatus.SUCCESS, response.data.message);
-        router.push('/products');
+        if(role === "user") {
+            router.push('/products');
+        } else if(role === "admin") {
+            router.push('/dashboard');
+        } else if(role === "user") {
+            router.push('/product');
+        }
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }

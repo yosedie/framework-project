@@ -27,12 +27,13 @@ const register = (fastify) => async (request, reply) => {
     } else if(password !== confirm_password) {
         response.message = "Confirm password harus sama dengan password !"
     } else {
-        const formattedDate = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-');
+        // const formattedDate = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-');
         response.status = true
         response.message = "Register sukses !"
         const newUser = new register({ 
             ...request.body,
-            tanggal_daftar: formattedDate,
+            tanggal_daftar: new Date(),
+            role: "user",
         });
         await newUser.save();
     }

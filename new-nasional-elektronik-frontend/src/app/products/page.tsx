@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
 
 // CSS
 import styles from './page.module.css'
@@ -87,6 +88,7 @@ export default function Products() {
     },
   ]
   const account = useSelector((state: RootState) => state.user.jwt_token)
+  const role = useSelector((state: RootState) => state.user.role)
   const dispatch = useDispatch()
 
   const handleAddToCart = (data: ProductStruct): void => {
@@ -117,6 +119,22 @@ export default function Products() {
       <button onClick={() => router.push("/admin")}>
         to Admin
       </button> */}
+        {
+            role !== "user" && role !== "" && (
+            <Button 
+                variant='contained'
+                onClick={() => {
+                    router.push(`/editproduct?add=1`)
+                }}
+                sx={{
+                    marginLeft: "26.5%",
+                    marginTop: "1.5%"
+                }}
+            >
+                + Add Product
+            </Button>
+            )
+        }
         <Grid container>
             <Grid size={3}>
                 <Item>
@@ -133,21 +151,35 @@ export default function Products() {
                 </Item>
             </Grid>
             <Grid container size={9}>
+                {/* role === "user" */}
                 {
                     products.map((data, index) => {
                         return (
-                            <Grid size={3}>
-                                <Item>
-                                    <Card
-                                        key={`${data.id_produk}_${index}`}
-                                        title={data.nama_produk}
-                                        description={data.deskripsi}
-                                        image_url={data.gambar_url}
-                                        withImage
-                                        onClickCard={() => handleAddToCart(data)} 
-                                    />
-                                </Item>
-                            </Grid>
+                            <>
+                                <Grid size={3}>
+                                    <Item>
+                                        <Card
+                                            key={`${data.id_produk}_${index}`}
+                                            title={data.nama_produk}
+                                            description={data.deskripsi}
+                                            image_url={data.gambar_url}
+                                            withImage
+                                            onClickCard={() => {
+                                                if(role === "user") {
+                                                    handleAddToCart(data) 
+                                                } else {
+                                                    router.push(`/editproduct?id=${data.id_produk}`)
+                                                }
+                                            }}
+                                            onDeleteClickCard={() => {
+                                                if(role !== "user") {
+
+                                                }
+                                            }}
+                                        />
+                                    </Item>
+                                </Grid>
+                            </>
                         )
                     })
                 }

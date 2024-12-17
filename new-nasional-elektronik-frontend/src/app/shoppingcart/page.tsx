@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, MidtransTokenData } from '../types/types';
+import { LoginData, ApiResponse, MidtransTokenData,  Role} from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -214,7 +214,7 @@ export default function Login() {
                     isHorizontal
                     fullWidth
                     withImage
-                    onDeleteClickCard={() => dispatch(removeFromCart(index))}
+                    onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk))}
                     />
                 ))
             }

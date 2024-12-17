@@ -5,6 +5,7 @@ import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Providers } from "./util/redux/provider";
+import { VerifyToken } from "./util/redux/verifyToken";
 // import { PersistGate } from 'redux-persist/integration/react';
 // import { store, persistor } from './util/redux/store';
 
@@ -45,7 +46,9 @@ export default function RootLayout({
         theme="light"
       />
         <Providers>
-          {children}
+          <VerifyToken>
+            {children}
+          </VerifyToken>
         </Providers>
       </body>
       {/* <script
