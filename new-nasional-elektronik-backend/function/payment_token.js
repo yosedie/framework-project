@@ -11,9 +11,10 @@ const paymentToken = (fastify) => async (request, reply) => {
         serverKey : 'SB-Mid-server-CKp9TOLZwarw9yQJmntI30yh'
     });
 
+    const orderID = `ORDER-${Math.floor(Math.random() * 100000)}`
     const parameter = {
         "transaction_details": {
-            "order_id": `ORDER-${Math.floor(Math.random() * 100000)}`,
+            "order_id": orderID,
             "gross_amount": 0
         },
         "credit_card": {
@@ -22,14 +23,17 @@ const paymentToken = (fastify) => async (request, reply) => {
         "customer_details": {
             "id_pelanggan": "",
             "alamat": "",
-        }
+        },
+        "callbacks": {
+            "finish": "http://localhost:3000/sucesstransaction",
+        },
     };
     const response = { 
         status: false,
         message: "",
         data: {}
     }
-    const { id_pelanggan, total_harga, alamat_pengiriman } = {...request.body}
+    const { id_pelanggan, total_harga, alamat_pengiriman, item } = {...request.body}
 
     if(id_pelanggan === "") {
         response.message = "ID pelanggan tidak boleh kosong !"
@@ -37,10 +41,53 @@ const paymentToken = (fastify) => async (request, reply) => {
         response.message = "Total harga tidak boleh kosong !"
     } else if(alamat_pengiriman === "") {
         response.message = "Alamat pengiriman tidak boleh kosong !"
+    } else if(item === "") {
+        response.message = "Item tidak boleh kosong !"
     } else {
+        const parsedItem = JSON.parse(item)
+        const hTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+        const newHtrans = new hTrans({ 
+            ...request.body,
+            tanggal: new Date(),
+            status: "Pending",
+            metode_pembayaran: "Midtrans",
+            nomor_resi: "1234",
+            id_pengiriman: "1",
+        });
+        await newHtrans.save()
+
+        const groupedItems = {};
+        for (const shoppingItem of parsedItem) {
+            const { id_produk, harga } = shoppingItem;
+            if (groupedItems[id_produk]) {
+                groupedItems[id_produk].jumlah += 1;
+                groupedItems[id_produk].harga += harga;
+            } else {
+                groupedItems[id_produk] = {
+                    id_h_trans: newHtrans._id,
+                    id_produk,
+                    jumlah: 1,
+                    harga,
+                };
+            }
+        }
+
+        for (const id_produk in groupedItems) {
+            const dTransData = groupedItems[id_produk];
+            const dTrans = mongoDB.models.D_trans || mongoDB.model('D_trans', DTransModel);
+            const newDTrans = new dTrans({
+                id_h_trans: dTransData.id_h_trans,
+                id_produk: dTransData.id_produk,
+                jumlah: dTransData.jumlah,
+                harga: dTransData.harga,
+            });
+            await newDTrans.save();
+        }
+
         parameter.transaction_details.gross_amount = total_harga
         parameter.customer_details.id_pelanggan = id_pelanggan
         parameter.customer_details.alamat = alamat_pengiriman
+
         const transaction = await snap.createTransaction(parameter);
         response.status = true
         response.message = "Transaksi terkirim !"

@@ -18,6 +18,7 @@ type ImgMediaCardProps = {
   title?: string;
   description?: string;
   image_url?: string;
+  height?: number;
   isDescriptionTitle?: boolean;
   isHorizontal?: boolean;
   isActionDelete?: boolean;
@@ -43,6 +44,7 @@ export default function ImgMediaCard({
   title, 
   description,
   image_url,
+  height,
   isDescriptionTitle, 
   isHorizontal,
   isActionDelete,
@@ -54,7 +56,11 @@ export default function ImgMediaCard({
 }: ImgMediaCardProps) {
   const role = useSelector((state: RootState) => state.user.role)
   return (
-    <Card sx={{ maxWidth: fullWidth ? "100%" : 345, marginTop: marginTopParam }}>
+    <Card sx={{ 
+      maxWidth: fullWidth ? "100%" : 345, 
+      marginTop: marginTopParam,
+      height: height || height != 0 ? height : 325
+    }}>
       {
         isHorizontal
         ? (
@@ -159,7 +165,7 @@ export default function ImgMediaCard({
         </Grid>
         )
         : (
-          <>
+          <Box>
             <CardMedia
               component="img"
               alt="green iguana"
@@ -170,7 +176,7 @@ export default function ImgMediaCard({
               <Typography gutterBottom variant="h5" component="div">
                 {title}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: "justify" }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: "justify", whiteSpace: "pre-line" }}>
                 {description}
               </Typography>
             </CardContent>
@@ -182,7 +188,9 @@ export default function ImgMediaCard({
                   <Button 
                     variant="contained" 
                     size="small" 
-                    sx={{margin: "0 auto"}} 
+                    sx={{
+                      margin: "0 auto",
+                    }}
                     fullWidth 
                     onClick={onClickCard}
                   >
@@ -191,39 +199,39 @@ export default function ImgMediaCard({
                 )
                 : (
                   <Grid container size={12} spacing={6}>
-                    <Grid size={6}>
-                      <Item sx={{boxShadow: "0"}}>
-                        <Button 
-                          variant="contained" 
-                          color="warning"
-                          size="small" 
-                          sx={{margin: "0 auto"}} 
-                          fullWidth 
-                          onClick={onClickCard}
-                        >
-                          Edit
-                        </Button>
-                      </Item>
-                    </Grid>
-                    <Grid size={6}>
-                      <Item sx={{boxShadow: "0"}}>
-                        <Button 
-                          variant="contained" 
-                          color="error"
-                          size="small" 
-                          sx={{margin: "0 auto"}} 
-                          fullWidth 
-                          onClick={onDeleteClickCard}
-                        >
-                          Delete
-                        </Button>
-                      </Item>
-                    </Grid>
+                      <Grid size={6}>
+                        <Item sx={{boxShadow: "0"}}>
+                          <Button 
+                            variant="contained" 
+                            color="warning"
+                            size="small" 
+                            sx={{margin: "0 auto"}} 
+                            fullWidth 
+                            onClick={onClickCard}
+                          >
+                            Edit
+                          </Button>
+                        </Item>
+                      </Grid>
+                      <Grid size={6}>
+                        <Item sx={{boxShadow: "0"}}>
+                          <Button 
+                            variant="contained" 
+                            color="error"
+                            size="small" 
+                            sx={{margin: "0 auto"}} 
+                            fullWidth 
+                            onClick={onDeleteClickCard}
+                          >
+                            Delete
+                          </Button>
+                        </Item>
+                      </Grid>
                   </Grid>
                 )
               }
             </CardActions>
-          </>
+          </Box>
         )
       }
     </Card>

@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { AddData, ApiResponse } from '../types/types';
+import { ProductStruct, FetchProductStruct, ApiResponse } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -65,7 +65,8 @@ export default function AddProduct() {
   const count = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
 
-  const [addData, setAddData] = React.useState({
+  const [productImage, setProductImage] = React.useState("")
+  const [addData, setAddData] = React.useState<ProductStruct>({
     nama_produk: "",
     harga: 0,
     status: 1,
@@ -76,29 +77,56 @@ export default function AddProduct() {
  const handleRoute = (paramPage: String) => {
     router.push(`/${paramPage}`)
  };
-
- const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAddData(prevData => ({
       ...prevData,
       [name]: value,
     }));
- };
- const handleChangeDropdown = (e: SelectChangeEvent<number>) => {
+  };
+  const handleChangeDropdown = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
     setAddData(prevData => ({
       ...prevData,
       [name]: value,
     }));
- };
-
- async function addProductHandler(): Promise<AddData> {
+  };
+  
+  async function fetchSingleProductHandler(): Promise<FetchProductStruct> {
     try {
-      const response = await axios.post<ApiResponse<AddData>>('/login', addData);
+      const productID = searchParams.get('id')
+      const response = await axios.get<ApiResponse<FetchProductStruct>>('/fetchProduct', {
+        params: {
+            productID: productID
+        }
+      });
   
       if (response.data.status) {
-        // const token = response.data.data.jwt_token;
-        // const role = response.data.data.role;
+        const selectedProduct = {...response.data.data.product[0]}
+        const {gambar_url} = selectedProduct
+        setProductImage(gambar_url as string)
+        setAddData(selectedProduct)
+      } else {
+        execToast(ToastStatus.ERROR, response.data.message);
+      }
+  
+      return response.data.data;
+    } catch (error) {
+      execToast(ToastStatus.ERROR, JSON.stringify(error));
+      throw error;
+    }
+  }
+
+  async function addProductHandler(): Promise<ProductStruct> {
+    try {
+      const response = await axios.post<ApiResponse<ProductStruct>>('/addProduct', {
+        ...addData, 
+        gambar_url: productImage
+      });
+  
+      if (response.data.status) {
+        execToast(ToastStatus.SUCCESS, response.data.message)
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -110,13 +138,18 @@ export default function AddProduct() {
     }
   }  
 
-  async function editProductHandler(): Promise<AddData> {
+  async function editProductHandler(): Promise<ProductStruct> {
     try {
-      const response = await axios.post<ApiResponse<AddData>>('/login', addData);
+      const productID = searchParams.get('id')
+      const response = await axios.put<ApiResponse<ProductStruct>>('/editProduct', {
+        ...addData,
+        id_produk: productID,
+      });
   
       if (response.data.status) {
         // const token = response.data.data.jwt_token;
         // const role = response.data.data.role;
+        execToast(ToastStatus.SUCCESS, response.data.message)
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -126,7 +159,13 @@ export default function AddProduct() {
       execToast(ToastStatus.ERROR, JSON.stringify(error));
       throw error;
     }
-  }  
+  }
+
+  React.useEffect(() => {
+    if(searchParams.get('id') && searchParams.get('id') !== "") {
+        fetchSingleProductHandler()
+    }
+  }, [])
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -169,16 +208,26 @@ export default function AddProduct() {
                         >
                             <Image
                                 draggable={false}
-                                src={PlaceholderImage}
+                                src={
+                                    productImage !== ""
+                                        ? productImage
+                                        : PlaceholderImage
+                                }
                                 alt="Example"
                                 // layout="responsive"
+                                style={{
+                                    objectFit: "cover"
+                                }}
                                 width={150}
                                 height={150}
                             />
                             <Button 
                                 variant='contained'
                                 onClick={() => {
-                                    router.push(`/addproduct`)
+                                    const imageURL = prompt("Mohon masukkan URL Image :")
+                                    if(imageURL) {
+                                        setProductImage(imageURL as string)
+                                    }
                                 }}
                                 sx={{
                                     marginTop: "5%",
@@ -191,7 +240,7 @@ export default function AddProduct() {
                                 variant='contained'
                                 color={'error'}
                                 onClick={() => {
-                                    router.push(`/addproduct`)
+                                    setProductImage("")
                                 }}
                                 sx={{
                                     marginTop: ".75%",

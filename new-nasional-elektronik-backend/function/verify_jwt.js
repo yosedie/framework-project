@@ -21,8 +21,7 @@ const verifyJWT = (fastify) => async (request, reply) => {
         const UserID = new mongoose.Types.ObjectId(decoded.userID);
         const user = await userModel.findOne({ _id: UserID})
         response.status = true
-        response.message = "TEST"
-        console.log(user.role)
+        response.message = ""
         response.data = {
             role: user.role
         }

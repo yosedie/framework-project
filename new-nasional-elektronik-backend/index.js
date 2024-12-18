@@ -20,7 +20,7 @@ const start = async () => {
     fastify.register(fastifyFormbody);
     fastify.register(fastifyCors, { 
         origin: '*',
-        methods: ['GET', 'POST'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     })      
     fastify.register(fastifyMongooseAPI, {

@@ -18,17 +18,35 @@ export const listProduct = (fastify) => async (request, reply) => {
     return response
 }
 
+export const fetchProduct = (fastify) => async (request, reply) => {
+    const response = { 
+        status: false,
+        message: "",
+        data: {}
+    }
+    const { productID } = request.query;
+    const produk = mongoDB.models.Product || mongoDB.model('Product', ProductModel);
+    const singleProduct = await produk.find({id_produk: productID})
+    response.status = true
+    response.data = {
+        product: {...singleProduct}
+    }
+    return response
+}
+
 export const addProduct = (fastify) => async (request, reply) => {
     const response = { 
         status: false,
         message: "",
         data: {}
     }
-    const { nama_produk, harga, kategori_id, stok, deskripsi } = {...request.body}
+    const { nama_produk, gambar_url, harga, kategori_id, stok, deskripsi } = {...request.body}
     const produk = mongoDB.models.Product || mongoDB.model('Product', ProductModel);
 
     if(nama_produk === "") {
         response.message = "Nama tidak boleh kosong !"
+    } else if(gambar_url === "") {
+        response.message = "Gambar tidak boleh kosong !"
     } else if(harga <= 0) {
         response.message = "Harga tidak boleh kosong !"
     } else if(kategori_id === "") {
@@ -38,12 +56,11 @@ export const addProduct = (fastify) => async (request, reply) => {
     } else if(deskripsi.length < 5) {
         response.message = "Deskripsi harus lebih dari 5 karakter !"
     } else {
-        const countAllProduct = await produk.find({})
         response.status = true
         response.message = "Tambah item sukses !"
         const newProduk = new produk({ 
             ...request.body,
-            id_produk: countAllProduct.length + 1,
+            id_produk: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
             tanggal_ditambahkan: new Date(),
             status: 1,
         });
@@ -74,7 +91,7 @@ export const editProduct = (fastify) => async (request, reply) => {
     } else if(deskripsi.length < 5) {
         response.message = "Deskripsi harus lebih dari 5 karakter !"
     } else {
-        const existingProduk = await produk.find({
+        const existingProduk = await produk.findOne({
             id_produk: id_produk,
         })
         if (!existingProduk) {
@@ -115,9 +132,10 @@ export const deleteProduct = (fastify) => async (request, reply) => {
             response.status = false;
             response.message = "Produk tidak ditemukan!";
         } else {
+            const newProdukList = await produk.find({})
             response.status = true;
             response.message = "Delete item sukses !"
-            response.data = deletedProduk;
+            response.data.list = newProdukList;
         }
     }
     return response

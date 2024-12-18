@@ -27,7 +27,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState, login, removeFromCart, removeAllFromCart } from '../util/redux/Features/user/userSlice';
+import { UserState, login, setPaymentInfo, removeFromCart, removeAllFromCart } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 import { ProductStruct } from '../types/types';
 
@@ -113,16 +113,16 @@ export default function Login() {
       (window as any).snap.embed(snap_token, {
         embedId: 'snap-container',
         onSuccess: function (result: SnapPaymentResult) {
-          console.log('Payment Success:', result);
+            console.log('Payment Success:', result);
         },
         onPending: function (result: SnapPaymentResult) {
-          console.log('Payment Pending:', result);
+            console.log('Payment Pending:', result);
         },
         onError: function (result: SnapPaymentResult) {
-          console.log('Payment Error:', result);
+            console.log('Payment Error:', result);
         },
         onClose: function () {
-          console.log('Payment popup closed');
+            console.log('Payment popup closed');
         },
       });
     } else {
@@ -155,7 +155,8 @@ export default function Login() {
         const response = await axios.post<ApiResponse<MidtransTokenData>>(`/getPaymentToken`, {
             id_pelanggan: account,
             total_harga: grand_total_cart,
-            alamat_pengiriman: "test address"
+            alamat_pengiriman: "test address",
+            item: JSON.stringify([...shoppingCart]),
         });
         if(response.data.status) {
             await handlePayment(response.data.data.token)
@@ -205,16 +206,16 @@ export default function Login() {
             {
                 groupedCart.map((data, index) => (
                     <Card 
-                    key={`${data.id_produk}_${index}`}
-                    title={`${data.quantity > 1 ? `${data.quantity}x ` : ''}${data.nama_produk}`}
-                    description={`Rp. ${new Intl.NumberFormat().format(data.harga * data.quantity)}`}
-                    image_url={data.gambar_url}
-                    isActionDelete
-                    isDescriptionTitle
-                    isHorizontal
-                    fullWidth
-                    withImage
-                    onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk))}
+                        key={`${data.id_produk}_${index}`}
+                        title={`${data.quantity > 1 ? `${data.quantity}x ` : ''}${data.nama_produk}`}
+                        description={`Rp. ${new Intl.NumberFormat().format(data.harga * data.quantity)}`}
+                        image_url={data.gambar_url}
+                        isActionDelete
+                        isDescriptionTitle
+                        isHorizontal
+                        fullWidth
+                        withImage
+                        onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk as string))}
                     />
                 ))
             }
@@ -226,7 +227,7 @@ export default function Login() {
                 fullWidth={true}
                 withImage={false}
                 marginTopParam='20vh'
-                onClickCard={midtransSnapHandler}
+                onClickCard={() =>midtransSnapHandler}
                 onDeleteClickCard={() => dispatch(removeAllFromCart({}))}
             />
             <Typography variant='overline' color='black' style={{

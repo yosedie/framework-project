@@ -1,10 +1,10 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, ProductStruct } from '../types/types';
+import { LoginData, ApiResponse, ProductStruct, GetProductStruct } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
@@ -52,44 +52,85 @@ const productsName = ["Test", "Test2"]
 export default function Products() {
   const router = useRouter()
 //   const count = useSelector((state: RootState) => state.counter.value)
-  const products = [
-    {
-        "id_produk": "1",
-        "nama_produk": "test produk",
-        "kategori": "test kategori",
-        "harga": 10000.00,
-        "stok": 10,
-        "deskripsi": "test deskripsi",
-        "tanggal_ditambahkan": new Date("2024-12-17"),
-        "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
-        "status": "aktif",
-    },
-    {
-        "id_produk": "2",
-        "nama_produk": "test produk 2",
-        "kategori": "test kategori",
-        "harga": 10000.00,
-        "stok": 10,
-        "deskripsi": "test deskripsi",
-        "tanggal_ditambahkan": new Date("2024-12-06"),
-        "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
-        "status": "aktif",
-    },
-    {
-        "id_produk": "3",
-        "nama_produk": "test produk 3",
-        "kategori": "test kategori",
-        "harga": 10000.00,
-        "stok": 10,
-        "deskripsi": "test deskripsi",
-        "tanggal_ditambahkan": new Date("2024-12-02"),
-        "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
-        "status": "aktif",
-    },
-  ]
+  const [products, setProducts] = useState<ProductStruct[]>([]);
+//   const [products, setProducts] = useState([
+    // {
+    //     "id_produk": "1",
+    //     "nama_produk": "test produk",
+    //     "kategori": "test kategori",
+    //     "harga": 10000.00,
+    //     "stok": 10,
+    //     "deskripsi": "test deskripsi",
+    //     "tanggal_ditambahkan": new Date("2024-12-17"),
+    //     "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
+    //     "status": "aktif",
+    // },
+    // {
+    //     "id_produk": "2",
+    //     "nama_produk": "test produk 2",
+    //     "kategori": "test kategori",
+    //     "harga": 10000.00,
+    //     "stok": 10,
+    //     "deskripsi": "test deskripsi",
+    //     "tanggal_ditambahkan": new Date("2024-12-06"),
+    //     "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
+    //     "status": "aktif",
+    // },
+    // {
+    //     "id_produk": "3",
+    //     "nama_produk": "test produk 3",
+    //     "kategori": "test kategori",
+    //     "harga": 10000.00,
+    //     "stok": 10,
+    //     "deskripsi": "test deskripsi",
+    //     "tanggal_ditambahkan": new Date("2024-12-02"),
+    //     "gambar_url": "https://media.istockphoto.com/id/182717773/nl/foto/ak-47.jpg?s=1024x1024&w=is&k=20&c=l4byp2mNhjq8yHY8JZbxWVuMiD-ntHt71fR8gqhFyjc=",
+    //     "status": "aktif",
+    // },
+ //  ])
   const account = useSelector((state: RootState) => state.user.jwt_token)
   const role = useSelector((state: RootState) => state.user.role)
   const dispatch = useDispatch()
+
+  async function deleteProductHandler(id_produk: string): Promise<GetProductStruct> {
+    try {
+      const response = await axios.delete<ApiResponse<GetProductStruct>>('/deleteProduct', {
+        data: {
+            id_produk: id_produk
+        }
+      });
+  
+      if (response.data.status) {
+        execToast(ToastStatus.SUCCESS, response.data.message);
+        setProducts(response.data.data.list)
+        console.log(response.data.data.list)
+      } else {
+        execToast(ToastStatus.ERROR, response.data.message);
+      }
+  
+      return response.data.data;
+    } catch (error) {
+      execToast(ToastStatus.ERROR, JSON.stringify(error));
+      throw error;
+    }
+  }
+
+  async function listProductHandler(): Promise<GetProductStruct> {
+    try {
+      const response = await axios.get<ApiResponse<GetProductStruct>>('/listProduct');
+  
+      if (response.data.status) {
+        setProducts(response.data.data.list)
+      } else {
+        execToast(ToastStatus.ERROR, response.data.message);
+      }
+  
+      return response.data.data;
+    } catch (error) {
+      execToast(ToastStatus.ERROR, JSON.stringify(error));
+      throw error;
+    }
+  }
 
   const handleAddToCart = (data: ProductStruct): void => {
     if(account !== "") {
@@ -99,6 +140,10 @@ export default function Products() {
         router.push("/login")
     }
   };
+
+  React.useEffect(() => {
+    listProductHandler()
+  }, [])
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -150,10 +195,10 @@ export default function Products() {
                     <Accordion />
                 </Item>
             </Grid>
-            <Grid container size={9}>
-                {/* role === "user" */}
+            <Grid container size={9} alignItems="stretch">
+                {/* role === "user" */} 
                 {
-                    products.map((data, index) => {
+                    products && products.map((data, index) => {
                         return (
                             <>
                                 <Grid size={3}>
@@ -173,7 +218,7 @@ export default function Products() {
                                             }}
                                             onDeleteClickCard={() => {
                                                 if(role !== "user") {
-
+                                                    deleteProductHandler(data.id_produk as string)
                                                 }
                                             }}
                                         />
