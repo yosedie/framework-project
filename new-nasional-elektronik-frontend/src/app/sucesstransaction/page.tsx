@@ -156,8 +156,8 @@ export default function Login() {
             } />
             <div style={{marginTop: "2.5%"}} />
             <Box sx={{textAlign: "left", width: "22.5%"}}>
-                <Typography variant="body1" component="p" sx={{color: "black"}}>
-                    Tanggal : {info_payment}
+                <Typography variant="body1" component="p" sx={{ color: "black" }}>
+                    Tanggal Pembayaran: {info_payment ? info_payment : "Tidak ada informasi pembayaran"}
                 </Typography>
                 <Typography variant="body1" component="p" sx={{color: "black"}}>
                     Total transaksi : Rp. 

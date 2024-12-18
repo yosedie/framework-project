@@ -24,7 +24,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState, login } from '../util/redux/Features/user/userSlice';
+import { UserState,setPaymentInfo, login } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 // COMPONENT
@@ -106,6 +106,13 @@ export default function Login() {
       throw error;
     }
   }  
+
+  const handlePaymentDispatch = () => {
+    const paymentData = "20 Desember 2024"; // Data pembayaran contoh
+    dispatch(setPaymentInfo(paymentData)); // Dispatch ke Redux
+    router.push('/successTransaction'); // Arahkan ke halaman successTransaction
+};
+
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -199,11 +206,17 @@ export default function Login() {
                             <Button variant="contained" onClick={loginHandler}>
                                 Login
                             </Button> <br />
+
                             <Typography variant="body2" component="p" sx={{color: "black"}}>
                                 Belum memiliki akun ? <Link href="#" variant="body2" onClick={() => handleRoute("register")}>
                                     Register
                                 </Link>
                             </Typography>
+
+                            <br />
+                            <Button variant="contained" onClick={handlePaymentDispatch}>
+                                Simpan Info Pembayaran & Lanjut
+                            </Button>
                         </Box>
                     </Item>
                 </Grid>

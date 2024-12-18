@@ -130,6 +130,21 @@ export default function Login() {
     }
   };
 
+  const handlePaymentDispatch = async () => {
+    try {
+        const paymentDate = new Date().toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        }); // Contoh data tanggal
+        dispatch(setPaymentInfo(paymentDate)); // Dispatch ke Redux
+        router.push('/successTransaction'); // Navigasi ke halaman successTransaction
+    } catch (error) {
+        execToast(ToastStatus.ERROR, "Terjadi kesalahan saat menyimpan data pembayaran");
+    }
+};
+
+
  async function loginHandler(): Promise<LoginData> {
     try {
         const response = await axios.post<ApiResponse<LoginData>>(`/login`, {
@@ -215,6 +230,7 @@ export default function Login() {
                         isHorizontal
                         fullWidth
                         withImage
+                        onClickCard={handlePaymentDispatch} // Ubah fungsi menjadi dispatch payment
                         onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk as string))}
                     />
                 ))
