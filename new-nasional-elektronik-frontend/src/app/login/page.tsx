@@ -24,7 +24,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState,setPaymentInfo, login } from '../util/redux/Features/user/userSlice';
+import { UserState, login } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 // COMPONENT
@@ -109,8 +109,8 @@ export default function Login() {
 
   const handlePaymentDispatch = () => {
     const paymentData = "20 Desember 2024"; // Data pembayaran contoh
-    dispatch(setPaymentInfo(paymentData)); // Dispatch ke Redux
-    router.push('/successTransaction'); // Arahkan ke halaman successTransaction
+    // dispatch(setPaymentInfo(paymentData)); // Dispatch ke Redux
+    router.push('/sucesstransaction'); // Arahkan ke halaman successTransaction
 };
 
 

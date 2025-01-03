@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse } from '../types/types';
+import { LoginData, ApiResponse, SnapPaymentResult } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -24,7 +24,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState, setPaymentInfo, login } from '../util/redux/Features/user/userSlice';
+import { UserState, login } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 
 // COMPONENT
@@ -53,10 +53,15 @@ const Item = styled(Paper)(({ theme }) => ({
 const productsName = ["Test", "Test2"]
 
 export default function Login() {
+  const [paymentInfo, setPaymentInfo] = React.useState({
+    tanggal: "",
+    total: "",
+    stok_transaksi: "",
+    alamat: "",
+    status: "pending",
+  })
   const searchParams = useSearchParams()
   const router = useRouter()
-  const count = useSelector((state: RootState) => state.counter.value)
-  const info_payment = useSelector((state: RootState) => state.user.payment_info)
   const dispatch = useDispatch()
 
   const [loginData, setLoginData] = React.useState({
@@ -109,6 +114,22 @@ export default function Login() {
     }
   }  
 
+  React.useEffect(() => {
+    const paymentInfoString = sessionStorage.getItem('payment_info');
+    // alert(JSON.stringify(paymentInfoString))
+    if (paymentInfoString) {
+        const storedPaymentInfo: SnapPaymentResult = JSON.parse(paymentInfoString);
+        setPaymentInfo((prevState) => ({
+            ...prevState,
+            tanggal: storedPaymentInfo.transaction_time,
+            total: storedPaymentInfo.gross_amount,
+            status: storedPaymentInfo.transaction_status,
+            alamat: storedPaymentInfo.alamat,
+            stok_transaksi: storedPaymentInfo.stok,
+        }))
+    }
+  }, [])
+
   return (
    <Box sx={{backgroundColor: "white"}}>
     <AppBar />
@@ -142,7 +163,7 @@ export default function Login() {
         >
             <Typography variant="h5" component="p" sx={{color: "black"}}>
                 {
-                    searchParams.get('transaction_status') == 'pending'
+                    paymentInfo.status === 'pending'
                     ? "Transaksi anda sedang dalam keadaan pending"
                     : "Selamat, transaksi anda berhasil"
                 }
@@ -150,34 +171,34 @@ export default function Login() {
             </Typography>
             <div style={{marginTop: "1%"}} />
             <Avatar sx={{width: "120px", height: "120px"}} src={
-                searchParams.get('transaction_status') == 'pending'
+                paymentInfo.status === 'pending'
                     ? "https://uxwing.com/wp-content/themes/uxwing/download/time-and-date/pending-clock-icon.png"
                     : "https://cdn-icons-png.flaticon.com/512/5610/5610944.png"
             } />
             <div style={{marginTop: "2.5%"}} />
             <Box sx={{textAlign: "left", width: "22.5%"}}>
                 <Typography variant="body1" component="p" sx={{ color: "black" }}>
-                    Tanggal Pembayaran: {info_payment ? info_payment : "Tidak ada informasi pembayaran"}
+                    Tanggal Pembayaran: <strong>{paymentInfo.tanggal.split(" ")[0]}</strong>
                 </Typography>
                 <Typography variant="body1" component="p" sx={{color: "black"}}>
-                    Total transaksi : Rp. 
+                    Total transaksi : <strong>Rp. {paymentInfo.total}</strong>
                 </Typography>
                 <Typography variant="body1" component="p" sx={{color: "black"}}>
-                    Jumlah barang yang dibeli : 
+                    Jumlah barang yang dibeli : <strong>{paymentInfo.stok_transaksi}</strong>
                 </Typography>
                 <Typography variant="body1" component="p" sx={{color: "black"}}>
-                    Alamat dikirim ke : 
+                    Alamat dikirim ke : <strong>{paymentInfo.alamat}</strong>
                 </Typography>
                 <Typography variant="body1" component="p" sx={{color: "black"}}>
                     Status : <strong>{
-                        searchParams.get('transaction_status') == 'pending'
+                        paymentInfo.status === 'pending'
                             ? "Pending"
                             : "Berhasil"    
                     }</strong> 
                 </Typography>
             </Box> <br />
             {
-                searchParams.get('transaction_status') == 'pending'
+                paymentInfo.status === 'pending'
                     ? (
                         <Button variant="contained" onClick={() => router.push("/products")}>
                             Ke daftar produk

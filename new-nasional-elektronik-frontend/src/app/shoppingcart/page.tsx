@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, MidtransTokenData,  Role} from '../types/types';
+import { LoginData, ApiResponse, MidtransTokenData, SnapPaymentResult} from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -27,7 +27,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState, login, setPaymentInfo, removeFromCart, removeAllFromCart } from '../util/redux/Features/user/userSlice';
+import { UserState, login, removeFromCart, removeAllFromCart } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 import { ProductStruct } from '../types/types';
 
@@ -60,12 +60,6 @@ export interface CartProduct extends ProductStruct {
     quantity: number;
 }
 
-interface SnapPaymentResult {
-    order_id: string;
-    status_code: string;
-    fraud_status: string;
-}
-  
 
 export default function Login() {
   const router = useRouter()
@@ -101,6 +95,7 @@ export default function Login() {
  };
 
   React.useEffect(() => {
+    sessionStorage.removeItem('payment_info')
     const script = document.createElement('script');
     script.src = 'https://app.sandbox.midtrans.com/snap/snap.js'; 
     script.setAttribute('data-client-key', 'SB-Mid-client-t9vamsHp5lVGoR8Z');
@@ -113,9 +108,23 @@ export default function Login() {
       (window as any).snap.embed(snap_token, {
         embedId: 'snap-container',
         onSuccess: function (result: SnapPaymentResult) {
-            console.log('Payment Success:', result);
+            sessionStorage.setItem('payment_info', JSON.stringify({
+                ...result,
+                alamat: "TEST ADDRESS SUKSES",
+                stok: 15,
+            }));
+            // const paymentData = "20 Desember 2024";
+            // dispatch(setPaymentInfo(paymentData));
+            // router.push('/sucesstransaction');
         },
         onPending: function (result: SnapPaymentResult) {
+            sessionStorage.setItem('payment_info', JSON.stringify({
+                transaction_time: (new Date()).toISOString().slice(0, 10),
+                gross_amount: 12000,
+                alamat: "PENDING",
+                stok: 15,
+                transaction_status: "pending"
+            }));
             console.log('Payment Pending:', result);
         },
         onError: function (result: SnapPaymentResult) {
@@ -136,9 +145,8 @@ export default function Login() {
             day: "2-digit",
             month: "long",
             year: "numeric",
-        }); // Contoh data tanggal
-        dispatch(setPaymentInfo(paymentDate)); // Dispatch ke Redux
-        router.push('/successTransaction'); // Navigasi ke halaman successTransaction
+        });
+        router.push('/successTransaction');
     } catch (error) {
         execToast(ToastStatus.ERROR, "Terjadi kesalahan saat menyimpan data pembayaran");
     }
@@ -230,7 +238,7 @@ export default function Login() {
                         isHorizontal
                         fullWidth
                         withImage
-                        onClickCard={handlePaymentDispatch} // Ubah fungsi menjadi dispatch payment
+                        onClickCard={handlePaymentDispatch}
                         onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk as string))}
                     />
                 ))
@@ -243,7 +251,7 @@ export default function Login() {
                 fullWidth={true}
                 withImage={false}
                 marginTopParam='20vh'
-                onClickCard={() =>midtransSnapHandler}
+                onClickCard={() => midtransSnapHandler()}
                 onDeleteClickCard={() => dispatch(removeAllFromCart({}))}
             />
             <Typography variant='overline' color='black' style={{

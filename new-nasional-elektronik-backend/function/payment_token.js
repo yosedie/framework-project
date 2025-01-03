@@ -1,5 +1,7 @@
 import midtransClient from 'midtrans-client'
 import { mongoDB } from '../index.js'
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken'
 
 // Model 
 import DTransModel from '../models/D_trans.js'
@@ -46,8 +48,11 @@ const paymentToken = (fastify) => async (request, reply) => {
     } else {
         const parsedItem = JSON.parse(item)
         const hTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+        const decoded = jwt.verify(id_pelanggan, process.env.private_key_jwt, { algorithms: ['HS512'] });
+        const UserID = new mongoose.Types.ObjectId(decoded.userID);
         const newHtrans = new hTrans({ 
             ...request.body,
+            id_pelanggan: UserID,
             tanggal: new Date(),
             status: "Pending",
             metode_pembayaran: "Midtrans",

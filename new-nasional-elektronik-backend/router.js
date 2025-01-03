@@ -7,6 +7,8 @@ import verifyToken from "./function/verify_jwt.js";
 
 import { fetchProduct, listProduct, addProduct, editProduct, deleteProduct } from "./function/products.js";
 
+import { fetchTransaction, listTransaction, deleteTransaction } from "./function/transactions.js";
+
 async function routes (fastify, options) {
     const errorWrapper = (fn) => (request, reply) => {
         return fn(request, reply).catch(err => {
@@ -34,6 +36,11 @@ async function routes (fastify, options) {
     fastify.post('/api/addProduct', errorWrapper(addProduct(fastify)))
     fastify.put('/api/editProduct', errorWrapper(editProduct(fastify)))
     fastify.delete('/api/deleteProduct', errorWrapper(deleteProduct(fastify)))
+
+    // Khusus transaksi
+    fastify.get('/api/fetchTransaction', errorWrapper(fetchTransaction(fastify)))
+    fastify.get('/api/listTransaction', errorWrapper(listTransaction(fastify)))
+    fastify.delete('/api/deleteTransaction', errorWrapper(deleteTransaction(fastify)))
 }
 
 export default routes;

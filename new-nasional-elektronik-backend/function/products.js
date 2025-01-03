@@ -75,11 +75,13 @@ export const editProduct = (fastify) => async (request, reply) => {
         message: "",
         data: {}
     }
-    const { id_produk, nama_produk, harga, kategori_id, stok, deskripsi, status } = {...request.body}
+    const { id_produk, nama_produk, gambar_url, harga, kategori_id, stok, deskripsi, status } = {...request.body}
     const produk = mongoDB.models.Product || mongoDB.model('Product', ProductModel);
 
     if(id_produk === "") {
         response.message = "ID Produk tidak boleh kosong !"
+    } else if(gambar_url === "") {
+        response.message = "Gambar tidak boleh kosong !"
     } else if(nama_produk === "") {
         response.message = "Nama tidak boleh kosong !"
     } else if(harga <= 0) {
@@ -98,6 +100,7 @@ export const editProduct = (fastify) => async (request, reply) => {
             response.status = false;
             response.message = "Produk tidak ditemukan!";
         } else {
+            existingProduk.gambar_url = gambar_url;
             existingProduk.nama_produk = nama_produk;
             existingProduk.harga = harga;
             existingProduk.kategori_id = kategori_id;

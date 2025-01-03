@@ -143,6 +143,7 @@ export default function AddProduct() {
       const productID = searchParams.get('id')
       const response = await axios.put<ApiResponse<ProductStruct>>('/editProduct', {
         ...addData,
+        gambar_url: productImage,
         id_produk: productID,
       });
   

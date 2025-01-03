@@ -5,14 +5,12 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 export interface UserState {
     role: string,
     jwt_token: string,
-    payment_info: string,
     shopping_cart: ProductStruct[],
 }
 
 const initialState: UserState = {
     role: "",
     jwt_token: "",
-    payment_info: "",
     shopping_cart: [],
 }
 
@@ -20,9 +18,6 @@ export const counterSlice = createSlice({
     name: 'counter',
     initialState,
     reducers: {
-        setPaymentInfo: (state, action) => {
-            state.payment_info = action.payload
-        },
         addToCart: (state, action: PayloadAction<ProductStruct>) => {
             state.shopping_cart.push(action.payload)
         },
@@ -45,7 +40,6 @@ export const counterSlice = createSlice({
 })
 
 export const {
-    setPaymentInfo,
     addToCart, 
     removeFromCart, 
     removeAllFromCart,
