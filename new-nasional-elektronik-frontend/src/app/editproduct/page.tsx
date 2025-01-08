@@ -318,6 +318,21 @@ export default function AddProduct() {
                                     <MenuItem value={2}>
                                         Mesin Cuci
                                     </MenuItem>
+                                    <MenuItem value={3}>
+                                        Kompor
+                                    </MenuItem>
+                                    <MenuItem value={4}>
+                                        Rice Cooker
+                                    </MenuItem>
+                                    <MenuItem value={5}>
+                                        TV
+                                    </MenuItem>
+                                    <MenuItem value={6}>
+                                        Anthena
+                                    </MenuItem>
+                                    <MenuItem value={7}>
+                                        Freezer Box
+                                    </MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField 
