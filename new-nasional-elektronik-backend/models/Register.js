@@ -8,6 +8,7 @@ const registerSchema = new mongoose.Schema({
     // alamat: String,
     password: String,
     tanggal_daftar: Date,
+    picture_profile: String,
 })
 
 export default registerSchema

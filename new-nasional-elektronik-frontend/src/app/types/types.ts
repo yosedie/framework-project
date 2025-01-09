@@ -1,5 +1,27 @@
 // enum
 
+export enum Kategori {
+    MesinCuci = "Mesin Cuci",
+    AC = "Air Conditioner",
+    Kulkas = "Kulkas",
+    Kompor = "Kompor",
+    RiceCooker = "Rice Cooker",
+    TV = "Televisi",
+    Anthena = "Anthena",
+    FreezeBox = "Freezer Box",
+}
+
+export const KategoriData = [
+    Kategori.MesinCuci,
+    Kategori.AC,
+    Kategori.Kulkas,
+    Kategori.Kompor,
+    Kategori.RiceCooker,
+    Kategori.TV,
+    Kategori.Anthena,
+    Kategori.FreezeBox,
+];
+
 export enum Role {
     User,
     Seller,
@@ -44,6 +66,15 @@ export interface ProductStruct {
     gambar_url?: string,
 }
 
+export interface VerifyTokenData {
+    role: string,
+    nama: string,
+    email: string,
+    telepon: string,
+    picture_profile: string,
+    password?: string,
+}
+
 export interface FetchProductStruct {
     product: ProductStruct[]
 }
@@ -64,16 +95,20 @@ export interface GetUserStruct {
     list: UserData[]
 }
 
-export interface VerifyTokenData {
-    role: string;
-}
-
 export interface LoginData {
     jwt_token: string;
     role: string;
 }
 
-export interface RegisterData {
+export interface UploadPictureStruct {
+    picture_profile: string;
+}
+
+export interface RatingStruct {
+    list: ListRating[];
+}
+
+export interface EmptyData {
 
 }
 
@@ -112,6 +147,19 @@ export interface UserData {
     telepon: string;
     password: string;
     tanggal_daftar: string;
+}
+
+export interface ListRating {
+    id_user: string,
+    id_product: string,
+    rating: string,
+    komentar: string,
+    user: UserRating,
+}
+
+export interface UserRating {
+    nama: string,
+    picture_profile: string,
 }
 
 export interface ApiResponse<T> {

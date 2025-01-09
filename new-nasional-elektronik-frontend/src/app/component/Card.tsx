@@ -26,7 +26,7 @@ type ImgMediaCardProps = {
   withImage?: boolean;
   marginTopParam?: string;
   onClickCard?: (data: any) => void;
-  onDeleteClickCard?: (data: any) => void;
+  onClickSecondaryCard?: (data: any) => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -52,7 +52,7 @@ export default function ImgMediaCard({
   withImage,
   marginTopParam,
   onClickCard,
-  onDeleteClickCard
+  onClickSecondaryCard
 }: ImgMediaCardProps) {
   const role = useSelector((state: RootState) => state.user.role)
   return (
@@ -98,7 +98,7 @@ export default function ImgMediaCard({
                             >
                               {description}
                             </Typography>
-                            <Button variant="contained" sx={{ marginLeft: 'auto', marginRight: "1.5%" }} color="error" onClick={onDeleteClickCard}>
+                            <Button variant="contained" sx={{ marginLeft: 'auto', marginRight: "1.5%" }} color="error" onClick={onClickSecondaryCard}>
                               Delete
                             </Button>
                           </Box>
@@ -153,7 +153,7 @@ export default function ImgMediaCard({
                   <Item sx={{boxShadow: "none", textAlign: "right "}}>
                     {/* <CardContent> */}
                     <Button variant="contained" sx={{width: "175px"}} onClick={onClickCard}>Next</Button> <br />
-                    <Button variant="contained" sx={{width: "175px", marginTop: ".5%"}} color="error" onClick={onDeleteClickCard}>
+                    <Button variant="contained" sx={{width: "175px", marginTop: ".5%"}} color="error" onClick={onClickSecondaryCard}>
                       Delete all items
                     </Button>
                     {/* </CardContent> */}
@@ -185,17 +185,34 @@ export default function ImgMediaCard({
               {
                 role === "" || role === "user"
                 ? (
-                  <Button 
-                    variant="contained" 
-                    size="small" 
-                    sx={{
-                      margin: "0 auto",
-                    }}
-                    fullWidth 
-                    onClick={onClickCard}
-                  >
-                    Add to Cart
-                  </Button>
+                  <Grid container size={12} spacing={1}>
+                      <Grid size={6}>
+                        <Button 
+                          variant="contained" 
+                          size="small" 
+                          sx={{
+                            margin: "0 auto",
+                          }}
+                          fullWidth 
+                          onClick={onClickCard}
+                        >
+                          Details Product
+                        </Button>
+                      </Grid>
+                      <Grid size={6}>
+                        <Button 
+                          variant="contained" 
+                          size="small" 
+                          sx={{
+                            margin: "0 auto",
+                          }}
+                          fullWidth 
+                          onClick={onClickSecondaryCard}
+                        >
+                          Add to Cart
+                        </Button>
+                      </Grid>
+                  </Grid>
                 )
                 : (
                   <Grid container size={12} spacing={6}>
@@ -221,7 +238,7 @@ export default function ImgMediaCard({
                             size="small" 
                             sx={{margin: "0 auto"}} 
                             fullWidth 
-                            onClick={onDeleteClickCard}
+                            onClick={onClickSecondaryCard}
                           >
                             Delete
                           </Button>

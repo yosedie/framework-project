@@ -1,17 +1,25 @@
 'use client';
-import { ProductStruct } from "@/app/types/types";
+import { ProductStruct, VerifyTokenData } from "@/app/types/types";
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {
     role: string,
     jwt_token: string,
     shopping_cart: ProductStruct[],
+    userData: VerifyTokenData,
 }
 
 const initialState: UserState = {
     role: "",
     jwt_token: "",
     shopping_cart: [],
+    userData: {
+        role: "",
+        nama: "",
+        email: "",
+        telepon: "",
+        picture_profile: "",
+    },
 }
 
 export const counterSlice = createSlice({
@@ -30,11 +38,24 @@ export const counterSlice = createSlice({
         changeRole: (state, action) => {
             state.role = action.payload
         },
+        changePictureProfile: (state, action: PayloadAction<string>) => {
+            state.userData.picture_profile = action.payload
+        },
+        changeUserData: (state, action: PayloadAction<VerifyTokenData>) => {
+            state.userData = action.payload
+        },
         login: (state, action) => {
             state.jwt_token = action.payload
         },
         logout: (state, action) => {
             state.jwt_token = ""
+            state.userData = {
+                role: "",
+                nama: "",
+                email: "",
+                telepon: "",
+                picture_profile: "",
+            }
         },
     }
 })
@@ -44,6 +65,8 @@ export const {
     removeFromCart, 
     removeAllFromCart,
     changeRole,
+    changePictureProfile,
+    changeUserData,
     login, 
     logout
 } = counterSlice.actions

@@ -82,8 +82,8 @@ export default function Transaction() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const router = useRouter()
-  const account = useSelector((state: RootState) => state.user.jwt_token)
-  const shoppingCart = useSelector((state: RootState) => state.user.shopping_cart)
+  const token = useSelector((state: RootState) => state.user.jwt_token)
+  const role = useSelector((state: RootState) => state.user.role)
   const dispatch = useDispatch()
 
   const [loginData, setLoginData] = React.useState({
@@ -108,7 +108,12 @@ export default function Transaction() {
 
  async function getTransactionList(): Promise<GetTransactionStruct> {
     try {
-        const response = await axios.get<ApiResponse<GetTransactionStruct>>(`/listTransaction`);
+        const response = await axios.get<ApiResponse<GetTransactionStruct>>(`/listTransaction`, {
+            params: {
+                jwt_token: token,
+                role: role,
+            }
+        });
         if(response.data.status) {
             setTransactionList(response.data.data.list)
         } else {
@@ -221,7 +226,6 @@ export default function Transaction() {
             )
             : <></>
         }
-        
     </Modal>
     <AppBar />
         {/* <button 
@@ -295,17 +299,21 @@ export default function Transaction() {
                                 >
                                 See Details
                                 </Button>
-                                <Button
-                                    sx={{
-                                        flex: 1,
-                                        borderRadius: 0,
-                                    }}
-                                    variant="contained"
-                                    color="error"
-                                    onClick={() => deleteTransaction(data._id)}
-                                >
-                                Delete
-                                </Button>
+                                {
+                                    role === "admin" && (
+                                    <Button
+                                        sx={{
+                                            flex: 1,
+                                            borderRadius: 0,
+                                        }}
+                                        variant="contained"
+                                        color="error"
+                                        onClick={() => deleteTransaction(data._id)}
+                                    >
+                                        Delete
+                                    </Button>
+                                    )
+                                }
                             </Box>
                         </Box>
                     )

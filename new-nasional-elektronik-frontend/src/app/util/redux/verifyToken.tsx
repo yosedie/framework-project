@@ -3,7 +3,7 @@
 import axios from '../../util/axios/axios';
 import { VerifyTokenData, ApiResponse } from '../../types/types'
 import { execToast, ToastStatus } from '../../util/toastify/toast';
-import { changeRole, UserState,  } from '../../util/redux/Features/user/userSlice';
+import { changeRole, UserState, changeUserData } from '../../util/redux/Features/user/userSlice';
 
 import React, { ReactNode } from 'react';
 import { Provider } from "react-redux";
@@ -24,6 +24,7 @@ export function VerifyToken({ children }: ProvidersProps) {
         if (response.data.status) {
           const role = response.data.data.role;
           dispatch(changeRole(role));
+          dispatch(changeUserData({...response.data.data}));
         } else {
           dispatch(changeRole(""));
         }

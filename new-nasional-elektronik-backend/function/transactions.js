@@ -1,5 +1,7 @@
 import { mongoDB } from '../index.js'
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
 
 // Model 
 import ProductsModel from '../models/Product.js'
@@ -13,24 +15,28 @@ export const listTransaction = (fastify) => async (request, reply) => {
         message: "",
         data: {}
     }
-    const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
-    const allTransaction = await HTrans.find({})
-
-    const User = mongoDB.models.User || mongoDB.model('User', RegisterModel);
-    const updatedTransactions = await Promise.all(
-        allTransaction.map(async (transaction) => {
-            const UserID = new mongoose.Types.ObjectId(transaction.id_pelanggan); // Use id_pelanggan as UserID
-            const user = await User.findOne({ _id: UserID }); // Fetch user data by UserID
-            return {
-            ...transaction.toObject(), // Convert transaction to a plain object
-            nama_pelanggan: user ? user.nama : null, // Append nama_pelanggan
-            };
-        })
-    );
-
-    response.status = true;
-    response.data.list = updatedTransactions;
-    return response;
+    const { jwt_token, role } = request.query
+    if (jwt_token && jwt_token.length > 0) {
+        const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+        const User = mongoDB.models.User || mongoDB.model('User', RegisterModel);
+        const decoded = jwt.verify(jwt_token, process.env.private_key_jwt, { algorithms: ['HS512'] });
+    
+        const allTransaction = await HTrans.find(role === "user" ? { id_pelanggan: decoded.userID } : {});
+        const updatedTransactions = await Promise.all(
+            allTransaction.map(async (transaction) => {
+                const user = await User.findOne({ _id: transaction.id_pelanggan });
+                return {
+                    ...transaction.toObject(),
+                    nama_pelanggan: user ? user.nama : null,
+                };
+            })
+        );
+    
+        response.status = true;
+        response.data.list = updatedTransactions;
+        return response;
+    }
+    return {}
 }
 
 export const fetchTransaction = (fastify) => async (request, reply) => {

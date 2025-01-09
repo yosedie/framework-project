@@ -11,6 +11,10 @@ import { fetchTransaction, listTransaction, deleteTransaction, notificationHandl
 
 import { listUser, editUser, deleteUser } from "./function/user.js";
 
+import { uploadImage, changeSecurity } from "./function/profile.js"
+
+import { listComment, postComment } from "./function/rating.js"
+
 async function routes (fastify, options) {
     const errorWrapper = (fn) => (request, reply) => {
         return fn(request, reply).catch(err => {
@@ -49,6 +53,14 @@ async function routes (fastify, options) {
     fastify.get('/api/listUser', errorWrapper(listUser(fastify)))
     fastify.put('/api/editUser', errorWrapper(editUser(fastify)))
     fastify.delete('/api/deleteUser', errorWrapper(deleteUser(fastify)))
+
+    // Khusus profile
+    fastify.put('/api/uploadImage', errorWrapper(uploadImage(fastify)))
+    fastify.put('/api/changeSecurity', errorWrapper(changeSecurity(fastify)))
+
+    // Khusus komentar
+    fastify.get('/api/fetchComment', errorWrapper(listComment(fastify)))
+    fastify.post('/api/postComment', errorWrapper(postComment(fastify)))
 }
 
 export default routes;

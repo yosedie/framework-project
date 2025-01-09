@@ -23,7 +23,11 @@ const verifyJWT = (fastify) => async (request, reply) => {
         response.status = true
         response.message = ""
         response.data = {
-            role: user.role
+            nama: user.nama,
+            email: user.email,
+            role: user.role,
+            telepon: user.telepon,
+            picture_profile: user.picture_profile,
         }
     }
     return response

@@ -33,6 +33,7 @@ const settingsGuest = ['Login', 'Register'];
 function ResponsiveAppBar() {
     const account = useSelector((state: RootState) => state.user.jwt_token)
     const role = useSelector((state: RootState) => state.user.role)
+    const profilePictureRedux = useSelector((state: RootState) => state.user.userData.picture_profile)
     const dispatch = useDispatch()
     const router = useRouter()
 
@@ -56,7 +57,12 @@ function ResponsiveAppBar() {
 
     const handleUserMenu = (page: string) => {
       if(typeof page === 'string') {
-        handleRoute(page.toLowerCase())
+        const pageString = page.toLowerCase()
+        if(pageString == "transactionhistory") {
+          handleRoute("transaction")
+        } else {
+          handleRoute(pageString)
+        }
       }
     };
 
@@ -173,7 +179,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="/static/images/avatar/2.jpg" />
+                <Avatar src={profilePictureRedux || ""} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -202,6 +208,7 @@ function ResponsiveAppBar() {
                     <MenuItem key={setting} onClick={() => {
                       if(setting === "Logout") {
                         dispatch(logout({}))
+                        handleRoute("login")
                       } else {
                         handleUserMenu(setting.replace(/\s+/g, ''))
                       }

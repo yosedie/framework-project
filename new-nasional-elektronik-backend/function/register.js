@@ -34,6 +34,7 @@ const register = (fastify) => async (request, reply) => {
             ...request.body,
             tanggal_daftar: new Date(),
             role: "user",
+            picture_profile: "",
         });
         await newUser.save();
     }
