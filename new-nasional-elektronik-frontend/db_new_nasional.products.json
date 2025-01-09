@@ -1,0 +1,1377 @@
+[{
+  "_id": {
+    "$oid": "677e2c64fd037427c8f8e04b"
+  },
+  "id_produk": "1736322148366-490",
+  "nama_produk": "Polytron chest freezer 200 liter PCF-217",
+  "kategori_id": 7,
+  "harga": 2750000,
+  "stok": 4,
+  "deskripsi": "CHEST FREEZER\nFEATURES\nBasket 1\nTemperature ≤ -18°\nSPECIFICATIONS\n\nCapacity(L) : 200\nPower source 230V / 60Hz\nPower 130W\n\nCOLOUR\nWHITE\nFREEZER DOORS\n1 DOOR\nMIN TEMPERATURE\n-18 CELCIUS\nPOWER CONS\n90 WATT\nVOLUME\n200 LITER",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T07:42:28.366Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/12/18/ee5875a4-66f2-4a09-9676-241f43593b1c.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e31c8fd037427c8f8e0a1"
+  },
+  "id_produk": "1736323528558-219",
+  "nama_produk": "POLYTRON kulkas 2 pintu PRB-219",
+  "kategori_id": 0,
+  "harga": 2750000,
+  "stok": 5,
+  "deskripsi": "SPESIFIKASI PRODUK\n\nKapasitas (L) :200 Liter\nUkuran (WxHxD) (mm) : 545 x 1380 x 588 mm\nDaya (W) : 145 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 60 Kg\nFITUR :\n- Ice Tray\n- Extra Big Freezer\n- Big Vegetable Box\n- Tempered Glass Shelf\n- Low Watt\n- LED Lighting\n- Twist & Ice",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:05:28.558Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/10/4/13c17cd9-2fb3-4b9c-9a22-47296129492e.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e34e6fd037427c8f8e0ef"
+  },
+  "id_produk": "1736324326317-185",
+  "nama_produk": "LG freezer 6 rak INV -304 SL",
+  "kategori_id": 7,
+  "harga": 3350000,
+  "stok": 5,
+  "deskripsi": "LG GN 304 SL Freezer 6 Rak Cocok untuk ASI dll (atau 7 rak kalau sama rak bawah)\n\nSPESIFIKASI :\n- Freezer 6 Rak\n- Kapasitas 171 Liter\n- Dimension (LxTxD) : 530 x 1300 x 600 mm\n- Daya Listrik 80 Watt\n- Low watt\n- Pintu Stainless\n- Anti Bakteri\n- Mechanical Controller\n- Bioshield\n- Direct Cooling\n- Garansi Resmi kompressor 3 Tahun\n- Cocok utk Buat Es batu, penyimpanan daging, ASI, Nugget Dll",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:18:46.317Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/24/af6f75fc-b55a-4f87-a1ae-20b460678c9f.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3535fd037427c8f8e0fb"
+  },
+  "id_produk": "1736324405785-19",
+  "nama_produk": "MIYAKO magic com 2,2 liter MCM-838",
+  "kategori_id": 4,
+  "harga": 350000,
+  "stok": 7,
+  "deskripsi": "Spesifikasi Produk :\n- Nama Produk : Miyako Magic Com\n- Tipe : MCM-838\n- Bahan Material : Plastik\n- Panjang Kabel : 1 Meter\n- Kapasitas :\n*Memasak : 2.2 Liter\n*Menghangatkan : 5.7 Liter\n- Daya :\n*Memasak : 450 Watt\n*Menghangatkan : 73 Watt\n- Tegangan : 220 Volt / 50 Hz\n- Dimensi (P x L x T) : 30.5 cm x 33 cm x 31.5 cm\n- Warna : Merah\n- Aksesoris :\n*plastic steam tray\n*rice paddle\n*measuring cup\n*rice scoop\n- Pengaturan Waktu : Tidak\n- Tersedia Pegangan Panci : Tidak\n- Made In : Indonesia",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:20:05.785Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/24/d653c1e1-ce24-4120-a67b-ce2610b44d55.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e35a5fd037427c8f8e110"
+  },
+  "id_produk": "1736324517540-43",
+  "nama_produk": "MIYAKO magic com serbaguna MCM-18",
+  "kategori_id": 4,
+  "harga": 375000,
+  "stok": 10,
+  "deskripsi": "Memiliki 3 element pemanas.\nPemanas atas, bawah, samping menjadikan nasi matang merata.\n\nUkuran 1,8 Liter untuk memasak nasi.\n\nBisa sampai 5 liter untuk menghangatkan makanan.\n\nDilengkapi dengan gelas pembuangan air dibagian belakang.\nmenampung air sisa memasak dan menjadikan nasi tidak mudah busuk.\n\nStandard SNI dan Food Grade.\n\nDaya : 395 Watt\nTegangan : 220 Vac\nBody : tin plate plastik\nPanci: Precoated\n\nterdapat gelas pengukur, centong, dan alat kukus.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:21:57.540Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/22/0183adc3-43c1-468e-8aed-c393d9b94096.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3638fd037427c8f8e129"
+  },
+  "id_produk": "1736324664457-618",
+  "nama_produk": "PHILIPS rice cooker / magic com 2 liter HD-3138",
+  "kategori_id": 4,
+  "harga": 800000,
+  "stok": 10,
+  "deskripsi": "Rice Cooker PHILIPS HD3138\n\nSpesifikasi :\n- Panci dalam dengan lapisan Bakuhanseki 6x Lebih Keras\n- Fungsi 3 in 1 : Memasak, menghangatkan, dan mengukus\n- Kapasitas 2 Liter\n- Daya Listrik : 400 Watt\n- Body Stainless Steel anti lengket; Panci teflon bahan keramik tahan goresan\n- 3D Heating 48 Jam tetap Hangat\n- Garansi Resmi PHILIPS Indonesia 2 Tahun\n\n- Lapisan Bakuhanseki yang canggih 6x lebih keras\nLapisan Bakuhanseki: hingga 6 kali lebih tahan lama dibandingkan lapisan anti-lengket pada rice cooker konvensional. Bakuhanseki adalah batu alam yang mengandung mineral dan unsur-unsur mikronutrien yang sangat penting bagi kesehatan tubuh. (*Penci bagian dalam rice cooker Philips terbuat dari Bakuhanseki 5-lapis sedangkan panci bagian dalam rice cooker konvensional terbuat dari lapisan anti-lengket)",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:24:24.457Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/21/c7b1a963-b0a6-46d1-8bea-14d1a74fbe93.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3703fd037427c8f8e149"
+  },
+  "id_produk": "1736324867450-348",
+  "nama_produk": "SHARP mesin cuci 2 tabung EST-80MW",
+  "kategori_id": 2,
+  "harga": 1650000,
+  "stok": 8,
+  "deskripsi": "FITUR :\n-Single Pulsator\n-Big pulsator,\nDilengkapi dengan pulsator yang besar membuat putaran saat pencucian sangat kuat, sehingga hasil pencucian akan lebih bersih dan sempurna.\n-Water Inlet, Mesin cuci ini memiliki water inlet. Sehingga memudahkan untuk pengguna dalam memasukan air kedalam mesin cuci pada saat process pencucian\n-Panel with Bahasa, Penggunaan panel menggunakan bahasa indonesia akan memudahkan pengguna dalam melakukan proses setting sebelum mencuci, sehingga hasil pencucian sesuai dengan apa yang kita inginkan.\n\nSPESIFIKASI :\nVoltage/Frequency 220 V/ 50 Hz\nKONSUMSI DAYA (W) : 330 Watt\nBERAT : 27 KG\nDIMENSION (WXDXH) : 783X437X934 Mm\nGaransi Resmi motor 3 tahun & 1 tahun sparepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:27:47.450Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/11/2fd5d403-4f38-4d91-a5c8-0c5556ca2eaa.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3736fd037427c8f8e152"
+  },
+  "id_produk": "1736324918091-477",
+  "nama_produk": "ADVANCE magic com/rice cooker 1.8 liter G-21",
+  "kategori_id": 4,
+  "harga": 300000,
+  "stok": 10,
+  "deskripsi": "penanak nasi dan mengkukus 1.8 liter panci anti lengket ada sekering suhu panas untuk keamanan\nMagic com advance G - 21 :\nkapasitas : 1,8 L\ntemperature : 157 derajat C\nvoltage : 220V - 50 hz\noperasi saklar tunggal\nmultifungsi menanak nasi dan mengukus\nlapisan anti lengket\ndaya : 350 W\n",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:28:38.091Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/9/4/4a525e6b-b344-4216-8e3d-02decc619b24.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e37b2fd037427c8f8e162"
+  },
+  "id_produk": "1736325042826-728",
+  "nama_produk": "SHARP ac 1/2 pk low watt AH-05UCYN",
+  "kategori_id": 1,
+  "harga": 3400000,
+  "stok": 7,
+  "deskripsi": "Sharp AH-A5UCYN AC Split 1/2 PK R-32\n\n\n* Daya listrik 340 Watt\n* R-32 Eco New Refrigerant\n* Garansi 1Tahun Sparepart\n* Garansi 10 Tahun Kompresor\n* Warna putih\n* New Super Jetstream Series\n* Auto Swing Louvre\n* Hight Density Filter\n* Auto Restart",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:30:42.826Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/31/1d66a692-b958-40ae-a225-665935d93c6a.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3801fd037427c8f8e16e"
+  },
+  "id_produk": "1736325121891-45",
+  "nama_produk": "SHARP mesin cuci 2 tabung 9 kg EST-97CM",
+  "kategori_id": 2,
+  "harga": 2200000,
+  "stok": 10,
+  "deskripsi": "FITUR :\n-Aquamagic FILTER, Menyaring kotoran / Pasir yg keluar dr kran air agar lebih bersih\n-Big pulsator, Dilengkapi dengan pulsator yang besar membuat putaran saat pencucian sangat kuat, sehingga hasil pencucian akan lebih bersih dan sempurna.\n-Water Inlet, Mesin cuci ini memiliki water inlet. Sehingga memudahkan untuk pengguna dalam memasukan air kedalam mesin cuci pada saat process pencucian\n\nSPESIFIKASI :\nKAPASITAS : 9 kg\nVoltage/Frequency 220 V/ 50 Hz\nKONSUMSI DAYA (W) : 225 Watt\nBERAT : 27 KG\nDIMENSION (WXDXH) : 855 x 495 x 955 mm\nGaransi Resmi motor 3 tahun & 1 tahun sparepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:32:01.891Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/25/2f46cecf-8921-4746-bf7e-a41e2ee88ddf.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3875fd037427c8f8e184"
+  },
+  "id_produk": "1736325237591-13",
+  "nama_produk": "POLYTRON mesin cuci 2 tabung 7,5 kg hijab series PWM-751",
+  "kategori_id": 2,
+  "harga": 1385000,
+  "stok": 10,
+  "deskripsi": "Polytron Mesin Cuci 2 Tabung 7.5 Kg Hijab Series PWM 751 PWM-751\nFITUR :\n- Hemat Listrik – Gear BOX\n- Dilengkapi – Samba Pulsator\n- Kuat - Tahan Karat\n- Water Selector\n- Magic Poush / Hhijab\n- Water Filter\n\nSPESIFIKASI :\n- Tipe : mesin cuci 2 tabung\n- Function Panel : Manual\n- Capacity WASH : 5.5 Kg, 7.5 Kg Basah\nSPIN : 4,0 Kg\n- Available Color : Blue (B)\n- Power Consumption : 250 Watt\n(wash); 130Watt (spin)\n- Voltage Input : 220V/50Hz\n- Speed : 130 RPM (wash); 1.400RPM (spin)\n- Dimension (WxDxH) : 759 x 463 x 967 mm (unit)\n- 820 x 503 x 1.044 mm (packing)\n- Net Weight : 21,6 Kg (unit) ; 24 kg (packing)\n- Material Body : Plastic",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:33:57.591Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/30/e766594b-ed99-4086-8364-4274afeabe63.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3958fd037427c8f8e196"
+  },
+  "id_produk": "1736325464477-198",
+  "nama_produk": "SHARP mesin cuci 8,5 kg 2 tabung EST-85CR",
+  "kategori_id": 2,
+  "harga": 1825000,
+  "stok": 5,
+  "deskripsi": "MESIN CUCI SHARP 2 TABUNG TOP LOADING EST-85CR KAPASITAS 8,5KG/ EST 85CR / EST85CR\nSPESIFIKASI PRODUK :\n- KAPASITAS :8 kg\n- Voltage/Frequency 220 V/ 50 Hz\n- KONSUMSI DAYA (W) : 245 Watt\n- BERAT : 27 KG\n- DIMENSI : 85,5 x 49,5 x 99,5 cm (PxLxT)\n- Garansi Resmi motor 3 tahun & 1 tahun sparepat\nNB : WARNA YANG DIKIRIMKAN ADALAH RANDOM ( JIKA INGIN NANYA WARNA HARAP CHAT PENJUAL)\n\nFITUR :\n-Aquamagic FILTER, Menyaring kotoran / Pasir yg keluar dr kran air agar lebih bersih\n-Big pulsator, Dilengkapi dengan pulsator yang besar membuat putaran saat pencucian sangat kuat, sehingga hasil pencucian akan lebih bersih dan sempurna.\n",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:37:44.477Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/23/0a4d2960-6175-4369-b74a-8dbf4b4aa4b9.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e3a0efd037427c8f8e1b4"
+  },
+  "id_produk": "1736325646471-467",
+  "nama_produk": "SHARP mesin cuci 6,5 kg 2 tabung EST-68 MW",
+  "kategori_id": 2,
+  "harga": 1300000,
+  "stok": 5,
+  "deskripsi": "SHARP Mesin Cuci ES-T68MW-BK SHARP Mesin Cuci ES-T68MW-BK adalah mesin cuci yang memiliki desain yang elegan. Dengan pulsator yang besar mampu menghasilkan pusaran air yang kuat sehingga hasil cucian lebih bersih. Sehingga memudahkan proses perendaman pakaian sehingga menghasilkan pakaian yang lebih bersih.\nDetail:\n- Single Pulsator\n- Silvermagic Protection on Pulsator\n- Rat Proof, Rust & dented Proof\n- Capacity 6.5 KG\n- Washer\n- Dryer\n- Twin Tube Washing Machine ( Plastic Body )\n- Wash : 330 Watt, Spin : 105 Watt",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T08:40:46.471Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/23/4daeb844-0a7a-478f-ad4d-18e4d1ad2a9f.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e41dcfd037427c8f8e1e5"
+  },
+  "id_produk": "1736327644479-58",
+  "nama_produk": "SHARP mesin cuci 9 kg 2 tabung EST-90 MW",
+  "kategori_id": 2,
+  "harga": 1900000,
+  "stok": 5,
+  "deskripsi": "FITUR :\n-Single Pulsator\n-Big pulsator, Dilengkapi dengan pulsator yang besar membuat putaran saat pencucian sangat kuat, sehingga hasil pencucian akan lebih bersih dan sempurna.\n-Water Inlet, Mesin cuci ini memiliki water inlet. Sehingga memudahkan untuk pengguna dalam memasukan air kedalam mesin cuci pada saat process pencucian\n-Panel with Bahasa, Penggunaan panel menggunakan bahasa indonesia akan memudahkan pengguna dalam melakukan proses setting sebelum mencuci, sehingga hasil pencucian sesuai dengan apa yang kita inginkan.\n\nSPESIFIKASI :\nKAPASITAS : 9 KG\nVoltage/Frequency 220 V/ 50 Hz\nKONSUMSI DAYA (W) : 350 Watt\nBERAT : 27 KG\nDIMENSION (WXDXH) : 845X525X963 Mm\nGaransi Resmi motor 3 tahun & 1 tahun sparepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T09:14:04.479Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/23/499455d3-a7f3-40c6-909c-036d8e0b0488.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e42bcfd037427c8f8e1f9"
+  },
+  "id_produk": "1736327868050-584",
+  "nama_produk": "SHARP air cooler pendingin ruangan portable PJA-36TY black",
+  "kategori_id": 1,
+  "harga": 1350000,
+  "stok": 5,
+  "deskripsi": "\nFitur Produk\n- Air Cooler\n- Memiliki 4 Ice Pack\n- Dilengkapi dengan remote control\n- Mudah digunakan\n\nColor Black and White\nAuto Yes\nWatt 65\nDimension (W x H x D) mm 375 x 306 x 745\nTank 6\nAir 400\nMotor 1150\nNett Weight 7\nVoltage (v) 220 - 240/50V~/Hz\nTimer 1 - 2 - 3h up to 15h",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T09:17:48.050Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/5/246c233c-33d2-4b3b-b784-5801f333f699.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e431afd037427c8f8e20c"
+  },
+  "id_produk": "1736327962429-359",
+  "nama_produk": "COSMOS rice cooker non stick 1.2 liter CRJ-1803",
+  "kategori_id": 4,
+  "harga": 350000,
+  "stok": 9,
+  "deskripsi": "Rice Cooker Cosmos Dengan Inner Pan Non Stick Coating Yang Anti Lengket Berkapasitas 1.2 Liter. Dengan Fungsi 3in1 Dapat Digunakan Untuk Memasak, Menghangatkan Serta Mengukus. Rice Cooker Ini Sangat Hemat Listrik Karena Menghangatkan Hanya 30 Watt Saja.\n\n· Rice Cooker dengan Inner Pan Anti Lengket Kapasitas 1.2 Liter\n· Low Watt Menghangatkan Hanya 30 Watt\n· Kapasitas 1.2 Liter\n· Fungsi 3in1 (Memasak, Menghangatkan, Mengukus)\n· Design Elegan\n· Dilengkapi Dengan: Gelas Ukur & Sendok Nasi\n· Daya Masukan 300 Watt\n\nGaransi 1 Th",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T09:19:22.429Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/25/b40b98e5-2be9-4aeb-ae20-ebe2e0166cd6.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e46b0fd037427c8f8e26c"
+  },
+  "id_produk": "1736328880347-551",
+  "nama_produk": "COMOS magic com 1.8 liter CRJ-3305",
+  "kategori_id": 4,
+  "harga": 350000,
+  "stok": 10,
+  "deskripsi": "Kapasitas : 1.8 Liter\nDaya Listrik : 400 Watt\nPanci Anti Lengket\nFood Grade\nPanci Anti Lengket\n\n\nCosmos CRJ-3305 Rice Cooker [1.8 Liter]\n\nCosmos Mengeluarkan Produk Baru Food Grade Dengan Harga Ramah Serta Produk Yang WAH!!! Dengan Kapasitas 1.8 Liter COSMOS CRJ-3305 Tampil Dengan Design Yang Lebih Menarik Yang Cocok Untuk Dapur Anda!i",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T09:34:40.347Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/25/cde70b94-4eab-443a-8050-7c68206ee34c.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4e2bfd037427c8f8e2ab"
+  },
+  "id_produk": "1736330795348-979",
+  "nama_produk": "POLYTRON kulkas 2 pintu PRB-239",
+  "kategori_id": 0,
+  "harga": 3000000,
+  "stok": 8,
+  "deskripsi": "SPESIFIKASI :\nKapasitas (L) :230 Liter\nUkuran (WxDxH) (mm) : 540 * 622 * 1515 mm\nDaya (W) : 130 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 50 Kg\nGaransi Produk : 1 Tahun spareparts 5 Tahun kompresor\nFITUR :\n-Ice Tray\n-Extra Big Freezer\n-Big Vegetable Box\n-Tempered Glass Shelf\n-Low Watt\n-LED Lighting\n-Twist & Ice",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:06:35.348Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/25/57b0fafb-2fb4-4701-8e06-ecbac0c52020.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4e75fd037427c8f8e2b6"
+  },
+  "id_produk": "1736330869408-528",
+  "nama_produk": "VOTRE G-10 magic com 1.2 L",
+  "kategori_id": 4,
+  "harga": 225000,
+  "stok": 7,
+  "deskripsi": "Votre Rice Cooker 1.2 Liter merupakan penanak nasi serbaguna dengan spesifikasi :\n* 220V-50Hz 350 Watt\n* Kapasitas 1.2 Liter\n* Operasi Saklar Tunggal\n* Serbaguna Multifungsi : Masak-Kukus-Hangat\n* Pengoperasian mudah dan praktis digunakan\n* Lapisan Panci Anti Lengket\n* Sekering Suhu Panas Untuk Keamanan\n* Temperatur 157 Derajat\n* SNI",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:07:49.408Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/25/f56d6bb1-be51-48f0-87c0-94c944638da5.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4f5cfd037427c8f8e2d3"
+  },
+  "id_produk": "1736331100497-508",
+  "nama_produk": "ADVANCE G-20 rice cooker/magic com 1.8 L",
+  "kategori_id": 4,
+  "harga": 250000,
+  "stok": 10,
+  "deskripsi": "MAGICOM 1.8 LITER ADVANCE G20\nProduct : Advance G-20 Rice Cooker\nGaransi Resmi Advance 1 Tahun\nWarna : Pink dan Biru - Warna akan dikirimkan sesuai ketersediaan stock kami yang ada, jika warna sangat penting mohon konfirmasi terlebih dahulu sebelum memesan\n\nSpesifikasi:\nTipe : G-20\nPenggunaan listrik : 220V/50Hz\nDaya listrik : 380W/40W\nKapasitas : 1.8 L\nTemperatur : 1570C\n\n",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:11:40.497Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/25/2937bcf9-103c-4423-93e2-69644fb36f82.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4fa9fd037427c8f8e2e5"
+  },
+  "id_produk": "1736331177272-158",
+  "nama_produk": "GIATECH tv tabung 14 inch",
+  "kategori_id": 5,
+  "harga": 600000,
+  "stok": 10,
+  "deskripsi": "Brand:GIATECH Type :GT-02 Layar:Semi Flat(cembung)\nCRT : Tabung Kaca\n\nUkuran: 14 inch\nDaya: 80 watt\nTegangan :110-240v\nWarna: hitam merah\n\nIsi kotak: TV ,Remote control dan buku petunjuk\nNegara Pembuat : Indonesia\n\nTombol Body : ON/OFF,AV/TV,Menu,Volume\n+/-,Channel+/-\nSlot Samping : AV-IN (RCA)\nSlot Belakang: AV-IN (RCA),AV-OUT(RCA)\nJack Antenna",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:12:57.272Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/3/8700b2e1-314c-486b-833d-f9a4ea558b4c.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e4ffbfd037427c8f8e2f1"
+  },
+  "id_produk": "1736331259690-264",
+  "nama_produk": "MASPION showcase 4 rak USG-218",
+  "kategori_id": 7,
+  "harga": 3350000,
+  "stok": 5,
+  "deskripsi": "Dilengkapi dengan kunci pengaman untuk melindungi produk makan dan minuman\nyang di simpan di dalam showcase.\n\" Rak yang mudah diatur.\n\nSpesifikasi\n\nModel : USG - 218 HD\nKapasitas : 222 Liter\nTegangan : 220 Volt / 50 Hz\nDaya Listrik : 135 Watt\nUkuran Produk : Panjang 535 x Lebar 490 x Tinggi 1630 mm\nBerat : 48 Kg\nJumlah Rak : 4",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:14:19.690Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/3/036a5858-c775-4f1c-b67a-5e67d9e9b7fe.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e503dfd037427c8f8e2fc"
+  },
+  "id_produk": "1736331325043-343",
+  "nama_produk": "POLYTRON showcase 3 rak 200 liter SCN-181 L",
+  "kategori_id": 7,
+  "harga": 3400000,
+  "stok": 8,
+  "deskripsi": "Kapasitas: 200 Ltier\nDaya: 190 Watt\nJumlah Rak: 3\nRefrigrant: R 134A (NON-CFC)\nTerdapat roda, Memudahkan Anda Untuk Memindahkan Show Case\nKey Lock (Dapat Dikunci)\nRust Free (Anti Karat)\nBottle Opener\nTempered Glass Door, Anti Fog (Bebas Embun)\nAdjustable Crystal Rack (Rak dapat Dipindah-pindahkan)\nHeavy Duty\nPerfect Door Sealed\nTwist & Ice\nJumbo Freezer Compartment\n",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:15:25.043Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/3/23618ffd-505e-434f-8ffe-0e651e1759e8.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5082fd037427c8f8e313"
+  },
+  "id_produk": "1736331394550-550",
+  "nama_produk": "POLYTRON showcase SCN-141X",
+  "kategori_id": 7,
+  "harga": 3250000,
+  "stok": 8,
+  "deskripsi": "Capacity : 165 Liter\nDoor Handle : Yes\nNumber of Racks : 3\nMax Power Consumption (Watt) : 180 Watt\nRefrigerant : R 134A (NON - CFC) Refrigerant Mass : 70 GR\nAnti-Flogging Glass Door : Yes\nBottle Opener : Yes\nAdjustable rack : Yes\nLock : Yes\nCooling Level Control : Yes\nHeavy Duty & Rust Free : Yes\nBigger Storage : Yes\nWheel : Yes\nEnergy Saving : Yes\nProduct Size (mm) : 540 x 582 x 1335 mm\nProduct Weight (Kg) : 31 KG",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:16:34.550Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/5/3/fa01f07b-794b-4ad1-8bff-b0eed1ba5903.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e50affd037427c8f8e31b"
+  },
+  "id_produk": "1736331439560-838",
+  "nama_produk": "VITRON tv tabung 21 inch ultra slim",
+  "kategori_id": 5,
+  "harga": 1250000,
+  "stok": 10,
+  "deskripsi": "Deskripsi TV TABUNG VITRON 21 INCH ULTRA SLIM\n- TV Tabung CRT Layar Datar\n- Size 21 inch Ultra Slim\n- Garansi Resmi Vitron Indonesia\n- SNI Standar Nasional Indonesia\n- Produk Lokal Indonesia (Sparepart gampang)\n- Memory 249channel Program\n- Pilihan Menu Bahasa : China, Inggris, Indonesia\n- Suara Tabung Menggelegar",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:17:19.560Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/27/ab39b925-b2e8-49fc-ac90-9e71937619be.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e50f2fd037427c8f8e326"
+  },
+  "id_produk": "1736331506669-523",
+  "nama_produk": "AQUA kulkas 2 pintu AQR-D270",
+  "kategori_id": 0,
+  "harga": 3100000,
+  "stok": 8,
+  "deskripsi": "Tanpa bunga Es/No Frost\nDilengkapi dengan lampu LED\nTwist ice maker\nCosmetic Box\nTempered Glass Rack mampu menahan beban hingga 100kg\nGaransi Kompresor 7 Tahun\nKapasitas 220liter\nDimensi (W x D x H ) 540x655x1530mm\nPower Consumption 60 watt\n\nFull Insulation\nMempercepat proses pendinginan di dalam kulkas dan lebih hemat energi\n\nMulti Air Flow\nMulti aliran dingin, mempercepat proses pendinginan lemari es\n\nBigger Vegetable Box\nTempat menyimpan sayuran dengan kapasitas yang besar dan luas.\n\nAnti Bacteria\nDengan sistem penyaringan Nano Ferit Ganda, menghilangkan bakteri dan bau cepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:18:26.669Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/21/2858f94e-3650-4aa9-b455-a113500cd719.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e519afd037427c8f8e335"
+  },
+  "id_produk": "1736331674702-498",
+  "nama_produk": "AQUA kulkas 1 pintu AQR -190",
+  "kategori_id": 0,
+  "harga": 1800000,
+  "stok": 6,
+  "deskripsi": "Kapasitas freezer yang lebih besar yaitu 23 liter untuk menyimpan lebih banyak frozen food.\n\nMenggunakan refrigerant R600a yang lebih ramah lingkungan dan memiliki konsumsi daya yang rendah.\n\nHanya dengan 1 langkah untuk melakukan pencairan (OFF + Auto ON).\n\nBahan kaca dengan kualitas prima yang mudah dibersihkan, kuat dan tahan lama.\n\nRak khusus penyimpanan sayur dan buah-buahan yang memiliki kapasitas lebih besar.\n\nHemat energi dengan konsumsi listrik yang rendah.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:21:14.702Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/13/fb42f8fe-2562-477a-aba2-fc5a6db12fb2.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5269fd037427c8f8e353"
+  },
+  "id_produk": "1736331881532-162",
+  "nama_produk": "AQUA kulkas 2 pintu AQR D-251",
+  "kategori_id": 0,
+  "harga": 2600000,
+  "stok": 6,
+  "deskripsi": "AQRD 251\nLemari Es 2 pintu Merk AQUA (SANYO)\nAQR D 251 low watt hanya 46 watt\nTanpa bunga Es/No Frost\nTempered Glass Rack mampu menahan beban hingga 100kg\nGaransi Kompresor 7 Tahun\nKapasitas 187 Liter\nDimensi (W x D x H ) mm 540 x 605 x 1.347\nPower Consumption 46 watt\n\nFull Insulation\nMempercepat proses pendinginan di dalam kulkas dan lebih hemat energi\n\nMulti Air Flow\nMulti aliran dingin, mempercepat proses pendinginan lemari es\n\nBigger Vegetable Box\nTempat menyimpan sayuran dengan kapasitas yang besar dan luas.\n\nAnti Bacteria\nDengan sistem penyaringan Nano Ferit Ganda, menghilangkan bakteri dan bau cepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:24:41.532Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/13/aaddd7b4-5e0e-4cdb-8a9a-f7069cb37e3c.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5299fd037427c8f8e35c"
+  },
+  "id_produk": "1736331929496-784",
+  "nama_produk": "PANASONIC mesin cuci 2 tabung 9,5 kg NAW-96 BB",
+  "kategori_id": 2,
+  "harga": 2100000,
+  "stok": 8,
+  "deskripsi": " FITUR :\n-Low Watt Gear Drive\n-Super Big Spinner,\n-Ag Clean\n-Anti Rust, Bodi dan dasar mesin cuci terbuat dari bahan plastik yang kokoh, anti karat dan bebas korosi\n\nSPESIFIKASI :\nKAPASITAS : 9.5 KG\nVoltage/Frequency 220 V/ 50 Hz\nKONSUMSI DAYA (W) : 330 Watt\nBERAT : 27 KG\nDIMENSION (WXDXH) : 791 x525x 1,023 MM\nGaransi Resmi motor 3 tahun & 1 tahun sparepat",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:25:29.496Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/1/58135354-b95b-4a08-91ec-c4aec9ebad24.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e52d7fd037427c8f8e366"
+  },
+  "id_produk": "1736331991482-845",
+  "nama_produk": "PANASONIC mesin cuci 2 tabung 8,5 kg NAW-86BB",
+  "kategori_id": 2,
+  "harga": 1950000,
+  "stok": 8,
+  "deskripsi": "MESIN CUCI PANASONIC NAW-86BB Z2 KAPASITAS 8 KG GARANSI RESMI\n\nDeskripsi Panasonic Mesin Cuci 2 Tabung 8,5Kg NAW-86BBZ PROMO MURAH GARANSIRESMI\n\nPanasonic Mesin Cuci Twin Tube 8.5 KG - NA-W86BBZ\nPower Consumption 250 Watt\nKapasitas 8.5 kg\nBig Pulsator Y\nAG Clean Y\nWater Filter Y\nGaransi Garansi Panasonic 1 Tahun\nType Panasonic Mesin Cuci Twin Tube 8.5 KG - NA-W86BBZ\nSKU NA-W86BBZ\n\nGaransi Resmi 1 Tahun Panasonic",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:26:31.482Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/1/b23bdabc-2540-4c4c-9036-ae6f16850d20.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e52fefd037427c8f8e36e"
+  },
+  "id_produk": "1736332030698-124",
+  "nama_produk": "PANASONIC mesin cuci 2 tabung 7kg NA-W76 BB",
+  "kategori_id": 2,
+  "harga": 1750000,
+  "stok": 2,
+  "deskripsi": "spesifikasi produk :\n\n-Panasonic LOW WATT\n-Kapasitas wash:7kg\nspin :5kg\n-DAYA Wash :230watt\nSpin :120watt\n-Doble pulsator\n-Hemat listrik\n-ag clean\n-Super soakmatic\n-Garansi motor 5 tahun\n-Suku Cadang 1 Tahun",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:27:10.698Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/29/bad2cc80-20e6-48e8-bd63-0c77e45492e7.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e53d1fd037427c8f8e395"
+  },
+  "id_produk": "1736332241864-802",
+  "nama_produk": "PANASONIC lemari es 1 pintu NR-AF 191 SS",
+  "kategori_id": 0,
+  "harga": 2400000,
+  "stok": 9,
+  "deskripsi": "Deskripsi Produk\nLemari es Panasonic NR AF 191 S\nGaransi Kompresor 7 Tahun\nKapasitas 164 Liter\nDimensi 53 x 51 x 120 Cm\n80 Watt\nSilver\n\nPanasonic NR-AF191 S Lemari Es lebih dari sekedar lemari es biasa, lemari es ini menghadirkan kemewahan dan keindahan karya seni yang memadukan kecanggihan teknologi dan kualitas, seperti hemat listik, cepat dingin, anti bau dan tahan lama.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:30:41.865Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/29/16ff07c3-70aa-4886-b8b2-e6729a66c0fc.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5411fd037427c8f8e3a0"
+  },
+  "id_produk": "1736332305782-383",
+  "nama_produk": "RINNAI kompor gas 2 tungku RI-522 S",
+  "kategori_id": 3,
+  "harga": 400000,
+  "stok": 10,
+  "deskripsi": "Deskripsi Rinnai kompor gas 2 tungku RI 522S\nDetail produk\nDengan desain yang elegan, Rinnai Kompor Gas 2 Tungku RI522S mampu menambah kesan berkelas didapur Anda. Makanan cepat matang, dan hemat gas.\n\nProduct Description\nRinnai Kompor Gas 2 Tungku RI522S\nFeatures :\nDimensi 700 (p) x 378 (l) x 199 (t)\nJenis api Sun Burner\nKategori Ceramic Burner Series",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:31:45.782Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/22/a05ffe64-e609-4442-85d2-f5ab60b555c9.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5482fd037427c8f8e3af"
+  },
+  "id_produk": "1736332418126-318",
+  "nama_produk": "AQUA lemari es 2 pintu AQRD-261 low watt (SBY-SDA-GRESIK only)",
+  "kategori_id": 0,
+  "harga": 2950000,
+  "stok": 5,
+  "deskripsi": "FITUR :\n-Full Insulation, Mempercepat proses pendinginan di dalam kulkas dan lebih hemat energi\n-Ice Tray, & Pull Out Tray,Tempered Glass Tray\n-Bigger Vegetable Box, Kapasitas box buah dan sayuran yang lebih besar\n-Multi Air Flow\n-Anti Bacteria\n-LED Lighting\n-Icemaker\n\n\nSPESIFIKASI :\nKapasitas (L) : 203 Liter\nUkuran (WxDxH) (mm) :540 x 655 x 1535 mm\nDaya (W) : 80 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 42 kg\nGaransi Produk : 1 Tahun spareparts 5 Tahun kompresor",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:33:38.126Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/19/37aa530f-1d6f-465a-8429-2ccafa82ff87.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e54d3fd037427c8f8e3bb"
+  },
+  "id_produk": "1736332499885-317",
+  "nama_produk": "Rinnai kompor gas 2 tungku motif RI-712 AF",
+  "kategori_id": 3,
+  "harga": 650000,
+  "stok": 10,
+  "deskripsi": "Warna : Pink\n\nGaransi : 1 Tahun\nApi lilin\nMudah dibersihkan\nDigital print finish\nBahan material stainless steel\n\nSpesifikasi\nNama Produk : Rinnai Kompor Gas 2 Tungku\nTipe : RI-712AF\nBahan Material : Stainless Steel\nKekuatan Api : 3.6-3.8 (kW/h)\nDimensi (P x L x T) : 72 cm x 41.5 cm x 20.1 cm\nBerat : 10 Kg\nWarna : Pink Flowers\nTipe Gas : LPG",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:34:59.885Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/3/ad52a567-42ab-4e26-b089-0bfa5105fd2f.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e554bfd037427c8f8e3cb"
+  },
+  "id_produk": "1736332619730-568",
+  "nama_produk": "SHARP Mesin Cuci 2 Tabung EST-75 NT",
+  "kategori_id": 2,
+  "harga": 1550000,
+  "stok": 3,
+  "deskripsi": "FITUR :\n-Single Pulsator\n-Big pulsator, Dilengkapi dengan pulsator yang besar membuat putaran saat pencucian sangat kuat, sehingga hasil pencucian akan lebih bersih dan sempurna.\n-Water Inlet, Mesin cuci ini memiliki water inlet. Sehingga memudahkan untuk pengguna dalam memasukan air kedalam mesin cuci pada saat process pencucian\n-Panel with Bahasa, Penggunaan panel menggunakan bahasa indonesia akan memudahkan pengguna dalam melakukan proses setting sebelum mencuci, sehingga hasil pencucian sesuai dengan apa yang kita inginkan.\n\n\nSPESIFIKASI :\nKAPASITAS : 7 KG\nVoltage/Frequency 220 V/ 50 Hz\nKONSUMSI DAYA (W) : 330 Watt\nBERAT : 27 KG\nDIMENSION (WXDXH) : 783X437X934 Mm\nGaransi Resmi motor 3 tahun & 1 tahun sperpart",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:36:59.730Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/2/e5c4b501-7005-4bb2-bb92-ac687f52852c.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e557bfd037427c8f8e3d4"
+  },
+  "id_produk": "1736332667428-135",
+  "nama_produk": "POLYTRON Mesin cuci 1 tabung 8.5 kg PAW-80517",
+  "kategori_id": 2,
+  "harga": 2500000,
+  "stok": 8,
+  "deskripsi": "Spesifikasi Product :\n- Type : FULL AUTOMATIC WASH\n- Washing Capacity (Kg) : 8,5 KG\n- Spin Speed : 700 RPM\n- Function Knob : Push\n- LED Display : Yes\n- Washing Program : NORMAL, QUICK, JEANS, SUTERA/BATIK, BLANKET, BABY WEAR, SUPER CLEAN, AIR DRY\n- Zeropress Technology : Yes\n- Big Pulsator : Yes\n- Waterfall : Yes\n- Smart Fuzzy Logic : Yes\n- Net Weight (Kg) : 29,5\n- Gross Weight (Kg) : 31,5\n- Wash Power Input : 330 W\n- Voltage Input : 220 V/ 50 HZ",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:37:47.428Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/2/c90d2994-3685-4747-a6a4-cc3b2b8821d2.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5665fd037427c8f8e3ed"
+  },
+  "id_produk": "1736332901665-248",
+  "nama_produk": "AQUA Chest Freezer / Box freezer 150 liter AQF-160",
+  "kategori_id": 7,
+  "harga": 2800000,
+  "stok": 5,
+  "deskripsi": " Menjaga makanan sampai 100 jam setelah alat dimatikan\n> High density mico-celluar foaming\n> Provide ticker insulation\n> Super freezing technology\n\nSPESIFIKASI :\nKapasitas (L) : 150 Liter\nSuhu : -15 C s/d -20 C\nUkuran (P x L x T) (mm) : 822x565x835 MM\nDaya (W) : 209 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 35 Kg\nKapasitas Simpan : 85 Kg\nKapasitas Beku : 8 Kg / 24 jam\nPendingin : R314a",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:41:41.665Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/26/67d93328-a632-4461-ba1f-3844a07dc6ce.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e56fefd037427c8f8e403"
+  },
+  "id_produk": "1736333054629-939",
+  "nama_produk": "AQUA SQF-100 W CHEST FREEZER BOX 100 liter",
+  "kategori_id": 7,
+  "harga": 2400000,
+  "stok": 10,
+  "deskripsi": "Diskripsi AQUA Chest Freezer / Box Freezer 100 Liter AQF 100\n\nVoltage/Frequency 220-240V / 50Hz\nCapaciy 100 Liter\nUnit Dimensions (WxDxH) 632*565*835mm\nNet Weight 27Kg\nKey Lock Yes\nVoltage 220-240V\nWhite Coating Inner Liner\nMemudahkan proses pembersihan dan tahan karat\nKeylock\nDilengkapi dengan keylock untuk menjaga keamanan makanan di dalam produk.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:44:14.629Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/26/e0a52c1b-14c2-4e71-87cf-4ae8fe7b982a.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e573afd037427c8f8e40d"
+  },
+  "id_produk": "1736333114427-953",
+  "nama_produk": "POLYTRON Freezer box 100 liter PCF-117",
+  "kategori_id": 7,
+  "harga": 2400000,
+  "stok": 10,
+  "deskripsi": "Gross Capacity (Liter) : 100 L\n- Power Consumption (Watt) : 130 Watts\n- Product Dimension (mm) : 544 x 610 x 840 mm\n- Basket : 1 Pc\n- Power Source : 220 V / 50 Hz\n- Refrigerant : R134A / 90 gram\n- Foaming Agent : Cyclopentane\n- Temperature Range : < = -18C\n- Weight : 26 Kg\n- Capacity : 51L~200L",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:45:14.427Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/26/4c5a9639-87e8-44e4-8080-8325435d9478.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e577ffd037427c8f8e41e"
+  },
+  "id_produk": "1736333183204-617",
+  "nama_produk": "ADVANCE Antena remote digital AA-830",
+  "kategori_id": 6,
+  "harga": 200000,
+  "stok": 10,
+  "deskripsi": "Advance antena remote digital AA-830 dirancang khusus untuk menghasilkan gambar yang tajam dan jernih ...\n\n√ dapat berputar hingga sampai 360° rotate\n√ dilengkapi dengan remote\n√ cocok untuk semua tv (LED-LCD-ANALOG TV)\n√ menghasilkan gambar yang tajam dan jernih\n√ free kabel antena 10meter full\n\nSpesifikasi\n√ frekuensi : 45-860 mhz\n√ receive range : FM/VHF/UHF\n√ Gain : 28dB\n√ rotasi : 360°\n√ VHF : 20dB-25dB\n√ UHF : 28dB-30dB",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:46:23.204Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/26/9c4ab88f-1a8d-4bef-9205-89a57ce8ea67.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e57bbfd037427c8f8e428"
+  },
+  "id_produk": "1736333243671-611",
+  "nama_produk": "SHARP Mesin cuci 2 tabung 6,5 Kg EST-65 NT",
+  "kategori_id": 2,
+  "harga": 1500000,
+  "stok": 8,
+  "deskripsi": "Mesin cuci Sharp 6,5kg\nTipe : EST 65 NT\nNew Model 2020\n\nSpesifikasi :\n1. Kapasitas 6,5kg\n2. model Puremagic\n3. Anti karat\n4. Tutup bisa di lepas.\n5. Konsumsi Listrik mencuci 300 watt, pengering 75 watt.\n6. Garansi resmi 1 tahun\n7. Tutup transparan",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:47:23.671Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/25/46b454a7-4b5e-4527-a56f-56df628fcb99.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e580efd037427c8f8e434"
+  },
+  "id_produk": "1736333326206-684",
+  "nama_produk": "POLYTRON Mesin cuci 2 Tabung 9 kg PWM -9366 H",
+  "kategori_id": 2,
+  "harga": 1650000,
+  "stok": 9,
+  "deskripsi": " Type : Twin Tube\nWashing Capacity (Kg) : 9 KG\nColor Available : Full Cyan/Full Green/Red/Blue\nVoltage Input : 220 Volt / 50 Hz\nWash Power Input : 230 Watt\nWash Speed : 130 RPM\nSpin Power Input : 120 Watt\nMaterial : Plastic\nSpin Speed : 1.400 RPM\nGross Weight (Kg) : 27.5 Kg\nNet Weight (Kg) : 25.5 Kg\nProduct Dimension (mm) : 830 x 510 x 990 mm\nPacking Dimension (mm) : 866 x 540 x 1040 mm",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:48:46.206Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/25/c4c0feb8-73e1-4d73-ae80-9cbc4e5ea651.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5839fd037427c8f8e43c"
+  },
+  "id_produk": "1736333369853-896",
+  "nama_produk": "POLYTRON Mesin cuci 2Tabung 8.5 Kg PWM-852",
+  "kategori_id": 2,
+  "harga": 1700000,
+  "stok": 10,
+  "deskripsi": "Polytron Mesin Cuci 2 Tabung 8.5 Kg Hijab Series PWM 852 PWM-852 Twin\nType : Twin Tub Washing Machine\n- Function Panel : Manual\n- Capacity : 8.5 Kg\n- Available Color : Green (G), Red (R)\n- Power Consumption : 250 Watt (wash); 130Watt (spin)\n- Voltage Input : 220V/50Hz\n- Speed : 130 RPM (wash); 1400RPM (spin)\n- Dimension (WxDxH) : 831 x 528 x 998 mm (unit)\n- Net Weight : 23.7 Kg (unit) ; 27.9 kg (packing)\n- Material Body : Plastic\n- Garansi Motor 3 Tahun\n- Garansi Sparepart 1 Tahun\n\nFitur:\n- HEMAT – GEAR BOX\n- HEBAT – SAMBA PULSATOR\n- KUAT - TAHAN KARAT\n- WATER SELECTOR\n- MAGIC POUCH / HIJAB\n- WATER FILTER",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:49:29.853Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/25/55059d92-930e-4c7c-affc-0cb1e78246ab.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e58e5fd037427c8f8e44f"
+  },
+  "id_produk": "1736333541662-604",
+  "nama_produk": "POLYTRON Mesin cuci 2 Tabung 8.5 kg pwn 851",
+  "kategori_id": 2,
+  "harga": 1800000,
+  "stok": 10,
+  "deskripsi": " Mesin cuci Polytron 8.5 kg\nTipe : PWM 851\nSpesifikasi :\n1. Kapasitas 8.5 kg lebih besar dibandingkan tipe 2020\n2. model Primadona Terbaru 2021\n3. Anti karat\n4. Tutup transparant\n5. Konsumsi Listrik mencuci 300 watt, pengering 100 watt.\n6. Garansi resmi 1 tahun\n7. Pilihan Warna Red /Blue(cek stok)",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:52:21.662Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/25/ae2a3967-4578-4782-9708-1e5296ebf95b.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5916fd037427c8f8e458"
+  },
+  "id_produk": "1736333590259-100",
+  "nama_produk": "POLYTRON Mesin Cuci 2 Tabung 8Kg PWM-8363",
+  "kategori_id": 2,
+  "harga": 1550000,
+  "stok": 10,
+  "deskripsi": "\nType : Twin Tub Washing Machine\n• Function Panel : Manual\n• Capacity WASH : 8 KG BASAH\nSPIN : 4,5 Kg\n• Available Color : Green (G), Red (R)\n• Power Consumption : 250 Watt (wash); 130Watt (spin)\n• Voltage Input : 220V/50Hz\n• Speed : 130 RPM (wash); 1400RPM (spin)\n• Dimension (WxDxH) : 831 x 518 x 915 mm (unit)\n: 880 x 564 x 970 mm (packing)\n• Net Weight : 19 Kg (unit) ; 22.5 kg (packing)\n• Material Body : Plastic",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:53:10.259Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/23/1571aa1a-3067-4231-aea6-cd416f649ee9.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e597afd037427c8f8e466"
+  },
+  "id_produk": "1736333690170-36",
+  "nama_produk": "POLYTRON Mesin cuci 8 kg 2 tabung PWM-801",
+  "kategori_id": 2,
+  "harga": 1600000,
+  "stok": 10,
+  "deskripsi": "Mesin cuci Polytron 8kg\nTipe : PWM 801\nSpesifikasi :\n1. Kapasitas 8 kg lebih besar dibandingkan model 2020\n2. model Primadona Terbaru 2021\n3. Anti karat\n4. Tutup transparant\n5. Konsumsi Listrik mencuci 300 watt, pengering 100 watt.\n6. Garansi resmi 3 tahun",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:54:50.170Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/23/d1e1af64-88ff-4ccd-95e6-a5795e9b3e10.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e59a1fd037427c8f8e46e"
+  },
+  "id_produk": "1736333729854-169",
+  "nama_produk": "POLYTRON Mesin cuci 2 tabung 7,5 kg PWM-752",
+  "kategori_id": 2,
+  "harga": 1500000,
+  "stok": 7,
+  "deskripsi": "Spesifikasi :\n- Function Panel : Manual\n- Capicity Total : 7,5 Kg\n- Available Color : Green (G), Red (R)\n- Power Consumption : 250 Watt (wash); 130 Watt (spin)\n- Voltage Input : 220V/50Hz\n- Speed : 130 RPM (wash); 1400RPM (spin)\n- Dimension (WxDxH) : 831 x 528 x 998 mm (unit)\n- Net Weight : 23.7 Kg\n- Material Body : Plastic",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:55:29.854Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/23/11b2f71d-5f18-4a47-b19a-61d549f423bf.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5a12fd037427c8f8e47d"
+  },
+  "id_produk": "1736333842448-399",
+  "nama_produk": "LG Mesin cuci 2 Tabung 7 Kg P7000N",
+  "kategori_id": 2,
+  "harga": 2250000,
+  "stok": 9,
+  "deskripsi": "Kapasitas : 7kg\nDimensi (L x D x T) : 805 x 475 x 975 mm\n\nDesain\nDesain Pintu : Plastic Door\nDisplay : Chrome Knob\n\nFitur Spesial\nPunch+3 : Yes",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:57:22.448Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/23/2aa134f9-1289-43fa-9646-111e1eda355a.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5a84fd037427c8f8e48d"
+  },
+  "id_produk": "1736333956768-689",
+  "nama_produk": "AQUA Mesin cuci 2 tabung 8 Kg QW-881",
+  "kategori_id": 2,
+  "harga": 1600000,
+  "stok": 7,
+  "deskripsi": "Kapasitas: 8 kg\n- Daya mencuci: 380 watt\n- Daya pengeringan: 165 watt\n- Dimensi: 760 x 445 x 898 mm\n- Berat bersih: 19 kg\n- Kapasitas air: 60 liter\n- Garansi: motor 5 tahun, sparepart 1 tahun\n\nFITUR:\nBig Pulsator\nDengan pulsator yang besar mampu menghasilkan pusaran air yang kuat sehingga hasil cucian lebih bersih.\nSoak Function.\nMemudahkan proses perendaman pakaian sehingga menghasilkan pakaian yang lebih bersih.\nAnti Rust.\nBodi dan dasar mesin cuci terbuat dari bahan plastik yang kokoh, anti karat dan bebas korosi\nTutup transparant, dilengkapi dengan filter air untuk menyaring pasir, lumpur.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T10:59:16.768Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/22/290d71ce-68f6-46c7-b815-e56ecc2120a0.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5adefd037427c8f8e49a"
+  },
+  "id_produk": "1736334046656-433",
+  "nama_produk": "AQUA Mesin cuci 2 tabung 7 kg AW-781",
+  "kategori_id": 2,
+  "harga": 1500000,
+  "stok": 5,
+  "deskripsi": "Mesin cuci Sanyo Aqua 2 tabung\nTipe QW 781xt\n\nspesifikasi :\n1. Kapasitas 7 kg\n2. model Aqua Putih Solid\n3. Anti karat\n4. Hijab Series\n5. Garansi resmi 1 tahun\n6. Free Wadah Hijab\n7. Warna biru Seperti digambar\n8. Daya Pencuci 300 watt\n9. Daya Pengering 100 watt\n10. Air Dry",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:00:46.656Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/22/536f3a31-cd12-42aa-ae71-5eb884580370.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5b1afd037427c8f8e4a4"
+  },
+  "id_produk": "1736334106798-184",
+  "nama_produk": "AKARI Mesin cuci 2 tabung AWM-8708K",
+  "kategori_id": 2,
+  "harga": 1500000,
+  "stok": 10,
+  "deskripsi": "Fitur :\nmesin cuci 2 tabung\nTabung cuci besar cukup untuk mencuci sekaligus sehingga lebih hemat listrik\nMaterial bodi pelastik yang lentur tahan lama untuk pemakaian bertahun tahun\nAnti karat\n\nType twin tube\nTegangan yang di perlukan 220v/50hz\npemakaian daya,cuci 340 w,peras 140 w\ndimensi 429x756x872\nBerat 18 kg\nTutup pengaman\nselang masukan air",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:01:46.798Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/22/e500d240-4f13-4211-8d4b-88d0e83810df.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5b4cfd037427c8f8e4ad"
+  },
+  "id_produk": "1736334156655-966",
+  "nama_produk": "AKARI Mesin cuci 2 tabung AWM-12 SK",
+  "kategori_id": 2,
+  "harga": 2300000,
+  "stok": 9,
+  "deskripsi": "Nama Produk: AWM-12SK\nKategori: Mesin Cuci\nBrand: AKARI\n\nTechnical Details::\nTipe: Top Loading\nTeknologi: Spin Air Dryer, Big Motor & Pulsator\nKapasitas: 12 Kg\nKonsumsi Daya: -\nKecepatan Putar: -\nFungsi: Mencuci, Mengeringkan\nJumlah Tabung: 2 Tabung",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:02:36.655Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/22/c3ba0cc0-80ed-4dc1-8ea0-5e5d653e17d1.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5b7ffd037427c8f8e4b6"
+  },
+  "id_produk": "1736334207320-147",
+  "nama_produk": "SHARP Kulkas 1 pintu SJ 192 DA",
+  "kategori_id": 0,
+  "harga": 2100000,
+  "stok": 8,
+  "deskripsi": "Specification (Refrigerator)\nCooling System Direct Cooling\nRefrigerant (NON CFC) HFC-134a\nDefrosting Semi Automatic\nCapacity (Gross / Netto) 184 / 175\nFreezer (Gross / Netto) 23 / 19\nRefrigerator (Gross / Netto) 161 / 156\nSource 220 - 240\nConsumption ( Watt ) 90\nDepth 550\nWidth 535\nHeight 1205\nWeight Nett : 28 Kg\nDoor One Door",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:03:27.320Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/22/cd271dcc-1001-4c67-a6a6-d6461e001962.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5ba4fd037427c8f8e4be"
+  },
+  "id_produk": "1736334244022-416",
+  "nama_produk": "AQUA kulkas 1 pintu 191 LB",
+  "kategori_id": 0,
+  "harga": 2000000,
+  "stok": 10,
+  "deskripsi": "Berat: 26kg\n- Tegangan: 220V/50Hz\n- Ukuran: 505 x 515 x 1129 mm\n- Kapasitas: 160L/153L\n- Power: 36W\n- Cooling system: direct cooling semi\n- Auto defrost: manual\n- Handle: recessed\n- Shelves type/qty: tempered Glass/2\n- Refrigrant: R134a\n- Garansi resmi AQUA 7 tahun\n- Barang 100% original langsung dr pabrik",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:04:04.022Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/20/1b1072d0-5230-491c-a2ba-3737bc99da1e.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5c11fd037427c8f8e4d3"
+  },
+  "id_produk": "1736334353450-351",
+  "nama_produk": "AQUA Kulkas AQR-D181",
+  "kategori_id": 0,
+  "harga": 1800000,
+  "stok": 6,
+  "deskripsi": "Model AQR-D181\nColor light black\nDimension (mm) W*D*H 505x515x1052.5\nDoor Insulation Yes, Polyurethane\nHandle Top & Side Hidden\nShelf Type / qty Tempered glass / 2\nRefrigerant R134a\nInverter No\nkapasitas 150 liter\n36 watt",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:05:53.450Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/12/12550011-cacf-42ed-8061-9fbaddc76216.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5d88fd037427c8f8e4ec"
+  },
+  "id_produk": "1736334728077-312",
+  "nama_produk": "POLYTRON Kulkas 1 pintu PRB 179",
+  "kategori_id": 0,
+  "harga": 1800000,
+  "stok": 10,
+  "deskripsi": "FITUR :\n-Single Door FLOWER DESIGN\n-4D Quick Freezing\n-Ice Tray\n-Freezer BOX\n-Vegetable Box\n-Temperes Glass Tray rack\n-Low Watt\n-LED Lighting\n-Direct Cooling System\n-Full Insulation\n- Rak kaca\n\nSPESIFIKASI :\nKapasitas (L) :170 liter\nUkuran (WxDxH) (mm) :530x513x1212 mm\nDaya (W) : 80 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 30 Kg\nGaransi Produk : 1 Tahun spareparts 5 Tahun kompresor",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:12:08.077Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/20/250f5a10-ceee-48ef-9eec-9e32452e5e52.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5dbefd037427c8f8e4f5"
+  },
+  "id_produk": "1736334782094-750",
+  "nama_produk": "POLYTRON Kulkas 1 pintu PRB 189",
+  "kategori_id": 0,
+  "harga": 1950000,
+  "stok": 10,
+  "deskripsi": "FITUR :\n-Single Door FLOWER DESIGN\n-4D Quick Freezing\n-Ice Tray\n-Freezer BOX\n-Vegetable Box\n-Low Watt\n-LED Lighting\n-Direct Cooling System\n-Full Insulation\n\nSPESIFIKASI :\nKapasitas (L) :180 liter\nUkuran (WxDxH) (mm) :513x542x1217 mm\nDaya (W) : 80 Watt\nTegangan : 220V / 1P\nBerat (Kg) : 31.8 Kg\nGaransi Produk : 1 Tahun spareparts 3 Tahun kompresor.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:13:02.094Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/20/b04d31f6-11a6-436f-9264-e7c5d34a5a03.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5deafd037427c8f8e4fe"
+  },
+  "id_produk": "1736334826422-939",
+  "nama_produk": "POLYTRON kulkas 1 pintu PRB-159",
+  "kategori_id": 0,
+  "harga": 1700000,
+  "stok": 6,
+  "deskripsi": "Door : Single\nNet Capacity (Liter) : 180 Liter\nIce Twist Tray : Yes\nEgg Pocket : Yes\nVoltage Input : 220v/50hz\nPower Input (Watt) : 80 Watt\nDimension Product (mm) : 513x530x1082 mm\nProduct Weight (Kg) : 36 Kg\n360 Multiflow : LED Lighting\nTempered glass rack : Yes\nTempered glass door : Yes\nJumbo freezer compartment : Yes\n4D Quick Freezing : Yes\nAdjustable Rack : Yes\nPerfect Door Sealed : Yes\nWarranty Compressor : 5 Years\nCategory : Single Door\nCapacity : 150L~200L\nSeries : Belleza 1\nHandle Type : Handle",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:13:46.422Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/20/ad70ab9e-ef3f-45dd-9814-edf5b30812d5.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5e19fd037427c8f8e507"
+  },
+  "id_produk": "1736334873401-285",
+  "nama_produk": "POLYTRON Kulkas 1 pintu PRA-18BNR (BELLEZA) 180 L",
+  "kategori_id": 0,
+  "harga": 2150000,
+  "stok": 9,
+  "deskripsi": "Door : Single\nNet Capacity (Liter) : 180 Liter\nIce Twist Tray : Yes\nEgg Pocket : Yes\nVoltage Input : 220v/50hz\nPower Input (Watt) : 80 Watt\nDimension Product (mm) : 513x530x1082 mm\nProduct Weight (Kg) : 36 Kg\n360 Multiflow : LED Lighting\nTempered glass rack : Yes\nTempered glass door : Yes\nJumbo freezer compartment : Yes\n4D Quick Freezing : Yes\nAdjustable Rack : Yes\nPerfect Door Sealed : Yes\nWarranty Compressor : 5 Years\nCategory : Single Door\nCapacity : 150L~200L\nSeries : Belleza 1\nHandle Type : Handle",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:14:33.401Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/20/e410c68a-a6d7-4874-b681-1189d8f5892e.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5e39fd037427c8f8e50e"
+  },
+  "id_produk": "1736334905233-436",
+  "nama_produk": "POLYTRON Kulkas 1 pintu PRA-16BNR",
+  "kategori_id": 0,
+  "harga": 1900000,
+  "stok": 8,
+  "deskripsi": "Refrigerator Type : Single Door\nCapacity : 160 Liter\nFinishing Door :Tempered Glass\nHandle :Yes\n\nEgg Pocket :Yes\nJumbo Freezer :Yes\nTempered Glass Rack :Yes\nAdjustable Rack :Yes\nPerfect Door Sealed :Yes\nCompressor :Refrigerant R134a\nPower Consumption : 80 Watt\nPower Source : 220 Volt / 50 Hz\nDimension (WxDxH) : 513 x 530 x 1212 mm",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:15:05.233Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/19/dcdcd206-6370-428d-ae30-05a48de40a5d.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5e7dfd037427c8f8e519"
+  },
+  "id_produk": "1736334973237-313",
+  "nama_produk": "Sharp Rice Cooker / Magic Com KSN18-MG-SL/ / KSN 18-MG-RD 1,8 liter",
+  "kategori_id": 4,
+  "harga": 285000,
+  "stok": 7,
+  "deskripsi": "Spesifikasi\n\nNama Produk : Sharp Rice Cooker\nTipe : KS-N18MG-RD\nBahan Material : Plastik\nPanjang Kabel : 1 Meter\nKapasitas : 1.8 Liter\nDaya :\n\nMemasak : 400 Watt\nMenghangatkan : 60 Watt\nTegangan : 220 Volt / 50 Hz\nDimensi (P x L x T) : 28.2 cm x 28.9 cm x 29 cm\nBerat : 4 Kg\nWarna : Red\nAksesoris :\n\nplastic steam tray\nrice paddle\nmeasuring cup\nrice scoop\n#RICECOOKER #MAGICCOM #SHARP",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:16:13.237Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/16/c2be5148-5e5c-44c9-9407-cfe15ac1f4ba.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5eaffd037427c8f8e522"
+  },
+  "id_produk": "1736335023225-249",
+  "nama_produk": "Maspion MRJ 1808 SS/MS stainless magic com",
+  "kategori_id": 4,
+  "harga": 385000,
+  "stok": 8,
+  "deskripsi": "MASPION MRJ 1808SS 1.8L 395W RICE COOKER\nSpesifikasi\n\n- Nama Produk Maspion Magic Com\n- Tipe MRJ-1808SS\n- Bahan Material Stainless steel\n- Panjang Kabel 1 Meter\n- Kapasitas 1.8 Liter\n- Daya 395 Watt\n- Tegangan 220 Volt / 50 Hz\n- Dimensi (P x L x T) 30.8 cm x 30.5 cm x 29.3 cm\n- Berat 5 Kg\n- Warna Silver / merah\n- Lampu Indikator Ya\n- Aksesoris Sendok Nasi,Gelas Takar/Cup,Senur Suplai,Pengukus",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:17:03.225Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/16/cbd24615-c8b9-48ae-9b8a-c8b2c63347f7.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5edafd037427c8f8e52a"
+  },
+  "id_produk": "1736335066605-606",
+  "nama_produk": "COSMOS Rice Cooker 3232",
+  "kategori_id": 4,
+  "harga": 290000,
+  "stok": 1,
+  "deskripsi": "Kapasitas : 1.8 Liter\nGaransi : 1 Tahun Service\n-Innerpot Terbuat dari Bahan Non-stick\n-Fungsi : 3 in 1 (Penanak nasi, penghangat dan pengukus)\n-Dilengkapi dengan : gelas ukur, pengukus dan sendok nasi\n-Pengukus serba guna\n-Panel mudah & nyaman\n-Daya : 400 Watt (Memasak), 70 Watt (Menghangatkan)\n-Anti Lengket & Cute Patterns\n-Sensor Pemanas 3D Heating\n\n#ricecooker #ricecookermurah #ricecookercosmos #magiccom #cosmos #magicjar #peralatanmakan",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:17:46.605Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/16/9204b670-f45a-49da-a4f6-914a0ecabbbe.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5f0cfd037427c8f8e533"
+  },
+  "id_produk": "1736335116775-751",
+  "nama_produk": "MIYAKO Rice Cooker 528 BTK 1,8 L",
+  "kategori_id": 4,
+  "harga": 300000,
+  "stok": 1,
+  "deskripsi": "Hemat Listrik\nKhawatir apabila perangkat dapur Anda akan mengunakan daya listrik yang besar? Miyako MCM528BTK – Magic Com 1.8 Liter 3in1 395 Watt Batik hanya memerlukan daya listrik hanya sebesar 395 Watt untuk memasak nasi.\n\nSpesifikasi\nNama Produk Miyako Magic Com 3in1\nTipe MCM-528BTK JLH\nBahan Material Plastik\nPanjang Kabel 1 Meter\nKapasitas 1.8 Liter\nDaya Penanak : 395 Watt\nPenghangat : 77 Watt\nTegangan 220 Volt / 50 Hz\nDimensi (P x L x T)\n30 cm x 30 cm x 29.5 cm\nBerat 4.4 Kg\nWarna Batik JLH\nAksesoris Sendok nasi, gelas ukur, & pengukus.",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:18:36.775Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/15/26d26395-1839-413b-87a7-036c7fa7b453.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5f3efd037427c8f8e53c"
+  },
+  "id_produk": "1736335166398-254",
+  "nama_produk": "IKEDO TV LED 32'' smart IK-32DL 12S",
+  "kategori_id": 5,
+  "harga": 2650000,
+  "stok": 10,
+  "deskripsi": "TV LED IKEDO ANDROID TV IK-D32L12S\nMerek\nIkedo\nResolusi\n1920x1080\nUkuran Layar\n30-39\"\nSmart TV\nYes\nGaransi\nOfficial\nPeriode Garansi\n5 TAHUN\n\nSpesifikasi :\n\nSmart TV With Android Version 4.4.4\nRAM/ ROM : 1GB / 4GB\nSize : 32 inch\nLED Display SAMSUNG Panel Grade A+\nAnalog TV (ATV)\nWifi\nMiracast\nInput : 3 HDMI input, 2 USB Movie, Audio Video, VGA Input, LAN RJ45 Audio Input/Output",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:19:26.398Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/15/5419d6d6-9bf6-4634-b1e8-8e553ba5c824.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5f69fd037427c8f8e544"
+  },
+  "id_produk": "1736335209274-566",
+  "nama_produk": "Magic Com YONGMA 2 Liter 8017",
+  "kategori_id": 4,
+  "harga": 750000,
+  "stok": 8,
+  "deskripsi": "- Rice Cooker\n- Dapat digunakan memasak nasi, menghangatkan, dan mengukus\n- Kapasitas : 2 liter\n- Bisa Masak Nasi Goreng\n- Pegangan pada Innerpot\n- Alarm\n- Fungsi One Touch\n- Fungsi Resume saat terjadi mati listrik\n\n!!FREE BUBBLE WRAP UNTUK PENGIRIMAN!!\n!!BERGARANSI RESMI!!\n\nWarna : Merah, Hitam, Putih\nKapasitas : 2.0 L / 11 orang\nInner Pot : Eco Ceramic\nDaya Konsumsi : 400 W\nGaransi : Garansi Resmi Yong Ma 1 Tahun\nBerat : 6 Kg",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:20:09.274Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/product-1/2020/7/14/99898319/99898319_5cc7e8fc-756f-4999-bf86-b97cb2dbdc67_1080_1080",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5f91fd037427c8f8e54c"
+  },
+  "id_produk": "1736335249291-147",
+  "nama_produk": "PHILIPS Blander 2 Liter S-2116",
+  "kategori_id": 4,
+  "harga": 900000,
+  "stok": 10,
+  "deskripsi": "Blender Philips ini akan mengenalkan Anda pada beragam sajian setiap hari. Buat sendiri jus segar Anda. Blender sup ala rumahan atau buat smoothie bergizi.\n- Motor kuat untuk memblender dan mencampur dengan mudah.\n- Memblender dengan beragam kecepatan dan tingkatan melalui pemilihan setelan.\n- Menghancurkan dan memblender dengan sempurna dengan pisau bergerigi ultra tajam dan awet ini.\n\n!!FREE BUBBLE WRAP UNTUK PENGIRIMAN!!\n!!BERGARANSI RESMI!!\n\nBahan Gelas : kaca\nBahan dry mill : plastik mika\nKonsumsi Daya : 350watt\nKapasitas : 2Liter\nBerat : 6 Kg",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:20:49.291Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/product-1/2020/7/14/99898319/99898319_6ffac290-27c5-4baf-af01-90a78fd12047_1080_1080",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5fb1fd037427c8f8e553"
+  },
+  "id_produk": "1736335281211-318",
+  "nama_produk": "MIYAKO Magic Warmer MCM-606",
+  "kategori_id": 4,
+  "harga": 300000,
+  "stok": 10,
+  "deskripsi": "- 3in1 dengan menggunakan bahan berkualitas tinggi (memasak nasi, mengukus dan menghangatkan makanan)\n- Memiliki 3 elemen pemanas di bagian atas, tengah dan bawah.\n- Dilengkapi dengan steamer dan penghangat otomatis.\n\n!!FREE BUBBLE WRAP UNTUK PENGIRIMAN!!\n!!BERGARANSI PABRIK!!\n\nFUNGSI : MEMASAK, MENGHANGATKAN, MENGUKUS\nBODI : PLASTIK\nSTEAMER : YES\nTEGANGAN : 220 VAC\nBERAT : 3 KG\nKAPASITAS : 0.6 LITER",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:21:21.211Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/product-1/2020/7/14/99898319/99898319_f26ec9fe-8808-4e1a-babc-66186d9a4387_1080_1080",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e5fe5fd037427c8f8e55d"
+  },
+  "id_produk": "1736335333660-192",
+  "nama_produk": "SANKEN mesin cuci top load 8 kg AW-S831 BK",
+  "kategori_id": 2,
+  "harga": 2050000,
+  "stok": 1,
+  "deskripsi": "FITUR : -4D X-TOR Tecnology -Auto Soak -Auto, -Hemat Listrik saat Siaga (Standby), -Fuzzy Logic -Spin Speed 700 RPM -Material Drum Stainless Steel -Tornado Dry SPESIFIKASI : KAPASITAS : 7 KG Voltage/Frequency 220 V/ 50 Hz Power Consumption max (W) : 340 watt BERAT : 35kg DIMENSION (wXdXh) : 515 x 525 x 900 Garansi Resmi motor 5 tahun & 1 tahun sparepats",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:22:13.660Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/1/26/df4348ca-6318-441d-8637-3ae7fc1a3117.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6027fd037427c8f8e56f"
+  },
+  "id_produk": "1736335399616-640",
+  "nama_produk": "POLYTRON led 24 inch PLD-24TV0855/1855",
+  "kategori_id": 5,
+  "harga": 1500000,
+  "stok": 1,
+  "deskripsi": "Fitur :\n3D Picture Noise Reduction\n8 Picture Mode\nScreen Stand by Mode\nEco Mode\nSpeaker Tower\n5 Yeard Warranty (Include LED Panel)\n\n\nSpesifikasi :\nLED TV 24 Inch\nDigital TV DVB-T2\nResolusi 1366 X 768 (HD Ready)\nHDMI 1 Input\nYUV component input\nUSB Movie 1 Input\nAV Input\nAudio Input\nSPDIF Output (optical)\nDaya 35 Watt\nTegangan 180-240 V\nDimensi TV (WxDxH) 622 x 202 x 396 mm\nDimensi Speaker Tower (WxDxH) 160 x 160 x 505 mm",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:23:19.616Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/11/28/4c2ea78a-0948-4fa7-9128-5e9b9aea28ce.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6051fd037427c8f8e577"
+  },
+  "id_produk": "1736335441868-815",
+  "nama_produk": "POLYTRON led digital tv 24 inch PLD-24V0853",
+  "kategori_id": 5,
+  "harga": 1900000,
+  "stok": 1,
+  "deskripsi": "[Fitur Produk]\nLED TV 24\"\nDigital TV DVB-T2, EWS\nHDMI Input\nYUV Component input\nUSB Input (Movie, MP3, Jpeg)\nAV Input\nAudio Input\nSPDIF output (optical)\n3D Picture Noice Reduction\n8 Picture Mode\nScreen Stand By Mode\nEco Mode\n5 Years Warranty\nTV Digital (DVB-T2)",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:24:01.868Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/11/5/9e7be69d-379a-43f8-a8a8-bf9038f2a289.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e609cfd037427c8f8e585"
+  },
+  "id_produk": "1736335516212-445",
+  "nama_produk": "TOSHIBA mesin cuci 2 tabung 8.5kg VH-85MN",
+  "kategori_id": 2,
+  "harga": 1500000,
+  "stok": 1,
+  "deskripsi": "Fiture Produk :\n• ' Kapasitas : 8.5 Kg\n• ' Tutup Transparan, Putih\n• ' Anti Karat\n• ' Filter Kaset\n• ' HighBlades Pulsator\n• ' SuperJet Spin\n• ' Washing Board\n• ' GoldenSoak Period\n• ' Garansi Spare Part & Service : 2 Tahun, Motor : 5 TahunProduk Spesifikasi :\n• Warna : Abu-abu, Biru,\n• Tegangan Listrik : 220V/50Hz\n• Kapasitas Pencucian/(kg) : 8 kg\n• Kapasitas Pengeringan/(kg) :5kg\n• Daya Listrik Pencucian/(W) : 140W\n• Daya Listrik Peras/pengeringan : 135W\n• Dimensi : 761 x 448 x 885 mm\n• Berat bersih : 19 kg",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:25:16.212Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/10/8/572fbcfa-fd68-499b-92f8-6753fabc6c40.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e60ddfd037427c8f8e58f"
+  },
+  "id_produk": "1736335581499-904",
+  "nama_produk": "POLYTRON kulkas 1 pintu 180 liter PRX-180S",
+  "kategori_id": 0,
+  "harga": 1975000,
+  "stok": 1,
+  "deskripsi": "Deskripsi Polytron kulkas 1 pintu 180 liter PRX 181S/Y Metal series garansi\nKhusus area yogyakarta,dikirim sopir toko exclude ongkos kirim\nKulkas Polytron 1 pintu model Terbaru PRX 181 Garansi Kompresor 5 Tahun\nSpesifikasi Produk Big Freezer\nBig Chrisper\nTwist ice Maker\nRak Tempered Glass\nDaya Listrik 80 Watt\nDimensi 52 x 53 x 122 cm\nGaransi 5 Tahun Kompressor\nKapasitas 180 Liter\nLow voltage sampai 160 V\n15 % lebih cepat buat Es\nKapasitas chrisper 20% lebih besar",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:26:21.499Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/30/ea03b64f-fbd5-4169-b1de-2bcaea45c56b.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e611afd037427c8f8e599"
+  },
+  "id_produk": "1736335642541-842",
+  "nama_produk": "ELECTROLUX MESIN CUCI 12 KG 2 TABUNG EWS-13262 WA",
+  "kategori_id": 2,
+  "harga": 2200000,
+  "stok": 1,
+  "deskripsi": "\n\nSPESIFIKASI :\nBrand: Electrolux\nModel : EWS 13262WA\nUkuran (L x W x H cm) :15x12x110\nBerat (kg) :30\nKecepatan Putaran (rpm) :800Type of Washing Machine :Twin Tub\nWarranty period :1 Year\nTipe garansi :Supplier warranty\nKapasitas Cuci (kg) :12 kg Washing\nfeatures :Quick Wash|Spin\ndryWashing modes :Spin",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:27:22.541Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/30/2b321db7-3732-4033-a15d-58eb8efc22e0.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6148fd037427c8f8e5a2"
+  },
+  "id_produk": "1736335688865-328",
+  "nama_produk": "ELECTROLUX MESIN CUCI 2 TABUNG KAPASITAS 10 KG EWS-11262",
+  "kategori_id": 2,
+  "harga": 1830000,
+  "stok": 1,
+  "deskripsi": "Spec :\nBrand: Electrolux\nModel : EWS 11261\nUkuran (L x W x H cm) :13x10x100\nBerat (kg) :30\nKecepatan Putaran (rpm) :800Type of Washing Machine :Twin Tub\nWarranty period :1 Year\nTipe garansi :Supplier warranty\nKapasitas Cuci (kg) :10 kg Washing\nfeatures :Quick Wash|Spin\ndryWashing modes :Spin",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:28:08.865Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/30/acf12e0c-ec73-4d27-9a86-445b820fda62.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6248fd037427c8f8e5b5"
+  },
+  "id_produk": "1736335944731-134",
+  "nama_produk": "PANASONIC ac 1/2 pk CSYN-5PKJ",
+  "kategori_id": 1,
+  "harga": 3250000,
+  "stok": 1,
+  "deskripsi": "Deskripsi Produk\nPanasonic YN5WKJ kami ingin menghadirkan lebih dari sekedar solusi pendinginan atau pemanasan. Kami ingin menciptakan solusi udara total agar anda menikmati udara berkualitas di dalam ruangan.\nSpesifikasi Panasonic CS-YN5WKJ AC Split 1/2 PK Standard Putih\n\nType AC Standard\nWarna Putih\nDaya Listrik 410 Watt\nDimensi 29 x 80 x 20 cm\nBerat 8 Kg\nGaransi 1 Tahun Sparepart, 3 Tahun Kompressor\nPK 1/2 PK\nRefrigrant R-32\nDimensi Out. 49 x 65 x 23 cm\nBerat Out. 16 Kg\nUk. Pipa 1/4 + 3/8",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:32:24.731Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/27/8af9f944-801f-4a97-86d4-4b7db14bdd8a.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6295fd037427c8f8e5c0"
+  },
+  "id_produk": "1736336021734-134",
+  "nama_produk": "AQUA JAPAN AC 1/2 pk KCR-05ANE",
+  "kategori_id": 1,
+  "harga": 2700000,
+  "stok": 1,
+  "deskripsi": "Spesifikasi Produk:\n- Kapasitas Dingin 5000 Btu/h (1/2 PK)\n- Daya Listrik 360 Watt\n- Freon R-32\n- Triple Airflow\n- Turbo Cool\n- Wide Voltage\n- Anti-corrosion system\n- Big Blade & Long Distance\n- Garansi RESMI PABRIK 5 Tahun Sparepart \n- Garansi RESMI PABRIK 10 Tahun Kompressor",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:33:41.734Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/27/04062e21-e9f2-4632-be16-98e05523b181.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6302fd037427c8f8e5cf"
+  },
+  "id_produk": "1736336130519-629",
+  "nama_produk": "IKEDO tv led 20P1U",
+  "kategori_id": 5,
+  "harga": 1050000,
+  "stok": 1,
+  "deskripsi": "LED TV IKEDO MADE IN INDONESIA\nMerk : Ikedo\nSize : 20 inch Wide Screen\nRatio : 16 : 10\nPanel Backlight : LED Backlight\nPanel Display Color : 16M colors\nPanel Respon : 8 ms\nResolution : 1600x1200\nColor Unit : Black Glosy\nPower Consumption : < 45W\nPower Input : 110~220VAC/12V DC\nControl : Power, Input, Menu, CH-, CH+, Vol-, Vol+\nInput : VGA, HDMI, AV, Audio In/Out, USB Movie\nSpeaker : Hi-Fi Subwoofer Engine\nGaransi Resmi : 1 Tahun\nGaransi Toko : Garansi tukar baru apabila ada kerusakan, setelah barang diterima",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:35:30.519Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/8/9/374a0e95-47ef-4442-8950-9740ac0d1e48.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e632ffd037427c8f8e5d8"
+  },
+  "id_produk": "1736336175216-102",
+  "nama_produk": "SHARP air cooler pendingin ruangan portable PJA-55TY white",
+  "kategori_id": 1,
+  "harga": 1200000,
+  "stok": 1,
+  "deskripsi": "SPECIFICATIONS PRODUK :\nModel : PJ-A55TY\nDaya : 100 Watt\nVoltase : 220-240 V/ 50 Hz\nKecepatan Motor : 1150 RPM\nWarna : Hitam & Putih\nLevel Kecepatan Hingga : 4 pilihan kecepatan\nTimer ON/OFF : 1-2-3 Jam hingga 15 Jam\nAuto Swing Louver Ya, dapat berputar secara horizontal (ke kanan dan ke kiri)\nLCD Panel : Ya\nRemote Control : Ya\nIce Pack : 4 Units\nAir Volume : 400 m3/h\nWater Tank Capacity : 6 Liter\nDimensi (P x L x T ) : 36 cm x 30 cm x 76 cm\nProduk Ber-SNI\n\nGARANSI RESMI 1 tahun",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:36:15.216Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/6/5/c87f0e53-263a-447d-931e-b6d5dd2598eb.jpg",
+  "status": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e636afd037427c8f8e5e2"
+  },
+  "id_produk": "1736336234862-131",
+  "nama_produk": "POLYTRON tv led 24 inch 24T1850",
+  "kategori_id": 5,
+  "harga": 1850000,
+  "stok": 1,
+  "deskripsi": "Specification\n\n- Size (inches) : 24\n- Resolution : 1366 x 768\n- Back Light Unit : LED\n- Maximum Audio Output : 2 x 10W\n- TOWER Speaker XBR : 2\n- VGA Input : 1\n- HDMI Input : 2\n- USB : 1\n- Equalizer : 5 Band\n- Power Consumption : 35W\n- Power Supply : 180-240V-50/60Hz\n- Backlight Adjustable\n- DIPE Engine\n- Dynamic Noise Reduction\n- AV Input : 1\n- Component Input : 1\n- AV Output : 1\n- ECO Mode\n- Automatic Volume Level\n- JENIS RESOLUSI : HD TV\n- UKURAN LAYAR : 19~29\n- SERIES : Cinemax",
+  "tanggal_ditambahkan": {
+    "$date": "2025-01-08T11:37:14.862Z"
+  },
+  "gambar_url": "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/4/5/54c81b24-197f-4299-8176-5e2e0682895c.jpg",
+  "status": 1,
+  "__v": 0
+}]
