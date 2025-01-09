@@ -13,10 +13,9 @@ const paymentToken = (fastify) => async (request, reply) => {
         serverKey : 'SB-Mid-server-CKp9TOLZwarw9yQJmntI30yh'
     });
 
-    const orderID = `ORDER-${Math.floor(Math.random() * 100000)}`
     const parameter = {
         "transaction_details": {
-            "order_id": orderID,
+            "order_id": "",
             "gross_amount": 0
         },
         "credit_card": {
@@ -60,6 +59,8 @@ const paymentToken = (fastify) => async (request, reply) => {
             id_pengiriman: "1",
         });
         await newHtrans.save()
+
+        parameter.transaction_details.order_id = newHtrans._id
 
         const groupedItems = {};
         for (const shoppingItem of parsedItem) {

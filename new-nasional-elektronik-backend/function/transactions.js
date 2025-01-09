@@ -2,6 +2,7 @@ import { mongoDB } from '../index.js'
 import mongoose from 'mongoose';
 
 // Model 
+import ProductsModel from '../models/Product.js'
 import DTransModel from '../models/D_trans.js'
 import HTransModel from '../models/H_trans.js'
 import RegisterModel from '../models/Register.js'
@@ -39,20 +40,21 @@ export const fetchTransaction = (fastify) => async (request, reply) => {
         data: {}
     }
     const { transactionID } = request.query;
-    const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
-    const singleTransaction = await HTrans.find({_id: transactionID})
-
-    const DTrans = mongoDB.models.H_trans || mongoDB.model('D_trans', DTransModel);
-    const transactionDetails = await DTrans.find({id_h_trans: transactionID})
+    const TransID = new mongoose.Types.ObjectId(transactionID);
+    const Products = mongoDB.models.Products || mongoDB.model('Products', ProductsModel);
+    const DTrans = mongoDB.models.D_trans || mongoDB.model('D_trans', DTransModel);
+    const transactionDetails = await DTrans.find({id_h_trans: TransID})
+    const detailedTransactions = await Promise.all(transactionDetails.map(async (transaction) => {
+        const productDetails = await Products.findOne({ id_produk: transaction.id_produk });
+        return {
+            ...transaction.toObject(),
+            product: productDetails ? productDetails : null,
+        };
+    }));
 
     response.status = true
     response.data = {
-        transaction: {
-            ...singleTransaction
-        },
-        details: {
-            ...transactionDetails
-        }
+        details: detailedTransactions
     }
     return response
 }
@@ -76,11 +78,46 @@ export const deleteTransaction = (fastify) => async (request, reply) => {
             response.status = false;
             response.message = "Transaksi tidak ditemukan!";
         } else {
-            const newTransactionList = await transaksi.find({})
+            const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+            const allTransaction = await HTrans.find({})
+
+            const User = mongoDB.models.User || mongoDB.model('User', RegisterModel);
+            const updatedTransactions = await Promise.all(
+                allTransaction.map(async (transaction) => {
+                    const UserID = new mongoose.Types.ObjectId(transaction.id_pelanggan);
+                    const user = await User.findOne({ _id: UserID });
+                    return {
+                    ...transaction.toObject(),
+                    nama_pelanggan: user ? user.nama : null,
+                    };
+                })
+            );
+
             response.status = true;
             response.message = "Delete transaksi sukses !"
-            response.data.list = newTransactionList;
+            response.data.list = updatedTransactions;
         }
     }
     return response
+}
+
+export const notificationHandler = (fastify) => async (request, reply) => {
+    const { order_id, transaction_status, status_code } = request.body
+    try {
+        new mongoose.Types.ObjectId(order_id)
+    } catch {
+        return
+    }
+    
+    if(transaction_status === "settlement" && status_code === "200") {
+        const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+        const filter = { _id: new mongoose.Types.ObjectId(order_id) };
+        const update = { status: "Success" };
+        const result = await HTrans.updateOne(filter, update);
+        if (result.modifiedCount > 0) {
+            fastify.info(`Order with ID ${order_id} updated to Success.`);
+        } else {
+            fastify.error(`No matching order found with ID ${order_id}.`);
+        }
+    }
 }

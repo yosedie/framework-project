@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, GetTransactionStruct, TransactionData, DetailsTransactionFetch, FetchTransactionStruct } from '../types/types';
+import { LoginData, ApiResponse, GetTransactionStruct, UserData, GetUserStruct, FetchTransactionStruct } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
@@ -20,7 +19,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Modal from '@mui/material/Modal';
 // import Spacer from '@mui/material/Spacer';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 // CSS
 import styles from './page.module.css'
@@ -90,8 +93,16 @@ export default function Transaction() {
     email: "",
     password: "",
  });
-  const [transactionList, setTransactionList] = React.useState<TransactionData[]>([]);
-  const [transactionDetailList, setTransactionDetailList] = React.useState<DetailsTransactionFetch[]>([]);
+  const [userList, setUserList] = React.useState<UserData[]>([]);
+  const [userDetail, setUserDetail] = React.useState<UserData>({
+    _id: "",
+    role: "",
+    nama: "",
+    email: "",
+    telepon: "",
+    password: "",
+    tanggal_daftar: "",
+  });
 
 
  const handleRoute = (paramPage: String) => {
@@ -106,11 +117,30 @@ export default function Transaction() {
     }));
  };
 
- async function getTransactionList(): Promise<GetTransactionStruct> {
+ const capitalizeFirstChar = (str: string) => {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+ const formatDateToGMT7 = (dateString: string): string => {
+    const date = new Date(dateString);
+    const gmt7Date = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+    const formattedDate = gmt7Date.toISOString().slice(0, 10);
+    const formattedTime = gmt7Date.toTimeString().slice(0, 8);
+    return `${formattedDate} ${formattedTime}`;
+ };
+
+ async function getUserList(): Promise<GetUserStruct> {
     try {
-        const response = await axios.get<ApiResponse<GetTransactionStruct>>(`/listTransaction`);
+        const response = await axios.get<ApiResponse<GetUserStruct>>(`/listUser`);
         if(response.data.status) {
-            setTransactionList(response.data.data.list)
+            const updatedUserList = response.data.data.list.map((user: UserData) => ({
+                ...user,
+                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
+                password: "",
+            }));
+            
+            setUserList(updatedUserList)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
         }
@@ -121,32 +151,24 @@ export default function Transaction() {
     }
  }
 
- async function fetchTransaction(transactionID: string): Promise<FetchTransactionStruct> {
+ async function editUser(id_user: string): Promise<GetUserStruct> {
     try {
-        const response = await axios.get<ApiResponse<FetchTransactionStruct>>(`/fetchTransaction`, {
-            params: { transactionID }
+        const response = await axios.put<ApiResponse<GetUserStruct>>(`/editUser`, {
+            id_user: id_user,
+            role: userDetail.role,
+            nama: userDetail.nama,
+            email: userDetail.email,
+            telepon: userDetail.telepon,
+            password: userDetail.password,
         });
         if(response.data.status) {
-            setTransactionDetailList(response.data.data.details)
-        } else {
-            execToast(ToastStatus.ERROR, response.data.message)
-        }
-        return response.data.data;
-    } catch (error) {
-        execToast(ToastStatus.ERROR, JSON.stringify(error))
-        throw error;
-    }
- }
-
- async function deleteTransaction(id_transaksi: string): Promise<GetTransactionStruct> {
-    try {
-        const response = await axios.delete<ApiResponse<GetTransactionStruct>>(`/deleteTransaction`, {
-            data: {
-                id_transaksi
-            }
-        });
-        if(response.data.status) {
-            setTransactionList(response.data.data.list)
+            const updatedUserList = response.data.data.list.map((user: UserData) => ({
+                ...user,
+                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
+                password: "",
+            }));
+            
+            setUserList(updatedUserList);
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
@@ -158,8 +180,50 @@ export default function Transaction() {
     }
  }
 
+ async function deleteUser(id_user: string): Promise<GetUserStruct> {
+    try {
+        const response = await axios.delete<ApiResponse<GetUserStruct>>(`/deleteUser`, {
+            data: {
+                id_user
+            }
+        });
+        if(response.data.status) {
+            const updatedUserList = response.data.data.list.map((user: UserData) => ({
+                ...user,
+                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
+                password: "",
+            }));
+            
+            setUserList(updatedUserList);
+            execToast(ToastStatus.SUCCESS, response.data.message)
+        } else {
+            execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+ }
+
+ const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setUserDetail((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  
+  const handleDropdownChange = (event: SelectChangeEvent) => {
+    const { value } = event.target;
+    setUserDetail((prev) => ({
+      ...prev,
+      role: value as string,
+    }));
+  };
+
  React.useEffect(() => {
-    getTransactionList()
+    getUserList()
  }, [])
 
   return (
@@ -178,45 +242,78 @@ export default function Transaction() {
             ? (
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Transaction Details
+                        User Edit
                     </Typography>
+                    <FormControl fullWidth sx={{marginTop: "3.5%"}}>
+                        <InputLabel id="demo-simple-select-label">User Role</InputLabel>
+                        <Select
+                            name="role"
+                            value={userDetail.role}
+                            label="User Role"
+                            onChange={handleDropdownChange}
+                        >
+                        <MenuItem value={"user"}>User</MenuItem>
+                        <MenuItem value={"admin"}>Admin</MenuItem>
+                        <MenuItem value={"penjual"}>Penjual</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <TextField 
+                        name="email"
+                        label="Email"
+                        type='email'
+                        variant="outlined"
+                        sx={{marginTop: "1.5%"}}
+                        fullWidth
+                        value={userDetail.email}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        name="nama"
+                        label="Nama"
+                        type='text'
+                        variant="outlined"
+                        sx={{marginTop: "1.5%"}}
+                        fullWidth
+                        value={userDetail.nama}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        name="telepon"
+                        label="Telepon"
+                        type='tel'
+                        variant="outlined"
+                        sx={{marginTop: "1.5%"}}
+                        fullWidth
+                        value={userDetail.telepon}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        name="password"
+                        label="New Password"
+                        type='password'
+                        variant="outlined"
+                        sx={{marginTop: "1.5%"}}
+                        fullWidth
+                        value={userDetail.password}
+                        onChange={handleInputChange}
+                    />
+                    <br /> <Button
+                        sx={{
+                            marginTop: "1.5%",
+                            display: "block",
+                            borderRadius: 0,
+                        }}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            editUser(userList[detailIndex]._id)
+                        }}
+                    >
+                        Edit User
+                    </Button>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Date : {(new Date(transactionList[detailIndex].tanggal)).toISOString().slice(0, 10)}
+                        Daftar Sejak : {userList[detailIndex].tanggal_daftar}
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Timestamp : {(new Date(transactionList[detailIndex].tanggal)).toTimeString().slice(0, 8)}
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Grand Total : Rp. {transactionList[detailIndex].total_harga}
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Product : 
-                    </Typography>
-                    {
-                        transactionDetailList.map(data => {
-                            return (
-                                <Box sx={{border: "1px solid black", padding: "2.5%", marginTop: "2.5%"}}>
-                                    <Image
-                                        draggable={false}
-                                        src={data.product.gambar_url as string}
-                                        alt="Example"
-                                        width={100}
-                                        height={100}
-                                        style={{ objectFit: "cover" }}
-                                    />
-                                    <Typography id="modal-modal-description">
-                                        Name : {data.product.nama_produk}
-                                    </Typography>
-                                    <Typography id="modal-modal-description">
-                                        Quantity : {data.jumlah}
-                                    </Typography>
-                                    <Typography id="modal-modal-description">
-                                        Price : Rp. {data.product.harga}
-                                    </Typography>
-                                </Box>
-                            )
-                        })
-                    }
                 </Box>
             )
             : <></>
@@ -242,33 +339,24 @@ export default function Transaction() {
         </button> */}
         <Box sx={{margin: "1.5% 2.5%"}}>
             <Typography variant="h5" color='black'>
-                Transaction History
+                Manage User
             </Typography>
             {
-                transactionList.map((data, index) => {
+                userList.map((data, index) => {
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'stretch', width: '100%', marginTop: "1.5%" }}>
                             <Card sx={{ flexGrow: 1, minWidth: 275 }}>
                                 <CardContent>
                                 <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                                    {((new Date(data.tanggal)).toISOString().slice(0, 10))} {((new Date(data.tanggal)).toTimeString().slice(0, 8))}
+                                    Daftar Sejak : {data.tanggal_daftar}
                                 </Typography>
                                 <Typography variant="h4" component="div">
-                                    Nama Pelanggan : {data.nama_pelanggan}
-                                </Typography>
-                                <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-                                    Metode Pembayaran : {data.metode_pembayaran}
+                                    Email : {data.email}
                                 </Typography>
                                 <Typography variant="body1">
-                                    Status : <strong style={{
-                                        color: data.status.toLocaleLowerCase() === "pending"
-                                            ? "orange"
-                                            : data.status.toLocaleLowerCase() === "success"
-                                                ? "green"
-                                                : "red"
-                                    }}>{data.status}</strong><br />
-                                    Alamat : {data.alamat_pengiriman} <br />
-                                    Total Harga : {data.total_harga}
+                                    Role : <strong>{capitalizeFirstChar(data.role)}</strong> <br />
+                                    Nama : {data.nama} <br />
+                                    Telepon : +{data.telepon}
                                 </Typography>
                                 </CardContent>
                             </Card>
@@ -286,14 +374,21 @@ export default function Transaction() {
                                     borderRadius: 0,
                                 }}
                                 variant="contained"
-                                color="primary"
+                                color="warning"
                                 onClick={() => {
                                     handleOpen()
                                     setDetailIndex(index)
-                                    fetchTransaction(data._id)
+                                    setUserDetail(prevState => ({
+                                        ...prevState,
+                                        _id: data._id,
+                                        role: data.role,
+                                        nama: data.nama,
+                                        email: data.email,
+                                        telepon: data.telepon
+                                    }))
                                 }}
                                 >
-                                See Details
+                                Edit User
                                 </Button>
                                 <Button
                                     sx={{
@@ -302,9 +397,9 @@ export default function Transaction() {
                                     }}
                                     variant="contained"
                                     color="error"
-                                    onClick={() => deleteTransaction(data._id)}
+                                    onClick={() => deleteUser(data._id)}
                                 >
-                                Delete
+                                Delete User
                                 </Button>
                             </Box>
                         </Box>

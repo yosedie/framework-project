@@ -7,7 +7,9 @@ import verifyToken from "./function/verify_jwt.js";
 
 import { fetchProduct, listProduct, addProduct, editProduct, deleteProduct } from "./function/products.js";
 
-import { fetchTransaction, listTransaction, deleteTransaction } from "./function/transactions.js";
+import { fetchTransaction, listTransaction, deleteTransaction, notificationHandler } from "./function/transactions.js";
+
+import { listUser, editUser, deleteUser } from "./function/user.js";
 
 async function routes (fastify, options) {
     const errorWrapper = (fn) => (request, reply) => {
@@ -38,9 +40,15 @@ async function routes (fastify, options) {
     fastify.delete('/api/deleteProduct', errorWrapper(deleteProduct(fastify)))
 
     // Khusus transaksi
+    fastify.post('/api/notificationHandler', errorWrapper(notificationHandler(fastify)))
     fastify.get('/api/fetchTransaction', errorWrapper(fetchTransaction(fastify)))
     fastify.get('/api/listTransaction', errorWrapper(listTransaction(fastify)))
     fastify.delete('/api/deleteTransaction', errorWrapper(deleteTransaction(fastify)))
+
+    // khusus user
+    fastify.get('/api/listUser', errorWrapper(listUser(fastify)))
+    fastify.put('/api/editUser', errorWrapper(editUser(fastify)))
+    fastify.delete('/api/deleteUser', errorWrapper(deleteUser(fastify)))
 }
 
 export default routes;

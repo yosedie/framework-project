@@ -27,6 +27,7 @@ const pages = ['Products', 'Events'];
 const pagesAdmin = ['Dashboard', 'Products', 'Transaction', 'Manage User'];
 const pagesPenjual = ['Products', 'Transaction'];
 const settings = ['Profile', 'Shopping Cart', 'Transaction History', 'Security', 'Logout'];
+const settingsAdmin = ['Profile', 'Security', 'Logout'];
 const settingsGuest = ['Login', 'Register'];
 
 function ResponsiveAppBar() {
@@ -162,8 +163,8 @@ function ResponsiveAppBar() {
               .map((page) => (
               <Button
                 key={page}
-                onClick={() => handleRoute(page.toLowerCase())}
-                sx={{ my: 2, color: usePathname() === ("/" + page.toLowerCase()) ? 'yellow' : 'white', display: 'block' }}
+                onClick={() => handleRoute(page.toLowerCase().replace(/\s+/g, ''))}
+                sx={{ my: 2, color: usePathname() === ("/" + page.toLowerCase().replace(/\s+/g, '')) ? 'yellow' : 'white', display: 'block' }}
               >
                 {page}
               </Button>
@@ -193,7 +194,9 @@ function ResponsiveAppBar() {
             >
               {
               (account !== ""
-                ? settings
+                ? role === "user"
+                  ? settings
+                  : settingsAdmin
                 : settingsGuest)
                   .map((setting) => (
                     <MenuItem key={setting} onClick={() => {

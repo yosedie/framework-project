@@ -56,6 +56,14 @@ export interface GetTransactionStruct {
     list: TransactionData[]
 }
 
+export interface FetchTransactionStruct {
+    details: DetailsTransactionFetch[]
+}
+
+export interface GetUserStruct {
+    list: UserData[]
+}
+
 export interface VerifyTokenData {
     role: string;
 }
@@ -68,6 +76,7 @@ export interface LoginData {
 export interface RegisterData {
 
 }
+
 export interface MidtransTokenData {
     token: string;
     redirect_url: string;
@@ -84,6 +93,25 @@ export interface TransactionData {
     nomor_resi: string;
     id_pengiriman: string;
     nama_pelanggan: string;
+}
+
+export interface DetailsTransactionFetch {
+    _id: string;
+    id_h_trans: string;
+    id_produk: string;
+    jumlah: number;
+    harga: number;
+    product: ProductStruct;
+}
+
+export interface UserData {
+    _id: string;
+    role: string;
+    nama: string;
+    email: string;
+    telepon: string;
+    password: string;
+    tanggal_daftar: string;
 }
 
 export interface ApiResponse<T> {
