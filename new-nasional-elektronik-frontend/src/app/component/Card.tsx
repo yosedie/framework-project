@@ -94,7 +94,14 @@ export default function ImgMediaCard({
                               variant={isDescriptionTitle ? "h5" : "body2"} 
                               color={isDescriptionTitle ? "black" : "text.secondary"} 
                               textAlign={isDescriptionTitle ? "left" : "justify"}
-                              sx={{ flex: 1 }}
+                              sx={{ 
+                                flex: 1, 
+                                display: '-webkit-box', 
+                                overflow: 'hidden', 
+                                textOverflow: 'ellipsis', 
+                                WebkitBoxOrient: 'vertical', 
+                                WebkitLineClamp: 3,
+                              }}
                             >
                               {description}
                             </Typography>
@@ -110,7 +117,14 @@ export default function ImgMediaCard({
                             variant={isDescriptionTitle ? "h5" : "body2"} 
                             color={isDescriptionTitle ? "black" : "text.secondary"} 
                             textAlign={isDescriptionTitle ? "left" : "justify"}
-                            sx={{ flex: 1 }}
+                            sx={{ 
+                              flex: 1, 
+                              display: '-webkit-box', 
+                              overflow: 'hidden', 
+                              textOverflow: 'ellipsis', 
+                              WebkitBoxOrient: 'vertical', 
+                              WebkitLineClamp: 3, 
+                            }}
                           >
                             {description}
                           </Typography>
@@ -173,10 +187,30 @@ export default function ImgMediaCard({
               image={image_url}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" sx={{
+                flex: 1, 
+                display: '-webkit-box', 
+                overflow: 'hidden', 
+                textOverflow: 'ellipsis', 
+                WebkitBoxOrient: 'vertical', 
+                WebkitLineClamp: 2
+              }}>
                 {title}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: "justify", whiteSpace: "pre-line" }}>
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: 'text.secondary', 
+                  textAlign: "left", 
+                  whiteSpace: "pre-line", 
+                  flex: 1, 
+                  display: '-webkit-box', 
+                  overflow: 'hidden', 
+                  textOverflow: 'ellipsis', 
+                  WebkitBoxOrient: 'vertical', 
+                  WebkitLineClamp: 3
+                }}
+                >
                 {description}
               </Typography>
             </CardContent>

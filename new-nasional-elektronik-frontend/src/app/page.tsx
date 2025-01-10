@@ -49,14 +49,14 @@ export default function Home() {
   return (
    <>
     <AppBar />
-    {user ? (
+    {/* {user ? (
         <Box sx={{ padding: 2 }}>
           <Typography variant="h6">Selamat Datang, {user.email}</Typography>
           <button onClick={handleLogout}>Logout</button>
         </Box>
       ) : (
         <Typography variant="h6">Silakan login untuk melanjutkan</Typography>
-      )}
+      )} */}
     {/* <button 
         className={styles.button}
         onClick={() => dispatch(increment())}

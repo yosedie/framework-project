@@ -3,7 +3,7 @@
 import axios from '../../util/axios/axios';
 import { VerifyTokenData, ApiResponse } from '../../types/types'
 import { execToast, ToastStatus } from '../../util/toastify/toast';
-import { changeRole, UserState, changeUserData } from '../../util/redux/Features/user/userSlice';
+import { changeRole, UserState, changeUserData, login } from '../../util/redux/Features/user/userSlice';
 
 import React, { ReactNode } from 'react';
 import { Provider } from "react-redux";
@@ -34,6 +34,13 @@ export function VerifyToken({ children }: ProvidersProps) {
         throw error;
       }
     }
+
+    React.useEffect(() => {
+      if(sessionStorage.getItem('user')) {
+        const { jwt_token } = JSON.parse(sessionStorage.getItem('user') as string)
+        dispatch(login(jwt_token))
+      }
+    }, [])
 
     React.useEffect(() => {
       tokenHandler();

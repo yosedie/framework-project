@@ -207,6 +207,7 @@ function ResponsiveAppBar() {
                   .map((setting) => (
                     <MenuItem key={setting} onClick={() => {
                       if(setting === "Logout") {
+                        sessionStorage.setItem('user', "");
                         dispatch(logout({}))
                         handleRoute("login")
                       } else {

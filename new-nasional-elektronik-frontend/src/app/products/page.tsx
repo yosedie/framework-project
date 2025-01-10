@@ -259,8 +259,8 @@ export default function Products() {
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                           Deskripsi : 
                       </Typography>
-                      <Typography id="modal-modal-description">
-                        {products[detailIndex].deskripsi}
+                      <Typography id="modal-modal-description" sx={{whiteSpace: "pre-line"}}>
+                        {products[detailIndex].deskripsi.trim()}
                       </Typography>
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                           Kategori Data : {KategoriData[products[detailIndex].kategori_id]}
@@ -442,7 +442,7 @@ export default function Products() {
                                         <Card
                                             key={`${data.id_produk}_${index}`}
                                             title={data.nama_produk}
-                                            description={data.deskripsi}
+                                            description={data.deskripsi.trim()}
                                             image_url={data.gambar_url}
                                             withImage
                                             onClickCard={() => {

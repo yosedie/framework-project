@@ -203,7 +203,7 @@ export default function Transaction() {
                                 <Box sx={{border: "1px solid black", padding: "2.5%", marginTop: "2.5%"}}>
                                     <Image
                                         draggable={false}
-                                        src={data.product.gambar_url as string}
+                                        src={data.product.gambar_url ? data.product.gambar_url as string : ""}
                                         alt="Example"
                                         width={100}
                                         height={100}
