@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/formbody": "^6.0.1",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "fastify": "^3.29.5",

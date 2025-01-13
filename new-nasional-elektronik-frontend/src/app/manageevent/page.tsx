@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, GetTransactionStruct, UserData, GetUserStruct, FetchTransactionStruct } from '../types/types';
+import { LoginData, ApiResponse, EventStruct, UserData, GetEventStruct, FetchTransactionStruct } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -72,22 +72,16 @@ const style = {
     overflowY: 'auto',
 };
 
-const productsName = ["Test", "Test2"]
-
 export interface CartProduct extends ProductStruct {
     quantity: number;
 }
 
 
-export default function ManageUser() {
-  const [detail, setDetail] = React.useState<UserData>({
-    _id: "",
-    nama: "",
-    email: "",
-    password: "",
-    role: "",
-    tanggal_daftar: "",
-    telepon: "",
+export default function ManageEvent() {
+  const [detail, setDetail] = React.useState<EventStruct>({
+    judul: "",
+    deskripsi: "",
+    tanggal_ditambahkan: "",
   });
   const [detailID, setDetailID] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -102,17 +96,15 @@ export default function ManageUser() {
     email: "",
     password: "",
  });
-  const [userList, setUserList] = React.useState<UserData[]>([]);
-  const [userListFiltered, setUserListFiltered] = React.useState<UserData[]>([]);
+  const [eventList, setEventList] = React.useState<EventStruct[]>([]);
+  const [eventListFiltered, setEventListFiltered] = React.useState<EventStruct[]>([]);
   const [searchValue, setSearchValue] = React.useState<string>("");
-  const [userDetail, setUserDetail] = React.useState<UserData>({
+  const [eventDetail, setEventDetail] = React.useState<EventStruct>({
     _id: "",
-    role: "",
-    nama: "",
-    email: "",
-    telepon: "",
-    password: "",
-    tanggal_daftar: "",
+    judul: "",
+    deskripsi: "",
+    gambar_url: "",
+    tanggal_ditambahkan: "",
   });
 
 
@@ -124,14 +116,13 @@ export default function ManageUser() {
     const { name, value } = event.target;
     setSearchValue(value)
     if(value.length === 0) {
-        setUserListFiltered([...userList])
+        setEventListFiltered([...eventList])
     } else {
-        const userFiltered = [...userList].filter((item) =>
-            item.nama.toLowerCase().includes(value.toLowerCase()) ||
-            item.email.toLowerCase().includes(value.toLowerCase()) ||
-            item.telepon.toLowerCase().includes(value.toLowerCase())
+        const eventFiltered = [...eventList].filter((item) =>
+            item.judul.toLowerCase().includes(value.toLowerCase()) ||
+            item.deskripsi.toLowerCase().includes(value.toLowerCase())
         );
-        setUserListFiltered([...userFiltered])
+        setEventListFiltered([...eventFiltered])
     }
  };
 
@@ -148,18 +139,17 @@ export default function ManageUser() {
     return `${formattedDate} ${formattedTime}`;
  };
 
- async function getUserList(): Promise<GetUserStruct> {
+ async function getEventList(): Promise<GetEventStruct> {
     try {
-        const response = await axios.get<ApiResponse<GetUserStruct>>(`/listUser`);
+        const response = await axios.get<ApiResponse<GetEventStruct>>(`/listEvent`);
         if(response.data.status) {
-            const updatedUserList = response.data.data.list.map((user: UserData) => ({
-                ...user,
-                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
-                password: "",
+            const updatedUserList = response.data.data.list.map((event: EventStruct) => ({
+                ...event,
+                tanggal_ditambahkan: formatDateToGMT7(event.tanggal_ditambahkan)
             }));
             
-            setUserList(updatedUserList)
-            setUserListFiltered(updatedUserList)
+            setEventList(updatedUserList)
+            setEventListFiltered(updatedUserList)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
         }
@@ -170,52 +160,48 @@ export default function ManageUser() {
     }
  }
 
- async function editUser(id_user: string): Promise<GetUserStruct> {
+ async function editEvent(id_event: string): Promise<GetEventStruct> {
     try {
-        const response = await axios.put<ApiResponse<GetUserStruct>>(`/editUser`, {
-            id_user: id_user,
-            role: userDetail.role,
-            nama: userDetail.nama,
-            email: userDetail.email,
-            telepon: userDetail.telepon,
-            password: userDetail.password,
+        const response = await axios.put<ApiResponse<GetEventStruct>>(`/editEvent`, {
+            id_event: id_event,
+            judul: eventDetail.judul,
+            deskripsi: eventDetail.deskripsi,
+            gambar_url: eventDetail.gambar_url
         });
         if(response.data.status) {
-            const updatedUserList = response.data.data.list.map((user: UserData) => ({
-                ...user,
-                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
-                password: "",
+            const updatedEventList = response.data.data.list.map((event: EventStruct) => ({
+                ...event,
+                tanggal_daftar: formatDateToGMT7(event.tanggal_ditambahkan)
             }));
             
-            setUserList(updatedUserList);
-            setUserListFiltered(updatedUserList);
+            setEventList(updatedEventList);
+            setEventListFiltered(updatedEventList);
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
         }
         return response.data.data;
     } catch (error) {
+        alert(error)
         execToast(ToastStatus.ERROR, JSON.stringify(error))
         throw error;
     }
  }
 
- async function deleteUser(id_user: string): Promise<GetUserStruct> {
+ async function deleteEvent(id_event: string): Promise<GetEventStruct> {
     try {
-        const response = await axios.delete<ApiResponse<GetUserStruct>>(`/deleteUser`, {
+        const response = await axios.delete<ApiResponse<GetEventStruct>>(`/deleteEvent`, {
             data: {
-                id_user
+                id_event
             }
         });
         if(response.data.status) {
-            const updatedUserList = response.data.data.list.map((user: UserData) => ({
-                ...user,
-                tanggal_daftar: formatDateToGMT7(user.tanggal_daftar),
-                password: "",
+            const updatedEventList = response.data.data.list.map((event: EventStruct) => ({
+                ...event,
+                tanggal_ditambahkan: formatDateToGMT7(event.tanggal_ditambahkan)
             }));
-            
-            setUserList(updatedUserList);
-            setUserListFiltered(updatedUserList);
+            setEventList(updatedEventList);
+            setEventListFiltered(updatedEventList);
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
@@ -229,7 +215,7 @@ export default function ManageUser() {
 
  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setUserDetail((prev) => ({
+    setEventDetail((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -237,14 +223,14 @@ export default function ManageUser() {
   
   const handleDropdownChange = (event: SelectChangeEvent) => {
     const { value } = event.target;
-    setUserDetail((prev) => ({
+    setEventDetail((prev) => ({
       ...prev,
       role: value as string,
     }));
   };
 
  React.useEffect(() => {
-    getUserList()
+    getEventList()
  }, [])
 
   return (
@@ -263,60 +249,39 @@ export default function ManageUser() {
             ? (
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        User Edit
+                        Event Edit
                     </Typography>
-                    <FormControl fullWidth sx={{marginTop: "3.5%"}}>
-                        <InputLabel id="demo-simple-select-label">User Role</InputLabel>
-                        <Select
-                            name="role"
-                            value={userDetail.role}
-                            label="User Role"
-                            onChange={handleDropdownChange}
-                        >
-                        <MenuItem value={"user"}>User</MenuItem>
-                        <MenuItem value={"admin"}>Admin</MenuItem>
-                        <MenuItem value={"penjual"}>Penjual</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField 
-                        name="email"
-                        label="Email"
-                        type='email'
-                        variant="outlined"
-                        sx={{marginTop: "1.5%"}}
-                        fullWidth
-                        value={userDetail.email}
-                        onChange={handleInputChange}
+                    <Image
+                        draggable={false}
+                        src={
+                            eventDetail.gambar_url as string
+                        }
+                        alt="Example"
+                        layout="responsive"
+                        width={0}
+                        height={200}
                     />
                     <TextField 
-                        name="nama"
-                        label="Nama"
+                        name="judul"
+                        label="Judul Event"
                         type='text'
                         variant="outlined"
                         sx={{marginTop: "1.5%"}}
                         fullWidth
-                        value={userDetail.nama}
+                        value={eventDetail.judul}
                         onChange={handleInputChange}
                     />
                     <TextField 
-                        name="telepon"
-                        label="Telepon"
-                        type='tel'
-                        variant="outlined"
-                        sx={{marginTop: "1.5%"}}
+                        name="deskripsi"
+                        type="text" 
+                        label="Deskripsi Event" 
+                        variant="outlined" 
+                        sx={{ marginTop: "1.5%" }} 
                         fullWidth
-                        value={userDetail.telepon}
+                        multiline
+                        maxRows={3}
                         onChange={handleInputChange}
-                    />
-                    <TextField 
-                        name="password"
-                        label="New Password"
-                        type='password'
-                        variant="outlined"
-                        sx={{marginTop: "1.5%"}}
-                        fullWidth
-                        value={userDetail.password}
-                        onChange={handleInputChange}
+                        value={eventDetail.deskripsi} 
                     />
                     <br /> <Button
                         sx={{
@@ -327,13 +292,13 @@ export default function ManageUser() {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            editUser(detail._id)
+                            editEvent(detail._id as string)
                         }}
                     >
-                        Edit User
+                        Edit Event
                     </Button>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Daftar Sejak : {detail.tanggal_daftar}
+                        Event Sejak : {detail.tanggal_ditambahkan}
                     </Typography>
                 </Box>
             )
@@ -360,44 +325,65 @@ export default function ManageUser() {
         </button> */}
         <Box sx={{margin: "1.5% 2.5%"}}>
             <Typography variant="h5" color='black'>
-                Manage User
+                Manage Event
             </Typography>
+            <Button 
+                variant='contained'
+                onClick={() => {
+                    router.push(`/editevent?add=1`)
+                }}
+                sx={{
+                    marginTop: "1.5%"
+                }}
+            >
+                + Add Event
+            </Button>
             <TextField 
                 value={searchValue}
                 id="outlined-basic" 
-                label="Search User" 
+                label="Search Event" 
                 variant="outlined" 
                 sx={{marginTop: "2.5%"}}
                 fullWidth 
                 onChange={handleSearchChange}
             />
             {
-                userListFiltered.length === 0 && (
+                eventListFiltered.length === 0 && (
                     <Box>
                         <Typography variant="h5" color='black' textAlign={"center"} sx={{
-                            margin: "12% 0"
+                            margin: "10% 0"
                         }}>
-                            Data / Pencarian User kosong !
+                            Data / Pencarian Event kosong !
                         </Typography>
                     </Box>
                 )
             }
             {
-                userListFiltered.map((data, index) => {
+                eventListFiltered.map((data, index) => {
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'stretch', width: '100%', marginTop: "1.5%" }}>
                             <Card sx={{ flexGrow: 1, minWidth: 275 }}>
                                 <CardContent>
                                 <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                                    Daftar Sejak : {data.tanggal_daftar}
+                                    Event Sejak : {data.tanggal_ditambahkan}
                                 </Typography>
+                                <Image
+                                    draggable={false}
+                                    src={
+                                        data.gambar_url as string
+                                    }
+                                    alt="Example"
+                                    width={700}
+                                    height={300}
+                                    style={{
+                                        objectFit: "cover"
+                                    }}
+                                />
                                 <Typography variant="h4" component="div">
-                                    Email : {data.email}
+                                    {data.judul}
                                 </Typography>
                                 <Typography variant="body1">
-                                    Role : <strong>{capitalizeFirstChar(data.role)}</strong> <br />
-                                    Nama : {data.nama} <br />
-                                    Telepon : +{data.telepon}
+                                    {data.deskripsi}
                                 </Typography>
                                 </CardContent>
                             </Card>
@@ -418,19 +404,19 @@ export default function ManageUser() {
                                 color="warning"
                                 onClick={() => {
                                     handleOpen()
+                                    setDetailID(data._id as string)
                                     setDetail({...data})
-                                    setDetailID(data._id)
-                                    setUserDetail(prevState => ({
+                                    setEventDetail(prevState => ({
                                         ...prevState,
                                         _id: data._id,
-                                        role: data.role,
-                                        nama: data.nama,
-                                        email: data.email,
-                                        telepon: data.telepon
+                                        judul: data.judul,
+                                        deskripsi: data.deskripsi,
+                                        gambar_url: data.gambar_url,
+                                        tanggal_ditambahkan: data.tanggal_ditambahkan,
                                     }))
                                 }}
                                 >
-                                Edit User
+                                    Edit Event
                                 </Button>
                                 <Button
                                     sx={{
@@ -439,9 +425,9 @@ export default function ManageUser() {
                                     }}
                                     variant="contained"
                                     color="error"
-                                    onClick={() => deleteUser(data._id)}
+                                    onClick={() => deleteEvent(data._id as string)}
                                 >
-                                Delete User
+                                    Delete Event
                                 </Button>
                             </Box>
                         </Box>

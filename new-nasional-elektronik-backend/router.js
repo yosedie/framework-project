@@ -4,16 +4,23 @@ import login from "./function/login.js";
 import payment from "./function/payment.js";
 import paymentToken from "./function/payment_token.js";
 import verifyToken from "./function/verify_jwt.js";
+import axios from "axios"
 
 import { fetchProduct, listProduct, addProduct, editProduct, deleteProduct } from "./function/products.js";
 
-import { fetchTransaction, listTransaction, deleteTransaction, notificationHandler } from "./function/transactions.js";
+import { countUserTransaction, fetchTransaction, listTransaction, deleteTransaction, notificationHandler } from "./function/transactions.js";
 
 import { listUser, editUser, deleteUser } from "./function/user.js";
 
 import { uploadImage, changeSecurity } from "./function/profile.js"
 
 import { listComment, postComment } from "./function/rating.js"
+
+import { listEvent, fetchEvent, addEvent, editEvent, deleteEvent } from "./function/event.js"
+
+import { fetchEventWithComment, toggleLikeEvent, addCommentEvent } from "./function/event.js"
+
+import { generateInvoice } from "./function/invoice_generate.js"
 
 async function routes (fastify, options) {
     const errorWrapper = (fn) => (request, reply) => {
@@ -44,6 +51,7 @@ async function routes (fastify, options) {
     fastify.delete('/api/deleteProduct', errorWrapper(deleteProduct(fastify)))
 
     // Khusus transaksi
+    fastify.get('/api/countUserTransaction', errorWrapper(countUserTransaction(fastify)))
     fastify.post('/api/notificationHandler', errorWrapper(notificationHandler(fastify)))
     fastify.get('/api/fetchTransaction', errorWrapper(fetchTransaction(fastify)))
     fastify.get('/api/listTransaction', errorWrapper(listTransaction(fastify)))
@@ -61,6 +69,55 @@ async function routes (fastify, options) {
     // Khusus komentar
     fastify.get('/api/fetchComment', errorWrapper(listComment(fastify)))
     fastify.post('/api/postComment', errorWrapper(postComment(fastify)))
+
+    // Khusus event [ADMIN]
+    fastify.get('/api/fetchEvent', errorWrapper(fetchEvent(fastify)))
+    fastify.get('/api/listEvent', errorWrapper(listEvent(fastify)))
+    fastify.post('/api/addEvent', errorWrapper(addEvent(fastify)))
+    fastify.put('/api/editEvent', errorWrapper(editEvent(fastify)))
+    fastify.delete('/api/deleteEvent', errorWrapper(deleteEvent(fastify)))
+
+    // Khusus event [USER]
+    fastify.get('/api/fetchEventUser', errorWrapper(fetchEventWithComment(fastify)))
+    fastify.post('/api/toggleLikeEvent', errorWrapper(toggleLikeEvent(fastify)))
+    fastify.post('/api/addCommentEvent', errorWrapper(addCommentEvent(fastify)))
+
+    // Khusus invoice generator
+    fastify.post('/api/generateInvoice', async (request, reply) => {
+        try {
+            const invoice_api_key = process.env.INVOICE_API_KEY;
+            if (!invoice_api_key) {
+              reply.code(500).send({ status: false, message: "API key is missing" });
+              return;
+            }
+        
+            const fileResponse = await axios.post(
+              "https://invoice-generator.com",
+              request.body,
+              {
+                headers: {
+                  Authorization: `Bearer ${invoice_api_key}`,
+                  "Content-Type": "application/json",
+                },
+                responseType: "arraybuffer",
+              }
+            );
+      
+            reply
+              .header("Content-Type", "application/pdf")
+              .header("Content-Disposition", "attachment; filename=invoice.pdf")
+              .status(200)
+              .send(fileResponse.data);
+          } catch (error) {
+            console.error("Error generating invoice:", error);
+        
+            reply.code(500).send({
+              status: false,
+              message: "Failed to generate invoice",
+              error: error.message,
+            });
+          }
+    })
 }
 
 export default routes;

@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { ProductStruct, FetchProductStruct, ApiResponse } from '../types/types';
+import { EventStruct, FetchEventStruct, ApiResponse } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -55,9 +55,7 @@ const Item = styled(Paper)(({ theme }) => ({
     }),
 }));
 
-const productsName = ["Test", "Test2"]
-
-export default function AddProduct() {
+export default function EditAddEvent() {
   const searchParams = useSearchParams()
   const isAdd : boolean = searchParams.get('add') === "1"
 
@@ -65,48 +63,36 @@ export default function AddProduct() {
   const count = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
 
-  const [productImage, setProductImage] = React.useState("")
-  const [addData, setAddData] = React.useState<ProductStruct>({
-    nama_produk: "",
-    harga: 0,
-    status: 1,
-    kategori_id: -1,
-    stok: 0,
+  const [eventImage, setEventImage] = React.useState("")
+  const [addEventData, setAddEventData] = React.useState<EventStruct>({
+    judul: "",
     deskripsi: "",
+    gambar_url: "",
+    tanggal_ditambahkan: "",
  });
- const handleRoute = (paramPage: String) => {
-    router.push(`/${paramPage}`)
- };
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setAddData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-  const handleChangeDropdown = (e: SelectChangeEvent<number>) => {
-    const { name, value } = e.target;
-    setAddData(prevData => ({
+    setAddEventData(prevData => ({
       ...prevData,
       [name]: value,
     }));
   };
   
-  async function fetchSingleProductHandler(): Promise<FetchProductStruct> {
+  async function fetchSingleEventHandler(): Promise<FetchEventStruct> {
     try {
-      const productID = searchParams.get('id')
-      const response = await axios.get<ApiResponse<FetchProductStruct>>('/fetchProduct', {
+      const eventID = searchParams.get('id')
+      const response = await axios.get<ApiResponse<FetchEventStruct>>('/fetchEvent', {
         params: {
-            productID: productID
+            eventID
         }
       });
   
       if (response.data.status) {
-        const selectedProduct = {...response.data.data.product[0]}
-        const {gambar_url} = selectedProduct
-        setProductImage(gambar_url as string)
-        setAddData(selectedProduct)
+        const selectedEvent = {...response.data.data.event[0]}
+        const {gambar_url} = selectedEvent
+        setEventImage(gambar_url as string)
+        setAddEventData(selectedEvent)
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -118,16 +104,16 @@ export default function AddProduct() {
     }
   }
 
-  async function addProductHandler(): Promise<ProductStruct> {
+  async function addEventHandler(): Promise<EventStruct> {
     try {
-      const response = await axios.post<ApiResponse<ProductStruct>>('/addProduct', {
-        ...addData, 
-        gambar_url: productImage
+      const response = await axios.post<ApiResponse<EventStruct>>('/addEvent', {
+        ...addEventData, 
+        gambar_url: eventImage
       });
   
       if (response.data.status) {
         execToast(ToastStatus.SUCCESS, response.data.message)
-        router.push("/products")
+        router.push("/manageevent")
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -139,20 +125,19 @@ export default function AddProduct() {
     }
   }  
 
-  async function editProductHandler(): Promise<ProductStruct> {
+  async function editEventHandler(): Promise<EventStruct> {
     try {
-      const productID = searchParams.get('id')
-      const response = await axios.put<ApiResponse<ProductStruct>>('/editProduct', {
-        ...addData,
-        gambar_url: productImage,
-        id_produk: productID,
+      const id_event = searchParams.get('id')
+      const response = await axios.put<ApiResponse<EventStruct>>('/editEvent', {
+        ...addEventData,
+        gambar_url: eventImage,
+        id_event: id_event,
       });
   
       if (response.data.status) {
         // const token = response.data.data.jwt_token;
         // const role = response.data.data.role;
         execToast(ToastStatus.SUCCESS, response.data.message)
-        router.push("/products")
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -166,7 +151,7 @@ export default function AddProduct() {
 
   React.useEffect(() => {
     if(searchParams.get('id') && searchParams.get('id') !== "") {
-        fetchSingleProductHandler()
+        fetchSingleEventHandler()
     }
   }, [])
 
@@ -212,8 +197,8 @@ export default function AddProduct() {
                             <Image
                                 draggable={false}
                                 src={
-                                    productImage !== ""
-                                        ? productImage
+                                    eventImage !== ""
+                                        ? eventImage
                                         : PlaceholderImage
                                 }
                                 alt="Example"
@@ -229,7 +214,7 @@ export default function AddProduct() {
                                 onClick={() => {
                                     const imageURL = prompt("Mohon masukkan URL Image :")
                                     if(imageURL) {
-                                        setProductImage(imageURL as string)
+                                        setEventImage(imageURL as string)
                                     }
                                 }}
                                 sx={{
@@ -243,7 +228,7 @@ export default function AddProduct() {
                                 variant='contained'
                                 color={'error'}
                                 onClick={() => {
-                                    setProductImage("")
+                                    setEventImage("")
                                 }}
                                 sx={{
                                     marginTop: ".75%",
@@ -269,139 +254,53 @@ export default function AddProduct() {
                                 flexDirection: 'column',
                                 justifyContent: 'start',
                                 alignItems: 'start',
-                                height: '60vh',
+                                height: '40vh',
                                 // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 borderRadius: '4px',
                                 paddingLeft: "2.5%",
                                 paddingTop: "5%",
-                                marginBottom: isAdd ? "10%" : "15%",
+                                marginBottom: "10%",
+                                marginTop: "10%",
+
                             }}
                         >
                             <TextField 
-                                name="nama_produk"
-                                value={addData.nama_produk} 
+                                name="judul"
+                                value={addEventData.judul} 
                                 type="text" 
-                                label="Nama Produk" 
-                                variant="outlined" 
-                                sx={{ marginBottom: "1.25%", width: 500 }} 
-                                onChange={handleChange} 
-                            />
-                            <TextField 
-                                name="harga"
-                                value={addData.harga} 
-                                type="number" 
-                                label="Harga Barang" 
-                                variant="outlined" 
-                                sx={{ marginBottom: "1.25%", width: 500 }} 
-                                onChange={handleChange} 
-                            />
-                            <FormControl sx={{
-                                width: 500,
-                                marginBottom: "1.25%"
-                            }}>
-                                <InputLabel>
-                                    Kategori Produk
-                                </InputLabel>
-                                <Select
-                                name='kategori_id'
-                                value={addData.kategori_id}
-                                label="Kategori Produk"
-                                onChange={handleChangeDropdown}
-                                sx={{
-                                    width: 500,
-                                }}
-                                >
-                                    <MenuItem value={0}>
-                                        Kulkas
-                                    </MenuItem>
-                                    <MenuItem value={1}>
-                                        AC
-                                    </MenuItem>
-                                    <MenuItem value={2}>
-                                        Mesin Cuci
-                                    </MenuItem>
-                                    <MenuItem value={3}>
-                                        Kompor
-                                    </MenuItem>
-                                    <MenuItem value={4}>
-                                        Rice Cooker
-                                    </MenuItem>
-                                    <MenuItem value={5}>
-                                        TV
-                                    </MenuItem>
-                                    <MenuItem value={6}>
-                                        Anthena
-                                    </MenuItem>
-                                    <MenuItem value={7}>
-                                        Freezer Box
-                                    </MenuItem>
-                                </Select>
-                            </FormControl>
-                            <TextField 
-                                name="stok"
-                                value={addData.stok} 
-                                type="number" 
-                                label="Stok Barang" 
+                                label="Nama Event" 
                                 variant="outlined" 
                                 sx={{ marginBottom: "1.25%", width: 500 }} 
                                 onChange={handleChange} 
                             />
                             <TextField 
                                 name="deskripsi"
-                                value={addData.deskripsi} 
+                                value={addEventData.deskripsi} 
                                 type="text" 
-                                label="Deskripsi Produk" 
+                                label="Deskripsi Event" 
                                 variant="outlined" 
                                 sx={{ marginBottom: "1.25%", width: 500 }} 
                                 onChange={handleChange}
                                 multiline
                                 maxRows={3}
                             />
-                            {
-                                !isAdd && (
-                                    <FormControl sx={{
-                                        width: 500,
-                                        marginBottom: "1.25%"
-                                    }}>
-                                        <InputLabel>
-                                            Status Produk
-                                        </InputLabel>
-                                        <Select
-                                        name='status'
-                                        value={addData.status}
-                                        label="Status Produk"
-                                        onChange={handleChangeDropdown}
-                                        sx={{
-                                            width: 500,
-                                        }}
-                                        >
-                                            <MenuItem value={1}>
-                                                Aktif
-                                            </MenuItem>
-                                            <MenuItem value={0}>
-                                                Pasif
-                                            </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                )
-                            }
                             <Button 
                                 variant="contained" 
                                 onClick={
                                     isAdd
-                                    ? addProductHandler
-                                    : editProductHandler
+                                    ? addEventHandler
+                                    : editEventHandler
                                 }
                                 sx={{
                                     marginTop: ".5%",
                                     width: 500,
                                 }}>
-                                {isAdd ? "Add" : "Edit"} Product
+                                {isAdd ? "Add" : "Edit"} Event
                             </Button>
                             <Button
                                 color={"warning"}
                                 variant="contained" 
-                                onClick={() => router.push("/products")}
+                                onClick={() => router.push("/manageevent")}
                                 sx={{
                                     marginTop: ".5%",
                                     width: 500,

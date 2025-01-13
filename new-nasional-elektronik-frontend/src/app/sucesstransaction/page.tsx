@@ -205,7 +205,7 @@ export default function Login() {
                         </Button>
                     )
                     : (
-                        <Button variant="contained" onClick={loginHandler}>
+                        <Button variant="contained" onClick={() => router.push("/transaction")}>
                             Ke history transaksi
                         </Button>
                     ) 

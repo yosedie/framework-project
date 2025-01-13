@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, UploadPictureStruct } from '../types/types';
+import { LoginData, ApiResponse, UploadPictureStruct, VerifyTokenData, EmptyData } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -61,6 +61,14 @@ export default function DashboardAdmin() {
   const dispatch = useDispatch()
 
   const [profilePicture, setProfilePicture] = React.useState("")
+  const [userDetail, setUserDetail] = React.useState<VerifyTokenData>({
+    role: "",
+    nama: "",
+    email: "",
+    telepon: "",
+    picture_profile: "",
+    password: "",
+  });
   const [loginData, setLoginData] = React.useState({
     email: "",
     password: "",
@@ -69,13 +77,14 @@ export default function DashboardAdmin() {
     router.push(`/${paramPage}`)
  };
 
- const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginData(prevData => ({
-      ...prevData,
+ const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setUserDetail((prev) => ({
+      ...prev,
       [name]: value,
     }));
- };
+  };
+
  async function uploadPicture(imageUrl: string): Promise<UploadPictureStruct> {
     try {
       const response = await axios.put<ApiResponse<UploadPictureStruct>>('/uploadImage', {
@@ -97,6 +106,31 @@ export default function DashboardAdmin() {
       throw error;
     }
   }  
+
+  async function changeProfile(jwt_token: string): Promise<EmptyData> {
+    try {
+        const response = await axios.put<ApiResponse<EmptyData>>(`/changeSecurity`, {
+            jwt_token: jwt_token,
+            nama: userDetail.nama,
+            email: userDetail.email,
+            telepon: userDetail.telepon,
+            password: userDetail.password,
+        });
+        if(response.data.status) {
+            execToast(ToastStatus.SUCCESS, response.data.message)
+        } else {
+            execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+  }
+
+  React.useEffect(() => {
+    setUserDetail({...userData})
+  }, [])
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -123,9 +157,12 @@ export default function DashboardAdmin() {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: "2% 0",
+                margin: "3.5% 0",
             }}
         >
+            <Typography variant="h6" component="h6" sx={{color: "black"}}>
+                Profile Data Anda
+            </Typography>
             {/* <Image
                 draggable={false}
                 src={LoginPageImage}
@@ -134,25 +171,104 @@ export default function DashboardAdmin() {
                 width={0}
                 height={400}
             /> */}
-
-            {
-              profilePictureRedux !== "" || profilePicture !== ""
-              ? <Avatar sx={{ width: 240, height: 240, color: "black" }} src={profilePictureRedux || profilePicture} />
-              : <AccountCircleIcon sx={{ fontSize: 240, color: "black" }} />
-            }
             
-            <Button variant="contained" onClick={() => {
-              const imageURL = prompt("Mohon masukkan URL Image :")
-              if(imageURL) {
-                uploadPicture(imageURL as string)
-              }
-            }} sx={{marginTop: "1.5%"}}>
-              Ganti Profile Gambar
-            </Button>
-            <Typography variant="h6" component="h6" sx={{color: "black", marginTop: "2.5%"}}>
-                Profile Data Anda
-            </Typography>
-            <Box sx={{
+            <Grid container size={12} spacing={6}>
+              <Grid size={6}>
+                <Item
+                  sx={{
+                    boxShadow: "0",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {profilePictureRedux !== "" || profilePicture !== "" ? (
+                    <Avatar
+                      sx={{ width: 240, height: 240, color: "black" }}
+                      src={profilePictureRedux || profilePicture}
+                    />
+                  ) : (
+                    <AccountCircleIcon sx={{ fontSize: 240, color: "black" }} />
+                  )}
+
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      const imageURL = prompt("Mohon masukkan URL Image :");
+                      if (imageURL) {
+                        uploadPicture(imageURL as string);
+                      }
+                    }}
+                    sx={{ marginTop: "3.5%" }}
+                  >
+                    Ganti Profile Gambar
+                  </Button>
+                </Item>
+              </Grid>
+              <Grid size={6}>
+                <Item sx={{boxShadow: "0"}}>
+                <Box sx={{width: "50%"}}>
+                  <TextField 
+                      name="email"
+                      label="Email"
+                      type='email'
+                      variant="outlined"
+                      sx={{marginTop: "3.5%"}}
+                      fullWidth
+                      value={userDetail.email}
+                      onChange={handleInputChange}
+                  />
+                  <TextField 
+                      name="nama"
+                      label="Nama"
+                      type='text'
+                      variant="outlined"
+                      sx={{marginTop: "3.5%"}}
+                      fullWidth
+                      value={userDetail.nama}
+                      onChange={handleInputChange}
+                  />
+                  <TextField 
+                      name="telepon"
+                      label="Telepon"
+                      type='tel'
+                      variant="outlined"
+                      sx={{marginTop: "3.5%"}}
+                      fullWidth
+                      value={userDetail.telepon}
+                      onChange={handleInputChange}
+                  />
+                  <TextField 
+                      name="password"
+                      label="New Password"
+                      type='password'
+                      variant="outlined"
+                      sx={{marginTop: "3.5%"}}
+                      fullWidth
+                      value={userDetail.password}
+                      onChange={handleInputChange}
+                  />
+                  <br /> <Button
+                      sx={{
+                          marginTop: "3.5%",
+                          display: "block",
+                          borderRadius: 0,
+                      }}
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      onClick={() => {
+                          changeProfile(token)
+                      }}
+                  >
+                      Ganti Profile
+                  </Button>
+                </Box>
+                </Item>
+              </Grid>
+            </Grid>
+            {/* <Box sx={{
               border: "1px solid black",
               padding: ".75%",
             }}>
@@ -168,8 +284,7 @@ export default function DashboardAdmin() {
               <Typography variant="body1" component="h6" sx={{color: "black"}}>
                   Telepon : <strong>+{userData.telepon}</strong>
               </Typography>
-            </Box>
-            
+            </Box> */}
         </Box>
     <Footer />
    </Box>

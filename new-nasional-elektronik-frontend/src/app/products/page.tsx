@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, ProductStruct, GetProductStruct, KategoriData, RatingStruct, ListRating } from '../types/types';
+import { SortConfig, ApiResponse, ProductStruct, GetProductStruct, Kategori, KategoriData, RatingStruct, ListRating } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React, { useState } from 'react';
@@ -16,6 +16,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
+import { Avatar } from '@mui/material';
 
 // CSS
 import styles from './page.module.css'
@@ -37,7 +38,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 import MainPage from './public/home_page.png'
 import zIndex from '@mui/material/styles/zIndex';
-import { Avatar } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -58,6 +58,7 @@ export default function Products() {
 //   const count = useSelector((state: RootState) => state.counter.value)
   const [comments, setComments] = useState<ListRating[]>([]);
   const [products, setProducts] = useState<ProductStruct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductStruct[]>([]);
 //   const [products, setProducts] = useState([
     // {
     //     "id_produk": "1",
@@ -97,9 +98,24 @@ export default function Products() {
   const role = useSelector((state: RootState) => state.user.role)
   const dispatch = useDispatch()
 
+  const [sortConfig, setSortConfig] = React.useState<SortConfig>({
+    order: "",
+    orderBy: "",
+  });
+  const [search, setSearch] = React.useState<string>("");
   const [komentar, setKomentar] = React.useState<string>("");
   const [starValue, setStarValue] = React.useState<number | null>(null);
-  const [detailIndex, setDetailIndex] = React.useState(-1);
+  const [detailProduct, setDetailProduct] = React.useState<ProductStruct>({
+    nama_produk: "",
+    deskripsi: "",
+    harga: -1,
+    stok: -1,
+    kategori_id: -1,
+    status: -1,
+  });
+  const [detailID, setDetailID] = React.useState<string>("");
+  const [ratingFilter, setRatingFilter] = React.useState<number[]>([]);
+  const [categoryFilter, setCategoryFilter] = React.useState<Kategori[]>([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -118,6 +134,20 @@ export default function Products() {
     overflowY: 'auto',
   };
 
+  const handleSearchChange = (value: string) => {
+    const searchValue = value;
+    setSearch(searchValue);
+
+    if (searchValue === "") {
+        setFilteredProducts(products);
+    } else {
+        const filtered = products.filter((product) =>
+            product.nama_produk.toLowerCase().startsWith(searchValue.toLowerCase())
+        );
+        setFilteredProducts(filtered);
+    }
+};
+
   async function deleteProductHandler(id_produk: string): Promise<GetProductStruct> {
     try {
       const response = await axios.delete<ApiResponse<GetProductStruct>>('/deleteProduct', {
@@ -129,7 +159,7 @@ export default function Products() {
       if (response.data.status) {
         execToast(ToastStatus.SUCCESS, response.data.message);
         setProducts(response.data.data.list)
-        console.log(response.data.data.list)
+        setFilteredProducts(response.data.data.list)
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -176,6 +206,7 @@ export default function Products() {
         execToast(ToastStatus.SUCCESS, response.data.message);
         setKomentar("")
         setStarValue(null)
+        listProductHandler()
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -193,6 +224,7 @@ export default function Products() {
   
       if (response.data.status) {
         setProducts(response.data.data.list)
+        setFilteredProducts(response.data.data.list)
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -223,13 +255,13 @@ export default function Products() {
       open={open}
       onClose={() => {
           handleClose()
-          setDetailIndex(-1)
+          setDetailID("")
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       >
           {
-              detailIndex !== -1
+              detailID !== ""
               ? (
                   <Box sx={style}>
                       <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -238,32 +270,50 @@ export default function Products() {
                       <Image
                         draggable={false}
                         src={
-                          products[detailIndex].gambar_url as string
+                          detailProduct.gambar_url as string
                         }
                         alt="Example"
                         style={{
                             objectFit: "cover"
                         }}
-                        width={730}
-                        height={400}
+                        layout="responsive"
+                        width={0}
+                        height={200}
                     />
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Nama : {products[detailIndex].nama_produk}
+                      <Typography variant="h6" component="h2" id="modal-modal-description" sx={{ mt: 2 }}>
+                          {detailProduct.nama_produk}
                       </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Harga : {products[detailIndex].harga}
+                      <Typography variant="h6" component="h2" id="modal-modal-description">
+                        IDR {
+                          new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(detailProduct.harga)
+                        }
                       </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Stok : {products[detailIndex].stok}
+                      <Typography id="modal-modal-description">
+                          Stok : {detailProduct.stok}
+                      </Typography>
+                      <Typography 
+                        id="modal-modal-description" 
+                        sx={{ 
+                          display: "flex", 
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                        >
+                          Rating : 
+                          <Rating
+                            name="simple-controlled"
+                            readOnly
+                            value={detailProduct.rating}
+                          />
                       </Typography>
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                           Deskripsi : 
                       </Typography>
                       <Typography id="modal-modal-description" sx={{whiteSpace: "pre-line"}}>
-                        {products[detailIndex].deskripsi.trim()}
+                        {detailProduct.deskripsi.trim()}
                       </Typography>
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Kategori Data : {KategoriData[products[detailIndex].kategori_id]}
+                          Kategori Produk : {KategoriData[detailProduct.kategori_id]}
                       </Typography>
                       <hr style={{marginTop: "1.25%"}} />
                       <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginTop: "1.25%"}}>
@@ -311,7 +361,7 @@ export default function Products() {
                       <Button 
                         variant='contained'
                         onClick={() => {
-                          postCommentHandler(token, products[detailIndex].id_produk as string)
+                          postCommentHandler(token, detailProduct.id_produk as string)
                         }}
                       >
                         Kirim komentar
@@ -424,17 +474,88 @@ export default function Products() {
                     </Typography>
                     <Autocomplete
                         disablePortal
-                        options={productsName}
-                        sx={{ width: "100%", marginTop: "5%" }}
-                        renderInput={(params) => <TextField {...params} label="Products name" />}
+                        options={products.map(data => data.nama_produk)}
+                        sx={{ 
+                          maxWidth: "100%", 
+                          marginTop: "5%",
+                          textAlign: "left", 
+                          display: 'flex', 
+                          alignItems: 'flex-start'
+                        }}
+                        onChange={(_, value: string | null) => {
+                          handleSearchChange(value || ''); 
+                        }}
+                        renderInput={params => (
+                          <TextField
+                            value={search}
+                            {...params}
+                            label=""
+                            sx={{
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              textAlign: "left", 
+                              display: 'flex', 
+                              alignItems: 'flex-start'
+                            }}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearchChange(e.target.value)}
+                            variant="outlined"
+                            fullWidth
+                          />
+                        )}
                     />
-                    <Accordion />
+                    <Accordion 
+                      onRatingChange={(rating: number[]) => {
+                        setRatingFilter(rating)
+                      }}
+                      onCategoryChange={(category: Kategori[]) => {
+                        setCategoryFilter(category)
+                      }}
+                      onSortChange={(sort: SortConfig) => {
+                        setSortConfig(sort)
+                      }}
+                    />
                 </Item>
             </Grid>
             <Grid container size={9} alignItems="stretch">
                 {/* role === "user" */} 
                 {
-                    products && products.map((data, index) => {
+                    filteredProducts && 
+                    (
+                      ratingFilter.length > 0
+                      ? filteredProducts.filter((product) => {
+                        if (ratingFilter.length === 0) return true;
+                        return ratingFilter.some((rating) => {
+                          return product.rating === rating;
+                        });
+                      })
+                      : categoryFilter.length > 0
+                        ? filteredProducts.filter((product) => {
+                          if (categoryFilter.length === 0) return true;
+                          return categoryFilter.some((kategori) => {
+                            return KategoriData[product.kategori_id] === kategori;
+                          });
+                        })
+                        : sortConfig.order !== "" && sortConfig.orderBy !== ""
+                          ? [...filteredProducts].sort((a, b) => {
+                            const valueA = a[sortConfig.orderBy as keyof ProductStruct];
+                            const valueB = b[sortConfig.orderBy as keyof ProductStruct];
+                        
+                            if (valueA == null && valueB == null) return 0;
+                            if (valueA == null) return sortConfig.order === "a" ? 1 : -1;
+                            if (valueB == null) return sortConfig.order === "a" ? -1 : 1;
+                        
+                            if (typeof valueA === "string" && typeof valueB === "string") {
+                              return sortConfig.order === "a"
+                                ? valueA.localeCompare(valueB)
+                                : valueB.localeCompare(valueA);
+                            } else if (typeof valueA === "number" && typeof valueB === "number") {
+                              return sortConfig.order === "a" ? valueA - valueB : valueB - valueA;
+                            }
+                            return 0;
+                          })
+                          : filteredProducts
+                    ).map((data, index) => {
                         return (
                             <>
                                 <Grid size={3}>
@@ -446,20 +567,29 @@ export default function Products() {
                                             image_url={data.gambar_url}
                                             withImage
                                             onClickCard={() => {
+                                              if(role && role.length > 0) {
                                                 if(role === "user") {
                                                     listCommentHandler(data.id_produk as string)
                                                     handleOpen()
-                                                    setDetailIndex(index)
+                                                    setDetailID(data.id_produk as string)
+                                                    setDetailProduct(data)
                                                 } else {
                                                     router.push(`/editproduct?id=${data.id_produk}`)
                                                 }
+                                              } else {
+                                                router.push("/login")
+                                              }
                                             }}
                                             onClickSecondaryCard={() => {
+                                              if(role && role.length > 0) {
                                                 if(role !== "user") {
                                                   deleteProductHandler(data.id_produk as string)
                                                 } else {
                                                   handleAddToCart(data)
                                                 }
+                                              } else {
+                                                router.push("/login")
+                                              }
                                             }}
                                         />
                                     </Item>

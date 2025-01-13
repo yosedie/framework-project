@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image';
@@ -24,10 +24,10 @@ import { increment, decrement, incrementByAmount } from '../util/redux/Features/
 
 
 const pages = ['Products', 'Events'];
-const pagesAdmin = ['Dashboard', 'Products', 'Transaction', 'Manage User'];
-const pagesPenjual = ['Products', 'Transaction'];
-const settings = ['Profile', 'Shopping Cart', 'Transaction History', 'Security', 'Logout'];
-const settingsAdmin = ['Profile', 'Security', 'Logout'];
+const pagesAdmin = ['Dashboard', 'Products', 'Transaction', 'Manage User', 'Manage Event'];
+const pagesPenjual = ['Dashboard', 'Products', 'Transaction'];
+const settings = ['Profile', 'Transaction History', 'Logout'];
+const settingsAdmin = ['Profile', 'Logout'];
 const settingsGuest = ['Login', 'Register'];
 
 function ResponsiveAppBar() {
@@ -130,7 +130,7 @@ function ResponsiveAppBar() {
               {
               (role === "admin"
                 ? pagesAdmin
-                : role === "seller"
+                : role === "penjual"
                   ? pagesPenjual
                   : pages)
                 .map((page) => (
@@ -141,8 +141,8 @@ function ResponsiveAppBar() {
               }
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -159,11 +159,11 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {(role === "admin"
               ? pagesAdmin
-              : role === "seller"
+              : role === "penjual"
                 ? pagesPenjual
                 : pages)
               .map((page) => (
@@ -182,6 +182,15 @@ function ResponsiveAppBar() {
                 <Avatar src={profilePictureRedux || ""} />
               </IconButton>
             </Tooltip>
+            {
+              role === "user" && (
+                <Tooltip title="Open shopping cart">
+                  <IconButton onClick={() => router.push("/shoppingcart")} sx={{ p: 0 }}>
+                    <ShoppingCartIcon sx={{color: "white", ml: 2}} />
+                  </IconButton>
+                </Tooltip>
+              )
+            }
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

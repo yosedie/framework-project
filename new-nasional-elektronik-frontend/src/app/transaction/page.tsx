@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, GetTransactionStruct, TransactionData, DetailsTransactionFetch, FetchTransactionStruct } from '../types/types';
+import { FetchTransactionCount, ApiResponse, GetTransactionStruct, TransactionData, DetailsTransactionFetch, FetchTransactionStruct } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -40,7 +40,7 @@ import Accordion from '../component/AccordionDashboard'
 // NEXT.JS
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
-import LoginPageImage from '../public/login_page.png'
+import logoInvoice from '../public/logo_invoice.png'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -77,13 +77,27 @@ export interface CartProduct extends ProductStruct {
 
 
 export default function Transaction() {
-  const [detailIndex, setDetailIndex] = React.useState(-1);
+  const [detailID, setDetailID] = React.useState("");
+  const [detailTransaction, setDetailTransaction] = React.useState<TransactionData>({
+    _id: "",
+    id_pelanggan: "",
+    id_pengiriman: "",
+    alamat_pengiriman: "",
+    metode_pembayaran: "",
+    nama_pelanggan: "",
+    nomor_resi: "",
+    status: "",
+    tanggal: "",
+    total_harga: -1,
+  });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const router = useRouter()
   const token = useSelector((state: RootState) => state.user.jwt_token)
   const role = useSelector((state: RootState) => state.user.role)
+  const nama = useSelector((state: RootState) => state.user.userData.nama)
+  const invoice_api_key = useSelector((state: RootState) => state.user.invoice_api_key)
   const dispatch = useDispatch()
 
   const [loginData, setLoginData] = React.useState({
@@ -91,20 +105,27 @@ export default function Transaction() {
     password: "",
  });
   const [transactionList, setTransactionList] = React.useState<TransactionData[]>([]);
+  const [transactionListFiltered, setTransactionListFiltered] = React.useState<TransactionData[]>([]);
   const [transactionDetailList, setTransactionDetailList] = React.useState<DetailsTransactionFetch[]>([]);
-
+  const [searchValue, setSearchValue] = React.useState<string>("");
 
  const handleRoute = (paramPage: String) => {
     router.push(`/${paramPage}`)
  };
 
- const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
- };
+ const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+     const { name, value } = event.target;
+     setSearchValue(value)
+     if(value.length === 0) {
+        setTransactionListFiltered([...transactionList])
+     } else {
+        const transactionFiltered = [...transactionList].filter((item) =>
+            item.alamat_pengiriman.toLowerCase().includes(value.toLowerCase()) ||
+            item.nama_pelanggan.toLowerCase().includes(value.toLowerCase())
+        );
+        setTransactionListFiltered([...transactionFiltered])
+     }
+};
 
  async function getTransactionList(): Promise<GetTransactionStruct> {
     try {
@@ -116,10 +137,72 @@ export default function Transaction() {
         });
         if(response.data.status) {
             setTransactionList(response.data.data.list)
+            setTransactionListFiltered(response.data.data.list)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
         }
         return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+ }
+
+ async function getTransactionCount(): Promise<FetchTransactionCount> {
+    try {
+        const response = await axios.get<ApiResponse<FetchTransactionCount>>(`/countUserTransaction`, {
+            params: {
+                jwt_token: token
+            }
+        });
+        if(response.data.status) {
+            return response.data.data
+        } else {
+            execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+ }
+
+ async function fetchInvoice(): Promise<void> {
+    try {
+        const items = transactionDetailList.map((detail) => ({
+            name: detail.product.nama_produk,
+            quantity: detail.jumlah,
+            unit_cost: detail.harga,
+        }));
+
+        const noTransaction = await getTransactionCount()
+        const payload = {
+            from: "Toko New Nasional",
+            to: nama,
+            number: noTransaction.count,
+            items: items,
+            notes: "Terimakasih sudah berbelanja di toko new nasional !",
+            currency: "idr",
+            logo: "https://i.ibb.co.com/bFrVFLm/logo-invoice.png",
+            ship_to: "TEST ADDRESS",
+        };
+
+        const response = await axios.post<ArrayBuffer>("/generateInvoice", payload, {
+            headers: {
+              Authorization: `Bearer ${invoice_api_key}`,
+              "Content-Type": "application/json",
+            },
+            responseType: "arraybuffer",
+        });
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "invoice.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     } catch (error) {
         execToast(ToastStatus.ERROR, JSON.stringify(error))
         throw error;
@@ -152,6 +235,7 @@ export default function Transaction() {
         });
         if(response.data.status) {
             setTransactionList(response.data.data.list)
+            setTransactionListFiltered(response.data.data.list)
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
@@ -163,6 +247,15 @@ export default function Transaction() {
     }
  }
 
+ const handleClick = async (transactionID: string): Promise<void> => {
+    try {
+        await fetchTransaction(transactionID); 
+        await fetchInvoice();
+    } catch (error) {
+        console.error("Error:", error);
+    }
+ };
+
  React.useEffect(() => {
     getTransactionList()
  }, [])
@@ -173,53 +266,55 @@ export default function Transaction() {
     open={open}
     onClose={() => {
         handleClose()
-        setDetailIndex(-1)
+        setDetailID("")
     }}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     >
         {
-            detailIndex !== -1
+            detailID !== ""
             ? (
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Transaction Details
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Date : {(new Date(transactionList[detailIndex].tanggal)).toISOString().slice(0, 10)}
+                        Date : {(new Date(detailTransaction.tanggal)).toISOString().slice(0, 10)}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Timestamp : {(new Date(transactionList[detailIndex].tanggal)).toTimeString().slice(0, 8)}
+                        Timestamp : {(new Date(detailTransaction.tanggal)).toTimeString().slice(0, 8)}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Grand Total : Rp. {transactionList[detailIndex].total_harga}
+                        Grand Total : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(detailTransaction.total_harga)}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Product : 
                     </Typography>
                     {
                         transactionDetailList.map(data => {
-                            return (
-                                <Box sx={{border: "1px solid black", padding: "2.5%", marginTop: "2.5%"}}>
-                                    <Image
-                                        draggable={false}
-                                        src={data.product.gambar_url ? data.product.gambar_url as string : ""}
-                                        alt="Example"
-                                        width={100}
-                                        height={100}
-                                        style={{ objectFit: "cover" }}
-                                    />
-                                    <Typography id="modal-modal-description">
-                                        Name : {data.product.nama_produk}
-                                    </Typography>
-                                    <Typography id="modal-modal-description">
-                                        Quantity : {data.jumlah}
-                                    </Typography>
-                                    <Typography id="modal-modal-description">
-                                        Price : Rp. {data.product.harga}
-                                    </Typography>
-                                </Box>
-                            )
+                            if(data.product) {
+                                return (
+                                    <Box sx={{border: "1px solid black", padding: "2.5%", marginTop: "2.5%"}}>
+                                        <Image
+                                            draggable={false}
+                                            src={data.product.gambar_url ? data.product.gambar_url as string : ""}
+                                            alt="Example"
+                                            width={100}
+                                            height={100}
+                                            style={{ objectFit: "cover" }}
+                                        />
+                                        <Typography id="modal-modal-description">
+                                            Name : {data.product.nama_produk}
+                                        </Typography>
+                                        <Typography id="modal-modal-description">
+                                            Quantity : {data.jumlah}
+                                        </Typography>
+                                        <Typography id="modal-modal-description">
+                                            Price : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.product.harga)}
+                                        </Typography>
+                                    </Box>
+                                )
+                            }
                         })
                     }
                 </Box>
@@ -248,8 +343,28 @@ export default function Transaction() {
             <Typography variant="h5" color='black'>
                 Transaction History
             </Typography>
+            <TextField 
+                value={searchValue}
+                id="outlined-basic" 
+                label="Search Transaction History" 
+                variant="outlined" 
+                sx={{marginTop: "2.5%"}}
+                fullWidth
+                onChange={handleInputChange}
+            />
             {
-                transactionList.map((data, index) => {
+                transactionListFiltered.length === 0 && (
+                    <Box>
+                        <Typography variant="h5" color='black' textAlign={"center"} sx={{
+                            margin: "12% 0"
+                        }}>
+                            Data / Pencarian Transaksi kosong !
+                        </Typography>
+                    </Box>
+                )
+            }
+            {
+                transactionListFiltered.map((data, index) => {
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'stretch', width: '100%', marginTop: "1.5%" }}>
                             <Card sx={{ flexGrow: 1, minWidth: 275 }}>
@@ -272,7 +387,7 @@ export default function Transaction() {
                                                 : "red"
                                     }}>{data.status}</strong><br />
                                     Alamat : {data.alamat_pengiriman} <br />
-                                    Total Harga : {data.total_harga}
+                                    Total Harga : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.total_harga)}
                                 </Typography>
                                 </CardContent>
                             </Card>
@@ -285,19 +400,33 @@ export default function Transaction() {
                                 }}
                             >
                                 <Button
-                                sx={{
-                                    flex: 1,
-                                    borderRadius: 0,
-                                }}
-                                variant="contained"
-                                color="primary"
-                                onClick={() => {
-                                    handleOpen()
-                                    setDetailIndex(index)
-                                    fetchTransaction(data._id)
-                                }}
+                                    sx={{
+                                        flex: 1,
+                                        borderRadius: 0,
+                                    }}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {
+                                        handleOpen()
+                                        setDetailID(data._id as string)
+                                        setDetailTransaction({...data})
+                                        fetchTransaction(data._id)
+                                    }}
                                 >
-                                See Details
+                                    See Details
+                                </Button>
+                                <Button
+                                    sx={{
+                                        flex: 1,
+                                        borderRadius: 0,
+                                    }}
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={() => {
+                                        handleClick(data._id)
+                                    }}
+                                >
+                                    Print Invoice
                                 </Button>
                                 {
                                     role === "admin" && (

@@ -2,6 +2,7 @@ import { mongoDB } from '../index.js'
 
 // Model 
 import ProductModel from '../models/Product.js'
+import RatingModel from '../models/Rating.js'
 
 export const listProduct = (fastify) => async (request, reply) => {
     const response = { 
@@ -10,11 +11,23 @@ export const listProduct = (fastify) => async (request, reply) => {
         data: {}
     }
     const produk = mongoDB.models.Product || mongoDB.model('Product', ProductModel);
+    const ratings = mongoDB.models.Rating || mongoDB.model('Rating', RatingModel);
     const allProduct = await produk.find({})
+    const enrichedProducts = await Promise.all(
+        allProduct.map(async (product) => {
+            const productRatings = await ratings.find({ id_product: product.id_produk });
+            const averageRating = productRatings.length > 0 
+                ? productRatings.reduce((sum, rating) => sum + parseFloat(rating.rating), 0) / productRatings.length
+                : 0;
+            const roundedRating = Math.round(averageRating);
+            return {
+                ...product.toObject(),
+                rating: roundedRating
+            };
+        })
+    );
     response.status = true
-    response.data.list = [
-        ...allProduct
-    ]
+    response.data.list = enrichedProducts
     return response
 }
 

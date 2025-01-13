@@ -1,5 +1,10 @@
 // enum
 
+export interface SortConfig {
+    order: string;
+    orderBy: string;
+}
+
 export enum Kategori {
     MesinCuci = "Mesin Cuci",
     AC = "Air Conditioner",
@@ -58,12 +63,23 @@ export interface ProductStruct {
     id_produk?: string,
     nama_produk: string,
     kategori_id: number,
+    rating?: number,
     harga: number,
     status: number,
     stok: number,
     deskripsi: string,
     tanggal_ditambahkan?: Date,
     gambar_url?: string,
+}
+
+export interface EventStruct {
+    _id?: string,
+    judul: string,
+    deskripsi: string,
+    gambar_url?: string,
+    tanggal_ditambahkan: string,
+    likeCount?: number,
+    liked?: boolean,
 }
 
 export interface VerifyTokenData {
@@ -75,8 +91,16 @@ export interface VerifyTokenData {
     password?: string,
 }
 
+export interface FetchTransactionCount {
+    count: number
+}
+
 export interface FetchProductStruct {
     product: ProductStruct[]
+}
+
+export interface FetchEventStruct {
+    event: EventStruct[]
 }
 
 export interface GetProductStruct {
@@ -93,6 +117,23 @@ export interface FetchTransactionStruct {
 
 export interface GetUserStruct {
     list: UserData[]
+}
+
+export interface GetEventStruct {
+    list: EventStruct[]
+}
+
+export interface GetEventWithCommentStruct {
+    event: EventStruct;
+    comment: UserCommentEvent[];
+}
+
+export interface UserCommentEvent {
+    id_user: string,
+    id_event: string,
+    comment: string,
+    tanggal_ditambahkan: string,
+    user: UserRating
 }
 
 export interface LoginData {

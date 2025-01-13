@@ -27,7 +27,7 @@ import styles from './page.module.css'
 // REDUX
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserState, login, removeFromCart, removeAllFromCart } from '../util/redux/Features/user/userSlice';
+import { UserState, login, removeFromCart, removeAllFromCart, removeQuantityFromCart, addToCart } from '../util/redux/Features/user/userSlice';
 import { increment, decrement, incrementByAmount } from '../util/redux/Features/counter/counterSlice';
 import { ProductStruct } from '../types/types';
 
@@ -67,6 +67,7 @@ export default function Login() {
   const shoppingCart = useSelector((state: RootState) => state.user.shopping_cart)
   const dispatch = useDispatch()
 
+  const [snapToken, setSnapToken] = React.useState<String>("")
   const [loginData, setLoginData] = React.useState({
     email: "",
     password: "",
@@ -141,11 +142,6 @@ export default function Login() {
 
   const handlePaymentDispatch = async () => {
     try {
-        const paymentDate = new Date().toLocaleDateString("id-ID", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-        });
         router.push('/successTransaction');
     } catch (error) {
         execToast(ToastStatus.ERROR, "Terjadi kesalahan saat menyimpan data pembayaran");
@@ -182,6 +178,7 @@ export default function Login() {
             item: JSON.stringify([...shoppingCart]),
         });
         if(response.data.status) {
+            setSnapToken(response.data.data.token)
             await handlePayment(response.data.data.token)
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
@@ -229,9 +226,10 @@ export default function Login() {
             {
                 groupedCart.map((data, index) => (
                     <Card 
+                        quantity={data.quantity}
                         key={`${data.id_produk}_${index}`}
-                        title={`${data.quantity > 1 ? `${data.quantity}x ` : ''}${data.nama_produk}`}
-                        description={`Rp. ${new Intl.NumberFormat().format(data.harga * data.quantity)}`}
+                        title={data.nama_produk}
+                        description={new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.harga * data.quantity)}
                         image_url={data.gambar_url}
                         isActionDelete
                         isDescriptionTitle
@@ -239,7 +237,9 @@ export default function Login() {
                         fullWidth
                         withImage
                         onClickCard={handlePaymentDispatch}
-                        onDeleteClickCard={() => dispatch(removeFromCart(data.id_produk as string))}
+                        onClickSecondaryCard={() => dispatch(removeFromCart(data.id_produk as string))}
+                        onClickAddQuantity={() => dispatch(addToCart(data as ProductStruct))}
+                        onClickRemoveQuantity={() => dispatch(removeQuantityFromCart(data.id_produk as string))}
                     />
                 ))
             }
@@ -250,26 +250,31 @@ export default function Login() {
                 isHorizontal={true}
                 fullWidth={true}
                 withImage={false}
-                marginTopParam='20vh'
+                marginTopParam='40vh'
                 onClickCard={() => midtransSnapHandler()}
-                onDeleteClickCard={() => dispatch(removeAllFromCart({}))}
+                onClickSecondaryCard={() => dispatch(removeAllFromCart({}))}
             />
-            <Typography variant='overline' color='black' style={{
-                zIndex: "1000",
-                position: "absolute", 
-                top: "18%", 
-                left: "65%",
-                color: "white",
-                fontSize: "16px",
-            }}>
-                <span style={{cursor: "pointer"}} onClick={() => {
-                    if ((window as any).snap) {
-                        (window as any).snap.hide();
-                    }
-                }}>
-                    X
-                </span>
-            </Typography>
+            {
+                snapToken !== "" && (
+                    <Typography variant='overline' color='black' style={{
+                        zIndex: "1000",
+                        position: "absolute", 
+                        top: "18%", 
+                        left: "65%",
+                        color: "white",
+                        fontSize: "16px",
+                    }}>
+                        <span style={{cursor: "pointer"}} onClick={() => {
+                            if ((window as any).snap) {
+                                (window as any).snap.hide();
+                                setSnapToken("")
+                            }
+                        }}>
+                            X
+                        </span>
+                    </Typography>
+                )
+            }
             <div 
                 id="snap-container" 
                 style={{ 

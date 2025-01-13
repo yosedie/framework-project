@@ -9,6 +9,25 @@ import DTransModel from '../models/D_trans.js'
 import HTransModel from '../models/H_trans.js'
 import RegisterModel from '../models/Register.js'
 
+export const countUserTransaction = (fastify) => async (request, reply) => {
+    const response = { 
+        status: false,
+        message: "",
+        data: {}
+    }
+    const { jwt_token } = request.query
+    if (jwt_token && jwt_token.length > 0) {
+        const HTrans = mongoDB.models.H_trans || mongoDB.model('H_trans', HTransModel);
+        const decoded = jwt.verify(jwt_token, process.env.private_key_jwt, { algorithms: ['HS512'] });
+        const allTransaction = await HTrans.find({id_pelanggan: decoded.userID});
+    
+        response.status = true;
+        response.data.count = allTransaction.length;
+        return response;
+    }
+    return response
+}
+
 export const listTransaction = (fastify) => async (request, reply) => {
     const response = { 
         status: false,

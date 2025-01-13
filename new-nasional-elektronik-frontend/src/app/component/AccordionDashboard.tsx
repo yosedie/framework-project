@@ -15,7 +15,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+
+import { Kategori, KategoriData, SortConfig } from '../types/types';
+
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -53,29 +59,78 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-const categoryList = [
-  "Mesin Cuci",
-  "AC",
-  "Kulkas",
-  "Kompor",
-  "Rice Cooker",
-  "TV",
-  "Anthena",
-  "Freeze Box",
-]
 const sortByList = [
-  "Rating",
-  "Nama",
-  "Terjual",
+  "rating",
+  "nama_produk",
 ]
 
-export default function AccordionDashboard() {
+type AccordionPropsFunc = {
+  onRatingChange: (data: number[]) => void;
+  onCategoryChange: (data: any) => void;
+  onSortChange: (data: any) => void;
+}
+
+export default function AccordionDashboard(
+  {
+    onRatingChange,
+    onCategoryChange,
+    onSortChange,
+  }: AccordionPropsFunc
+) {
+
+  const [sortConfig, setSortConfig] = React.useState<SortConfig>({
+    order: "",
+    orderBy: "",
+  });
+  const [checkedValuesRating, setCheckedValuesRating] = React.useState<number[]>([]);
+  const [checkedValuesCategory, setCheckedValuesCategory] = React.useState<Kategori[]>([]);
   const [expanded, setExpanded] = React.useState<string | false>('panel1');
-  const [sort, setSort] = React.useState('');
+
+  const handleClick = (value: string) => {
+    if (value === sortConfig.orderBy) {
+      setSortConfig(prevState => ({
+        ...prevState,
+        orderBy: "",
+      }))
+    } else {
+      setSortConfig(prevState => ({
+        ...prevState,
+        orderBy: value,
+      }))
+    }
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, value: number) => {
+    setCheckedValuesRating(prev => 
+      event.target.checked 
+        ? [...prev, value] 
+        : prev.filter(item => item !== value)
+    );
+  };
+  const handleCheckboxChangeCategory = (event: React.ChangeEvent<HTMLInputElement>, value: Kategori) => {
+    setCheckedValuesCategory(prev => 
+      event.target.checked 
+        ? [...prev, value] 
+        : prev.filter(item => item !== value)
+    );
+  };
 
   const handleChangeSort = (event: SelectChangeEvent) => {
-    setSort(event.target.value);
+    setSortConfig(prevState => ({
+      ...prevState,
+      order: event.target.value,
+    }))
   };
+
+  React.useEffect(() => {
+    onRatingChange(checkedValuesRating)
+  }, [checkedValuesRating])
+  React.useEffect(() => {
+    onCategoryChange(checkedValuesCategory)
+  }, [checkedValuesCategory])
+  React.useEffect(() => {
+    onSortChange(sortConfig)
+  }, [sortConfig])
 
 
   const handleChange =
@@ -93,9 +148,16 @@ export default function AccordionDashboard() {
         <FormGroup>
           {
             Array.from({ length: 5 }, (_, index) => {
+              const value = index + 1;
               return (
                 <FormControlLabel 
-                  control={<Checkbox />} 
+                  key={value}
+                  control={
+                    <Checkbox
+                      checked={checkedValuesRating.includes(value)}
+                      onChange={(e) => handleCheckboxChange(e, value)}
+                    />
+                  }
                   label={
                     <Rating name="read-only" value={index+1} readOnly />
                   } 
@@ -112,10 +174,16 @@ export default function AccordionDashboard() {
         </AccordionSummary>
         <AccordionDetails>
           {
-            categoryList.map(category => {
+            KategoriData.map(category => {
               return (
                 <FormControlLabel 
-                  control={<Checkbox />} 
+                  key={category}
+                  control={
+                  <Checkbox 
+                    checked={checkedValuesCategory.includes(category)}
+                    onChange={(e) => handleCheckboxChangeCategory(e, category)}
+                  />
+                  } 
                   label={
                     category
                   }
@@ -125,7 +193,6 @@ export default function AccordionDashboard() {
                     textAlign: "left",
                   }} 
                 />
-
               )
             })
           }
@@ -143,11 +210,10 @@ export default function AccordionDashboard() {
             display: 'flex', 
             alignItems: 'flex-start'
           }}>
-            <InputLabel id="demo-simple-select-helper-label">Urutan</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
-              value={sort}
+              value={sortConfig.order}
               label="Naik / Turun"
               onChange={handleChangeSort}
               sx={{width: "80%"}}
@@ -161,24 +227,28 @@ export default function AccordionDashboard() {
             <FormHelperText>Ascending = Urutan dari rendah</FormHelperText>
             <FormHelperText>Descending = Urutan dari tinggi</FormHelperText>
           </FormControl>
-          {
-            sortByList.map(category => {
-              return (
-                <FormControlLabel 
-                  control={<Checkbox />} 
-                  label={
-                    category
-                  }
-                  style={{
-                    display:"block",
-                    width: "100%",
-                    textAlign: "left",
-                  }} 
-                />
-
-              )
-            })
-          }
+          <RadioGroup
+            name="sort-by-group"
+            value={sortConfig.orderBy || ''}
+          >
+            {
+              sortByList.map((sortBy, index) => {
+                return (
+                  <FormControlLabel 
+                    key={index}
+                    value={sortBy}
+                    control={<Radio onClick={() => handleClick(sortBy)} />}
+                    label={sortBy === "rating" ? "Rating" : "Nama"}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      textAlign: 'left',
+                    }}
+                  />
+                )
+              })
+            }
+          </RadioGroup>
         </AccordionDetails>
       </Accordion>
     </div>

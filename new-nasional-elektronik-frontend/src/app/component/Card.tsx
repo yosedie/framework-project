@@ -9,12 +9,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
+
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import type { RootState } from '../util/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { Role } from '../types/types';
 
 type ImgMediaCardProps = {
+  quantity?: number;
   title?: string;
   description?: string;
   image_url?: string;
@@ -27,6 +33,8 @@ type ImgMediaCardProps = {
   marginTopParam?: string;
   onClickCard?: (data: any) => void;
   onClickSecondaryCard?: (data: any) => void;
+  onClickAddQuantity?: (data: any) => void;
+  onClickRemoveQuantity?: (data: any) => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,6 +49,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ImgMediaCard({ 
+  quantity,
   title, 
   description,
   image_url,
@@ -52,7 +61,9 @@ export default function ImgMediaCard({
   withImage,
   marginTopParam,
   onClickCard,
-  onClickSecondaryCard
+  onClickSecondaryCard,
+  onClickAddQuantity,
+  onClickRemoveQuantity
 }: ImgMediaCardProps) {
   const role = useSelector((state: RootState) => state.user.role)
   return (
@@ -90,21 +101,37 @@ export default function ImgMediaCard({
                       ? (
                         <>
                           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography 
-                              variant={isDescriptionTitle ? "h5" : "body2"} 
-                              color={isDescriptionTitle ? "black" : "text.secondary"} 
-                              textAlign={isDescriptionTitle ? "left" : "justify"}
-                              sx={{ 
-                                flex: 1, 
-                                display: '-webkit-box', 
-                                overflow: 'hidden', 
-                                textOverflow: 'ellipsis', 
-                                WebkitBoxOrient: 'vertical', 
-                                WebkitLineClamp: 3,
-                              }}
-                            >
-                              {description}
-                            </Typography>
+                            <Box sx={{textAlign: "left"}}>
+                              <Typography 
+                                variant={isDescriptionTitle ? "h5" : "body2"} 
+                                color={isDescriptionTitle ? "black" : "text.secondary"} 
+                                textAlign={isDescriptionTitle ? "left" : "justify"}
+                                sx={{ 
+                                  flex: 1, 
+                                  display: '-webkit-box', 
+                                  overflow: 'hidden', 
+                                  textOverflow: 'ellipsis', 
+                                  WebkitBoxOrient: 'vertical', 
+                                  WebkitLineClamp: 3,
+                                }}
+                              >
+                                {description}
+                              </Typography>
+                              <IconButton aria-label="remove" onClick={onClickRemoveQuantity}>
+                                <RemoveIcon />
+                              </IconButton>
+                              <Typography 
+                                variant={"body2"} 
+                                color={"black"}
+                                display={"inline"}
+                                margin={"0 5%"}
+                              >
+                                {quantity}
+                              </Typography>
+                              <IconButton aria-label="add" onClick={onClickAddQuantity}>
+                                <AddIcon />
+                              </IconButton>
+                            </Box>
                             <Button variant="contained" sx={{ marginLeft: 'auto', marginRight: "1.5%" }} color="error" onClick={onClickSecondaryCard}>
                               Delete
                             </Button>

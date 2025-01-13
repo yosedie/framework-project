@@ -93,8 +93,8 @@ export default function Login() {
             router.push('/products');
         } else if(role === "admin") {
             router.push('/dashboard');
-        } else if(role === "user") {
-            router.push('/product');
+        } else if(role === "penjual") {
+            router.push('/products')
         }
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
@@ -212,11 +212,6 @@ export default function Login() {
                                     Register
                                 </Link>
                             </Typography>
-
-                            <br />
-                            <Button variant="contained" onClick={handlePaymentDispatch}>
-                                Simpan Info Pembayaran & Lanjut
-                            </Button>
                         </Box>
                     </Item>
                 </Grid>
