@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { FetchTransactionCount, ApiResponse, GetTransactionStruct, TransactionData, DetailsTransactionFetch, FetchTransactionStruct } from '../types/types';
+import { GetConfirmAddressStruct, ConfirmAddressData, FetchTransactionCount, ApiResponse, GetTransactionStruct, TransactionData, DetailsTransactionFetch, FetchTransactionStruct } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -78,17 +78,14 @@ export interface CartProduct extends ProductStruct {
 
 export default function Transaction() {
   const [detailID, setDetailID] = React.useState("");
-  const [detailTransaction, setDetailTransaction] = React.useState<TransactionData>({
-    _id: "",
-    id_pelanggan: "",
-    id_pengiriman: "",
-    alamat_pengiriman: "",
-    metode_pembayaran: "",
-    nama_pelanggan: "",
-    nomor_resi: "",
-    status: "",
-    tanggal: "",
-    total_harga: -1,
+  const [confirmationAddressDetail, setConfirmationAddressDetail] = React.useState<ConfirmAddressData>({
+    kota: "",
+    kode_zip: "",
+    nama_jalan: "",
+    provinsi: "",
+    tanggal_ditambahkan: "",
+    nomor_hp: "",
+    status: -1,
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -97,7 +94,6 @@ export default function Transaction() {
   const token = useSelector((state: RootState) => state.user.jwt_token)
   const role = useSelector((state: RootState) => state.user.role)
   const nama = useSelector((state: RootState) => state.user.userData.nama)
-  const address = useSelector((state: RootState) => state.user.userData.alamat)
   const invoice_api_key = useSelector((state: RootState) => state.user.invoice_api_key)
   const dispatch = useDispatch()
 
@@ -105,9 +101,8 @@ export default function Transaction() {
     email: "",
     password: "",
  });
-  const [transactionList, setTransactionList] = React.useState<TransactionData[]>([]);
-  const [transactionListFiltered, setTransactionListFiltered] = React.useState<TransactionData[]>([]);
-  const [transactionDetailList, setTransactionDetailList] = React.useState<DetailsTransactionFetch[]>([]);
+  const [confirmationAddressList, setConfirmationAddressList] = React.useState<ConfirmAddressData[]>([]);
+  const [confirmationAddressListFiltered, setConfirmationAddressListFiltered] = React.useState<ConfirmAddressData[]>([]);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
  const handleRoute = (paramPage: String) => {
@@ -118,27 +113,24 @@ export default function Transaction() {
      const { name, value } = event.target;
      setSearchValue(value)
      if(value.length === 0) {
-        setTransactionListFiltered([...transactionList])
+        setConfirmationAddressListFiltered([...confirmationAddressList])
      } else {
-        const transactionFiltered = [...transactionList].filter((item) =>
-            item.alamat_pengiriman.toLowerCase().includes(value.toLowerCase()) ||
-            item.nama_pelanggan.toLowerCase().includes(value.toLowerCase())
+        const transactionFiltered = [...confirmationAddressList].filter((item) =>
+            item.kota.toLowerCase().includes(value.toLowerCase()) ||
+            item.nama_jalan.toLowerCase().includes(value.toLowerCase()) ||
+            item.kode_zip.toLowerCase().includes(value.toLowerCase()) ||
+            item.provinsi.toLowerCase().includes(value.toLowerCase())
         );
-        setTransactionListFiltered([...transactionFiltered])
+        setConfirmationAddressListFiltered([...transactionFiltered])
      }
 };
 
- async function getTransactionList(): Promise<GetTransactionStruct> {
+ async function getConfirmationAddressList(): Promise<GetConfirmAddressStruct> {
     try {
-        const response = await axios.get<ApiResponse<GetTransactionStruct>>(`/listTransaction`, {
-            params: {
-                jwt_token: token,
-                role: role,
-            }
-        });
+        const response = await axios.get<ApiResponse<GetConfirmAddressStruct>>(`/listConfirmationAddress`);
         if(response.data.status) {
-            setTransactionList(response.data.data.list)
-            setTransactionListFiltered(response.data.data.list)
+            setConfirmationAddressList(response.data.data.list)
+            setConfirmationAddressListFiltered(response.data.data.list)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
         }
@@ -149,94 +141,15 @@ export default function Transaction() {
     }
  }
 
- async function getTransactionCount(): Promise<FetchTransactionCount> {
+ async function confirmAddress(id_confirm_address: string, status_code: number): Promise<GetConfirmAddressStruct> {
     try {
-        const response = await axios.get<ApiResponse<FetchTransactionCount>>(`/countUserTransaction`, {
-            params: {
-                jwt_token: token
-            }
+        const response = await axios.put<ApiResponse<GetConfirmAddressStruct>>(`/confirmAddress`, {
+            id_confirm_address,
+            status_code
         });
         if(response.data.status) {
-            return response.data.data
-        }
-        return response.data.data;
-    } catch (error) {
-        alert(error)
-        execToast(ToastStatus.ERROR, JSON.stringify(error))
-        throw error;
-    }
- }
-
- async function fetchInvoice(detailData: DetailsTransactionFetch[]): Promise<void> {
-    try {
-        const items = detailData.map((detail) => ({
-            name: detail.product.nama_produk,
-            quantity: detail.jumlah,
-            unit_cost: detail.harga,
-        }));
-
-        const noTransaction = await getTransactionCount()
-        const payload = {
-            from: "Toko New Nasional",
-            to: nama,
-            number: noTransaction.count,
-            items: items,
-            notes: "Terimakasih sudah berbelanja di toko new nasional !",
-            currency: "idr",
-            logo: "https://i.ibb.co.com/bFrVFLm/logo-invoice.png",
-            ship_to: address,
-        };
-
-        const response = await axios.post<ArrayBuffer>("/generateInvoice", payload, {
-            headers: {
-              Authorization: `Bearer ${invoice_api_key}`,
-              "Content-Type": "application/json",
-            },
-            responseType: "arraybuffer",
-        });
-        const blob = new Blob([response.data], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "invoice.pdf";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    } catch (error) {
-        execToast(ToastStatus.ERROR, JSON.stringify(error))
-        throw error;
-    }
- }
-
- async function fetchTransaction(transactionID: string): Promise<DetailsTransactionFetch[]> {
-    try {
-        const response = await axios.get<ApiResponse<FetchTransactionStruct>>(`/fetchTransaction`, {
-            params: { transactionID }
-        });
-        if(response.data.status) {
-            setTransactionDetailList(response.data.data.details)
-            return response.data.data.details
-        } else {
-            execToast(ToastStatus.ERROR, response.data.message)
-        }
-        return response.data.data.details;
-    } catch (error) {
-        execToast(ToastStatus.ERROR, JSON.stringify(error))
-        throw error;
-    }
- }
-
- async function deleteTransaction(id_transaksi: string): Promise<GetTransactionStruct> {
-    try {
-        const response = await axios.delete<ApiResponse<GetTransactionStruct>>(`/deleteTransaction`, {
-            data: {
-                id_transaksi
-            }
-        });
-        if(response.data.status) {
-            setTransactionList(response.data.data.list)
-            setTransactionListFiltered(response.data.data.list)
+            setConfirmationAddressList(response.data.data.list)
+            setConfirmationAddressListFiltered(response.data.data.list)
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)
@@ -248,17 +161,29 @@ export default function Transaction() {
     }
  }
 
- const handleClick = async (transactionID: string): Promise<void> => {
+ async function deleteConfirmAddress(id_confirm_address: string): Promise<GetConfirmAddressStruct> {
     try {
-        const dataDetails = await fetchTransaction(transactionID); 
-        await fetchInvoice(dataDetails);
+        const response = await axios.delete<ApiResponse<GetConfirmAddressStruct>>(`/deleteConfirmationAddress`, {
+            data: {
+                id_confirm_address
+            }
+        });
+        if(response.data.status) {
+            setConfirmationAddressList(response.data.data.list)
+            setConfirmationAddressListFiltered(response.data.data.list)
+            execToast(ToastStatus.SUCCESS, response.data.message)
+        } else {
+            execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
     } catch (error) {
-        console.error("Error:", error);
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
     }
- };
+ }
 
  React.useEffect(() => {
-    getTransactionList()
+    getConfirmationAddressList()
  }, [])
 
   return (
@@ -277,47 +202,40 @@ export default function Transaction() {
             ? (
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Transaction Details
+                        Confirmation Address Details
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Date : {(new Date(detailTransaction.tanggal)).toISOString().slice(0, 10)}
+                        Date : {(new Date(confirmationAddressDetail.tanggal_ditambahkan as string)).toISOString().slice(0, 10)}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Timestamp : {(new Date(detailTransaction.tanggal)).toTimeString().slice(0, 8)}
+                        Timestamp : {(new Date(confirmationAddressDetail.tanggal_ditambahkan as string)).toTimeString().slice(0, 8)}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Grand Total : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(detailTransaction.total_harga)}
+                        Status : <strong style={{
+                            color: confirmationAddressDetail.status === 0
+                                ? "orange"
+                                : confirmationAddressDetail.status === 1
+                                    ? "green"
+                                    : "red"
+                        }}>
+                            {confirmationAddressDetail.status === 0 ? "Pending" : confirmationAddressDetail.status === 1 ? "Approved" : "Rejected"}
+                        </strong>
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Product : 
+                        Provinsi : {confirmationAddressDetail.provinsi}
                     </Typography>
-                    {
-                        transactionDetailList.map(data => {
-                            if(data.product) {
-                                return (
-                                    <Box sx={{border: "1px solid black", padding: "2.5%", marginTop: "2.5%"}}>
-                                        <Image
-                                            draggable={false}
-                                            src={data.product.gambar_url ? data.product.gambar_url as string : ""}
-                                            alt="Example"
-                                            width={100}
-                                            height={100}
-                                            style={{ objectFit: "cover" }}
-                                        />
-                                        <Typography id="modal-modal-description">
-                                            Name : {data.product.nama_produk}
-                                        </Typography>
-                                        <Typography id="modal-modal-description">
-                                            Quantity : {data.jumlah}
-                                        </Typography>
-                                        <Typography id="modal-modal-description">
-                                            Price : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.product.harga)}
-                                        </Typography>
-                                    </Box>
-                                )
-                            }
-                        })
-                    }
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Kota : {confirmationAddressDetail.kota}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Nama Jalan : {confirmationAddressDetail.nama_jalan}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Kode Zip : {confirmationAddressDetail.kode_zip}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Nomor HP : <strong>{confirmationAddressDetail.nomor_hp}</strong>
+                    </Typography>
                 </Box>
             )
             : <></>
@@ -342,19 +260,19 @@ export default function Transaction() {
         </button> */}
         <Box sx={{margin: "1.5% 2.5%"}}>
             <Typography variant="h5" color='black'>
-                Transaction History
+                Confirm Address List
             </Typography>
             <TextField 
                 value={searchValue}
                 id="outlined-basic" 
-                label="Search Transaction History" 
+                label="Search Address Confirmation" 
                 variant="outlined" 
                 sx={{marginTop: "2.5%"}}
                 fullWidth
                 onChange={handleInputChange}
             />
             {
-                transactionListFiltered.length === 0 && (
+                confirmationAddressListFiltered.length === 0 && (
                     <Box>
                         <Typography variant="h5" color='black' textAlign={"center"} sx={{
                             margin: "12% 0"
@@ -365,30 +283,32 @@ export default function Transaction() {
                 )
             }
             {
-                transactionListFiltered.map((data, index) => {
+                confirmationAddressListFiltered.map((data, index) => {
                     return (
                         <Box sx={{ display: 'flex', alignItems: 'stretch', width: '100%', marginTop: "1.5%" }}>
                             <Card sx={{ flexGrow: 1, minWidth: 275 }}>
                                 <CardContent>
                                 <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                                    {((new Date(data.tanggal)).toISOString().slice(0, 10))} {((new Date(data.tanggal)).toTimeString().slice(0, 8))}
+                                    {((new Date(data.tanggal_ditambahkan as string)).toISOString().slice(0, 10))} {((new Date(data.tanggal_ditambahkan as string)).toTimeString().slice(0, 8))}
                                 </Typography>
                                 <Typography variant="h4" component="div">
-                                    Nama Pelanggan : {data.nama_pelanggan}
+                                    Nama Pelanggan : {data.user?.nama}
                                 </Typography>
-                                <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
+                                {/* <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
                                     Metode Pembayaran : {data.metode_pembayaran}
-                                </Typography>
+                                </Typography> */}
                                 <Typography variant="body1">
-                                    Status : <strong style={{
-                                        color: data.status.toLocaleLowerCase() === "pending"
-                                            ? "orange"
-                                            : data.status.toLocaleLowerCase() === "success"
-                                                ? "green"
-                                                : "red"
-                                    }}>{data.status}</strong><br />
-                                    Alamat : {data.alamat_pengiriman} <br />
-                                    Total Harga : {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.total_harga)}
+                                Status : <strong style={{
+                                    color: data.status === 0
+                                        ? "orange"
+                                        : data.status === 1
+                                            ? "green"
+                                            : "red"
+                                }}>
+                                    {data.status === 0 ? "Pending" : data.status === 1 ? "Approved" : "Rejected"}
+                                </strong>
+                                <br />
+                                Alamat : {data.nama_jalan}
                                 </Typography>
                                 </CardContent>
                             </Card>
@@ -410,8 +330,7 @@ export default function Transaction() {
                                     onClick={() => {
                                         handleOpen()
                                         setDetailID(data._id as string)
-                                        setDetailTransaction({...data})
-                                        fetchTransaction(data._id)
+                                        setConfirmationAddressDetail({...data})
                                     }}
                                 >
                                     See Details
@@ -422,34 +341,44 @@ export default function Transaction() {
                                         borderRadius: 0,
                                     }}
                                     variant="contained"
-                                    color="warning"
+                                    color="success"
                                     onClick={() => {
-                                        handleClick(data._id)
+                                        confirmAddress(data._id as string, 1)
                                     }}
                                 >
-                                    Print Invoice
+                                    Approve
                                 </Button>
-                                {
-                                    role === "admin" && (
-                                    <Button
-                                        sx={{
-                                            flex: 1,
-                                            borderRadius: 0,
-                                        }}
-                                        variant="contained"
-                                        color="error"
-                                        onClick={() => deleteTransaction(data._id)}
-                                    >
-                                        Delete
-                                    </Button>
-                                    )
-                                }
+                                <Button
+                                    sx={{
+                                        flex: 1,
+                                        borderRadius: 0,
+                                    }}
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={() => {
+                                        confirmAddress(data._id as string, 2)
+                                    }}
+                                >
+                                    Reject
+                                </Button>
+                                <Button
+                                    sx={{
+                                        flex: 1,
+                                        borderRadius: 0,
+                                    }}
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => deleteConfirmAddress(data._id as string)}
+                                >
+                                    Delete
+                                </Button>
                             </Box>
                         </Box>
                     )
                 })
             }            
         </Box>
+    <Box sx={{marginTop: "12.5%"}}></Box>
     <Footer />
    </Box>
   );

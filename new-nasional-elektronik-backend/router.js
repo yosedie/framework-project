@@ -20,7 +20,7 @@ import { listEvent, fetchEvent, addEvent, editEvent, deleteEvent } from "./funct
 
 import { fetchEventWithComment, toggleLikeEvent, addCommentEvent } from "./function/event.js"
 
-import { generateInvoice } from "./function/invoice_generate.js"
+import { checkConfirmAddress, listConfirmAddress, sendConfirmAddress, confirmAddress, deleteConfirmationAddress } from "./function/address_confirmation.js"
 
 async function routes (fastify, options) {
     const errorWrapper = (fn) => (request, reply) => {
@@ -81,6 +81,13 @@ async function routes (fastify, options) {
     fastify.get('/api/fetchEventUser', errorWrapper(fetchEventWithComment(fastify)))
     fastify.post('/api/toggleLikeEvent', errorWrapper(toggleLikeEvent(fastify)))
     fastify.post('/api/addCommentEvent', errorWrapper(addCommentEvent(fastify)))
+
+    // Khusus delivery
+    fastify.get('/api/checkConfirmationAddress', errorWrapper(checkConfirmAddress(fastify)))
+    fastify.get('/api/listConfirmationAddress', errorWrapper(listConfirmAddress(fastify)))
+    fastify.post('/api/sendConfirmationAddress', errorWrapper(sendConfirmAddress(fastify)))
+    fastify.put('/api/confirmAddress', errorWrapper(confirmAddress(fastify)))
+    fastify.delete('/api/deleteConfirmationAddress', errorWrapper(deleteConfirmationAddress(fastify)))
 
     // Khusus invoice generator
     fastify.post('/api/generateInvoice', async (request, reply) => {

@@ -21,6 +21,7 @@ const initialState: UserState = {
         email: "",
         telepon: "",
         picture_profile: "",
+        alamat: "",
     },
 }
 
@@ -63,6 +64,7 @@ export const counterSlice = createSlice({
                 email: "",
                 telepon: "",
                 picture_profile: "",
+                alamat: "",
             }
         },
     }

@@ -284,7 +284,7 @@ export default function Products() {
                           {detailProduct.nama_produk}
                       </Typography>
                       <Typography variant="h6" component="h2" id="modal-modal-description">
-                        IDR {
+                        {
                           new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(detailProduct.harga)
                         }
                       </Typography>

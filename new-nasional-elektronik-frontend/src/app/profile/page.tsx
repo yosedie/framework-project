@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { LoginData, ApiResponse, UploadPictureStruct, VerifyTokenData, EmptyData } from '../types/types';
+import { ConfirmAddressData, ApiResponse, UploadPictureStruct, VerifyTokenData, EmptyData } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import Modal from '@mui/material/Modal';
 import Link from '@mui/material/Link';
 // import Spacer from '@mui/material/Spacer';
 
@@ -69,10 +70,34 @@ export default function DashboardAdmin() {
     picture_profile: "",
     password: "",
   });
-  const [loginData, setLoginData] = React.useState({
-    email: "",
-    password: "",
- });
+  const [confirmAddressForm, setConfirmAddressForm] = React.useState<ConfirmAddressData>({
+    nama_jalan: "",
+    kode_zip: "",
+    kota: "",
+    provinsi: "",
+    nomor_hp: "",
+  });
+
+  const [userAlreadyConfirm, setUserAlreadyConfirm] = React.useState(false);
+  const [isPending, setIsPending] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    color: "black",
+    maxHeight: 600,
+    overflowY: 'auto',
+  };
+
  const handleRoute = (paramPage: String) => {
     router.push(`/${paramPage}`)
  };
@@ -80,6 +105,14 @@ export default function DashboardAdmin() {
  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setUserDetail((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleInputChangeAddress = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setConfirmAddressForm((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -128,12 +161,141 @@ export default function DashboardAdmin() {
     }
   }
 
+  async function checkConfirmationAddress(user_token: string, status_filter: number): Promise<boolean> {
+    try {
+        const response = await axios.get<ApiResponse<boolean>>(`/checkConfirmationAddress`, {
+          params: {
+            user_token,
+            status_filter
+          }
+        });
+        if(response.data.status) {
+          if(status_filter === 0) {
+            setIsPending(response.data.data)
+          } else if(status_filter === 1) {
+            setUserAlreadyConfirm(response.data.data)
+          }
+          return response.data.data
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+  }
+
+  async function submitAddressConfirmation(): Promise<EmptyData> { 
+    setIsPending(true)
+    try {
+        const response = await axios.post<ApiResponse<EmptyData>>(`/sendConfirmationAddress`, {
+            ...confirmAddressForm,
+            user_token: token,
+        });
+        if(response.data.status) {
+            execToast(ToastStatus.SUCCESS, response.data.message)
+        } else {
+            execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+ }
+
   React.useEffect(() => {
     setUserDetail({...userData})
+    checkConfirmationAddress(token, 0)
+    checkConfirmationAddress(token, 1)
   }, [])
 
   return (
    <Box sx={{backgroundColor: "white"}}>
+    <Modal
+    open={open}
+    onClose={() => {
+        handleClose()
+    }}
+    aria-labelledby="modal-modal-title"
+    aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+              Form pengisian permintaan pengiriman alamat
+          </Typography>
+          <TextField 
+              name="nama_jalan"
+              label="Nama Jalan"
+              type='text'
+              variant="outlined"
+              sx={{marginTop: "1.5%"}}
+              fullWidth
+              value={confirmAddressForm.nama_jalan}
+              onChange={handleInputChangeAddress}
+          />
+          <TextField 
+              name="kode_zip"
+              label="Kode ZIP"
+              type='text'
+              variant="outlined"
+              sx={{marginTop: "1.5%"}}
+              fullWidth
+              value={confirmAddressForm.kode_zip}
+              onChange={handleInputChangeAddress}
+          />
+          <TextField 
+              name="kota"
+              label="Kota"
+              type='text'
+              variant="outlined"
+              sx={{marginTop: "1.5%"}}
+              fullWidth
+              value={confirmAddressForm.kota}
+              onChange={handleInputChangeAddress}
+          />
+          <TextField 
+              name="provinsi"
+              label="Provinsi"
+              type='text'
+              variant="outlined"
+              sx={{marginTop: "1.5%"}}
+              fullWidth
+              value={confirmAddressForm.provinsi}
+              onChange={handleInputChangeAddress}
+          />
+          <TextField 
+              name="nomor_hp"
+              label="Nomor HP"
+              type='text'
+              variant="outlined"
+              sx={{marginTop: "1.5%"}}
+              fullWidth
+              value={confirmAddressForm.nomor_hp}
+              onChange={handleInputChangeAddress}
+          />
+          <br /> <Button
+              sx={{
+                  marginTop: "1.5%",
+                  display: "block",
+                  borderRadius: 0,
+              }}
+              variant="contained"
+              color="primary"
+              onClick={async () => {
+                const checkAlreadyPending = await checkConfirmationAddress(token, 0)
+                if(checkAlreadyPending) {
+                  execToast(ToastStatus.ERROR, "Harap menunggu konfirmasi dari admin !")
+                } else {
+                  await submitAddressConfirmation()
+                }
+              }}
+          >
+              Submit permintaan pengiriman alamat
+          </Button>
+      </Box>
+    </Modal>
     <AppBar />
         {/* <button 
             className={styles.button}
@@ -208,7 +370,7 @@ export default function DashboardAdmin() {
               </Grid>
               <Grid size={6}>
                 <Item sx={{boxShadow: "0"}}>
-                <Box sx={{width: "50%"}}>
+                <Box sx={{width: "80%"}}>
                   <TextField 
                       name="email"
                       label="Email"
@@ -229,7 +391,7 @@ export default function DashboardAdmin() {
                       value={userDetail.nama}
                       onChange={handleInputChange}
                   />
-                  <TextField 
+                  {/* <TextField 
                       name="telepon"
                       label="Telepon"
                       type='tel'
@@ -238,7 +400,7 @@ export default function DashboardAdmin() {
                       fullWidth
                       value={userDetail.telepon}
                       onChange={handleInputChange}
-                  />
+                  /> */}
                   <TextField 
                       name="password"
                       label="New Password"
@@ -258,12 +420,47 @@ export default function DashboardAdmin() {
                       variant="contained"
                       color="primary"
                       fullWidth
-                      onClick={() => {
+                      onClick={async () => {
                           changeProfile(token)
                       }}
                   >
                       Ganti Profile
                   </Button>
+                  {
+                    !userAlreadyConfirm && (
+                      <Button
+                        sx={{
+                            marginTop: "1.5%",
+                            display: "block",
+                            borderRadius: 0,
+                        }}
+                        variant="contained"
+                        color="warning"
+                        fullWidth
+                        onClick={() => {
+                          handleOpen()
+                        }}
+                      >
+                          Ajukkan konfirmasi<br/>
+                          pengiriman alamat
+                      </Button>
+                    )
+                  }
+                  <Typography variant="body1">
+                    Status Verifikasi Alamat : <strong style={{
+                        color: !userAlreadyConfirm || isPending
+                        ? isPending
+                          ? "orange"
+                          : "red"
+                        : "green"
+                    }}>
+                        {!userAlreadyConfirm || isPending
+                          ? isPending
+                            ? "Pending"
+                            : "Not Verified"
+                          : "Verified"}
+                    </strong>
+                  </Typography>
                 </Box>
                 </Item>
               </Grid>

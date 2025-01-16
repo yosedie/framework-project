@@ -1,7 +1,7 @@
 "use client"
 
 import axios from '../util/axios/axios';
-import { RegisterData, ApiResponse } from '../types/types';
+import { EmptyData, ApiResponse } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
@@ -90,9 +90,9 @@ export default function Register() {
     }));
   };
 
- async function registerHandler(): Promise<RegisterData> {
+ async function registerHandler(): Promise<EmptyData> {
     try {
-        const response = await axios.post<ApiResponse<RegisterData>>(`/register`, {
+        const response = await axios.post<ApiResponse<EmptyData>>(`/register`, {
             ...registerData
         });
         if(response.data.status) {

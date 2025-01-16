@@ -63,10 +63,12 @@ export interface CartProduct extends ProductStruct {
 
 export default function Login() {
   const router = useRouter()
-  const account = useSelector((state: RootState) => state.user.jwt_token)
+  const address = useSelector((state: RootState) => state.user.userData.alamat)
+  const token = useSelector((state: RootState) => state.user.jwt_token)
   const shoppingCart = useSelector((state: RootState) => state.user.shopping_cart)
   const dispatch = useDispatch()
 
+  const [addressValid, setAddressValid] = React.useState<boolean>(false)
   const [snapToken, setSnapToken] = React.useState<String>("")
   const [loginData, setLoginData] = React.useState({
     email: "",
@@ -111,7 +113,7 @@ export default function Login() {
         onSuccess: function (result: SnapPaymentResult) {
             sessionStorage.setItem('payment_info', JSON.stringify({
                 ...result,
-                alamat: "TEST ADDRESS SUKSES",
+                alamat: address,
                 stok: 15,
             }));
             // const paymentData = "20 Desember 2024";
@@ -168,13 +170,33 @@ export default function Login() {
     }
  }
 
+ async function checkConfirmationAddress(user_token: string, status_filter: number): Promise<boolean> {
+    try {
+        const response = await axios.get<ApiResponse<boolean>>(`/checkConfirmationAddress`, {
+          params: {
+            user_token,
+            status_filter
+          }
+        });
+        if(response.data.status) {
+          setAddressValid(response.data.data)
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message)
+        }
+        return response.data.data;
+    } catch (error) {
+        execToast(ToastStatus.ERROR, JSON.stringify(error))
+        throw error;
+    }
+  }
+
  async function midtransSnapHandler(): Promise<MidtransTokenData> {
     try {
         const grand_total_cart = shoppingCart.reduce((total, product) => total + product.harga, 0)
         const response = await axios.post<ApiResponse<MidtransTokenData>>(`/getPaymentToken`, {
-            id_pelanggan: account,
+            id_pelanggan: token,
             total_harga: grand_total_cart,
-            alamat_pengiriman: "test address",
+            alamat_pengiriman: address,
             item: JSON.stringify([...shoppingCart]),
         });
         if(response.data.status) {
@@ -190,6 +212,10 @@ export default function Login() {
         throw error;
     }
  }
+
+ React.useEffect(() => {
+    checkConfirmationAddress(token, 1)
+ }, [])
 
   return (
    <Box sx={{backgroundColor: "white"}}>
@@ -251,7 +277,17 @@ export default function Login() {
                 fullWidth={true}
                 withImage={false}
                 marginTopParam='40vh'
-                onClickCard={() => midtransSnapHandler()}
+                onClickCard={() => {
+                    if(shoppingCart.length === 0) {
+                        execToast(ToastStatus.WARNING, "Harap tambahkan produk, minimal 1 !")
+                        router.push("/products")
+                    } else if(!addressValid) {
+                        execToast(ToastStatus.WARNING, "Harap mengajukkan konfirmasi alamat pengiriman !")
+                        router.push("/profile")
+                    } else {
+                        midtransSnapHandler()
+                    }
+                }}
                 onClickSecondaryCard={() => dispatch(removeAllFromCart({}))}
             />
             {

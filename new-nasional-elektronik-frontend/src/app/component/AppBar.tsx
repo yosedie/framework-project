@@ -24,7 +24,7 @@ import { increment, decrement, incrementByAmount } from '../util/redux/Features/
 
 
 const pages = ['Products', 'Events'];
-const pagesAdmin = ['Dashboard', 'Products', 'Transaction', 'Manage User', 'Manage Event'];
+const pagesAdmin = ['Dashboard', 'Products', 'Transaction', 'Manage User', 'Manage Event', 'Confirm Address'];
 const pagesPenjual = ['Dashboard', 'Products', 'Transaction'];
 const settings = ['Profile', 'Transaction History', 'Logout'];
 const settingsAdmin = ['Profile', 'Logout'];

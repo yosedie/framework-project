@@ -82,6 +82,19 @@ export interface EventStruct {
     liked?: boolean,
 }
 
+export interface ConfirmAddressData {
+    _id?: string,
+    id_user?: string,
+    nama_jalan: string,
+    kode_zip: string,
+    kota: string,
+    provinsi: string,
+    nomor_hp: string,
+    status?: number, // 0 : pending, 1 : diterima, 2 : ditolak
+    tanggal_ditambahkan?: string,
+    user?: UserRating,
+}
+
 export interface VerifyTokenData {
     role: string,
     nama: string,
@@ -89,6 +102,7 @@ export interface VerifyTokenData {
     telepon: string,
     picture_profile: string,
     password?: string,
+    alamat?: string,
 }
 
 export interface FetchTransactionCount {
@@ -109,6 +123,10 @@ export interface GetProductStruct {
 
 export interface GetTransactionStruct {
     list: TransactionData[]
+}
+
+export interface GetConfirmAddressStruct {
+    list: ConfirmAddressData[]
 }
 
 export interface FetchTransactionStruct {
