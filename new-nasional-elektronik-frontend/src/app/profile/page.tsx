@@ -59,6 +59,7 @@ export default function DashboardAdmin() {
   const profilePictureRedux = useSelector((state: RootState) => state.user.userData.picture_profile)
   const token = useSelector((state: RootState) => state.user.jwt_token)
   const userData = useSelector((state: RootState) => state.user.userData)
+  const role = useSelector((state: RootState) => state.user.role)
   const dispatch = useDispatch()
 
   const [profilePicture, setProfilePicture] = React.useState("")
@@ -427,7 +428,7 @@ export default function DashboardAdmin() {
                       Ganti Profile
                   </Button>
                   {
-                    !userAlreadyConfirm && (
+                    !userAlreadyConfirm && role === "user" && (
                       <Button
                         sx={{
                             marginTop: "1.5%",
@@ -446,21 +447,25 @@ export default function DashboardAdmin() {
                       </Button>
                     )
                   }
-                  <Typography variant="body1">
-                    Status Verifikasi Alamat : <strong style={{
-                        color: !userAlreadyConfirm || isPending
-                        ? isPending
-                          ? "orange"
-                          : "red"
-                        : "green"
-                    }}>
-                        {!userAlreadyConfirm || isPending
-                          ? isPending
-                            ? "Pending"
-                            : "Not Verified"
-                          : "Verified"}
-                    </strong>
-                  </Typography>
+                  {
+                    role === "user" && (
+                      <Typography variant="body1">
+                        Status Verifikasi Alamat : <strong style={{
+                            color: !userAlreadyConfirm || isPending
+                            ? isPending
+                              ? "orange"
+                              : "red"
+                            : "green"
+                        }}>
+                            {!userAlreadyConfirm || isPending
+                              ? isPending
+                                ? "Pending"
+                                : "Not Verified"
+                              : "Verified"}
+                        </strong>
+                      </Typography>
+                    )
+                  }
                 </Box>
                 </Item>
               </Grid>
