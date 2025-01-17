@@ -5,14 +5,17 @@ import ProductModel from '../models/Product.js'
 import RatingModel from '../models/Rating.js'
 
 export const listProduct = (fastify) => async (request, reply) => {
+    const { user_token } = request.query
     const response = { 
         status: false,
         message: "",
         data: {}
     }
+    console.log(user_token)
     const produk = mongoDB.models.Product || mongoDB.model('Product', ProductModel);
     const ratings = mongoDB.models.Rating || mongoDB.model('Rating', RatingModel);
-    const allProduct = await produk.find({})
+    const productFilter = user_token ? { status: 1 } : {};
+    const allProduct = await produk.find(productFilter);
     const enrichedProducts = await Promise.all(
         allProduct.map(async (product) => {
             const productRatings = await ratings.find({ id_product: product.id_produk });

@@ -96,6 +96,7 @@ export default function Register() {
             ...registerData
         });
         if(response.data.status) {
+            router.push("/login")
             execToast(ToastStatus.SUCCESS, response.data.message)
         } else {
             execToast(ToastStatus.ERROR, response.data.message)

@@ -17,9 +17,9 @@ export enum Kategori {
 }
 
 export const KategoriData = [
-    Kategori.MesinCuci,
-    Kategori.AC,
     Kategori.Kulkas,
+    Kategori.AC,
+    Kategori.MesinCuci,
     Kategori.Kompor,
     Kategori.RiceCooker,
     Kategori.TV,

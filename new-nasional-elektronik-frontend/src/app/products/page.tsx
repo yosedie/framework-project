@@ -220,7 +220,11 @@ export default function Products() {
 
   async function listProductHandler(): Promise<GetProductStruct> {
     try {
-      const response = await axios.get<ApiResponse<GetProductStruct>>('/listProduct');
+      const response = await axios.get<ApiResponse<GetProductStruct>>('/listProduct', {
+        params: {
+          user_token: token
+        }
+      });
   
       if (response.data.status) {
         setProducts(response.data.data.list)
