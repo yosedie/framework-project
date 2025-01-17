@@ -20,7 +20,7 @@
     "fastify-mongoose-api": "^1.2.23",
     "jsonwebtoken": "^9.0.2",
     "midtrans-client": "^1.4.2",
-    "mongoose": "^8.7.0"
+    "mongoose": "^8.9.5"
   },
   "type": "module"
 }
