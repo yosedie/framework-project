@@ -56,6 +56,7 @@ export default function Login() {
   const [paymentInfo, setPaymentInfo] = React.useState({
     tanggal: "",
     total: "",
+    // stok_transaksi: 0,
     stok_transaksi: "",
     alamat: "",
     status: "pending",
@@ -126,6 +127,8 @@ export default function Login() {
             status: storedPaymentInfo.transaction_status,
             alamat: storedPaymentInfo.alamat,
             stok_transaksi: storedPaymentInfo.stok,
+            // stok_transaksi: Number(storedPaymentInfo.stok), // Konversi string ke number
+
         }))
     }
   }, [])

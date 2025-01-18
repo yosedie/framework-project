@@ -43,6 +43,7 @@ export interface SnapPaymentResult {
     // pribadi
     alamat: string;
     stok: string;
+    // stok: number; // Ubah menjadi number jika backend mendukung
 
     // dari midtrans
     status_code: string;
