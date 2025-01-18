@@ -47,13 +47,15 @@ const start = async () => {
     });
     
     await fastify.ready();
-    await fastify.listen({ port: process.env.port }, (err, address) => {
+    const port = process.env.PORT || 8000; // Menggunakan port yang diberikan oleh Cloud Run atau fallback ke 8000
+    await fastify.listen({ port }, (err, address) => {
         if (err) {
             fastify.error(err)
             process.exit(1)
         }
         fastify.info(`Server listening at ${address}`);
     });
+
 };
 
 start()
