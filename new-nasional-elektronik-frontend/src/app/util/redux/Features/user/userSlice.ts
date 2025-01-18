@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { ProductStruct, VerifyTokenData } from "@/app/types/types";
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";

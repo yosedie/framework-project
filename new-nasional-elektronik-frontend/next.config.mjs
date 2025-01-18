@@ -9,7 +9,9 @@ const nextConfig = {
                 pathname: '/**',
             },
         ],
+        unoptimized: true, // Menonaktifkan optimasi gambar
     },
+    output: 'export', // Tetap menggunakan output statis
 };
 
 export default nextConfig;
