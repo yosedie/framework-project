@@ -4,3 +4,6 @@
 .gitignore
 <!-- .next/ -->
 node_modules/
+*.log
+.cache/
+.env

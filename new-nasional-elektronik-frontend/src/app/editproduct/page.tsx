@@ -65,11 +65,12 @@ const Item = styled(Paper)(({ theme }) => ({
 const productsName = ["Test", "Test2"]
 
 export default function AddProduct() {
-  const searchParams = useSearchParams()
-  const param = searchParams.get("key");
+//   const searchParams = useSearchParams()
+//   const param = searchParams.get("key");
 
 
-  const isAdd : boolean = searchParams.get('add') === "1"
+//   const isAdd : boolean = searchParams.get('add') === "1"
+const [isAdd, setIsAdd] = React.useState<boolean>(false);
 
   const router = useRouter()
   const count = useSelector((state: RootState) => state.counter.value)
@@ -103,20 +104,52 @@ export default function AddProduct() {
     }));
   };
   
-  async function fetchSingleProductHandler(): Promise<FetchProductStruct> {
+//   async function fetchSingleProductHandler(): Promise<FetchProductStruct> {
+//     try {
+//       const productID = searchParams.get('id')
+//       const response = await axios.get<ApiResponse<FetchProductStruct>>('/fetchProduct', {
+//         params: {
+//             productID: productID
+//         }
+//       });
+  
+//       if (response.data.status) {
+//         const selectedProduct = {...response.data.data.product[0]}
+//         const {gambar_url} = selectedProduct
+//         setProductImage(gambar_url as string)
+//         setAddData(selectedProduct)
+//       } else {
+//         execToast(ToastStatus.ERROR, response.data.message);
+//       }
+  
+//       return response.data.data;
+//     } catch (error) {
+//       execToast(ToastStatus.ERROR, JSON.stringify(error));
+//       throw error;
+//     }
+//   }
+
+async function fetchSingleProductHandler(): Promise<FetchProductStruct> {
     try {
-      const productID = searchParams.get('id')
+      const productID =
+        typeof window !== 'undefined'
+          ? new URLSearchParams(window.location.search).get('id')
+          : null;
+  
+      if (!productID) {
+        execToast(ToastStatus.ERROR, 'Product ID tidak ditemukan.');
+        return Promise.reject('Product ID missing.');
+      }
+  
       const response = await axios.get<ApiResponse<FetchProductStruct>>('/fetchProduct', {
-        params: {
-            productID: productID
-        }
+        params: { productID },
       });
   
       if (response.data.status) {
-        const selectedProduct = {...response.data.data.product[0]}
-        const {gambar_url} = selectedProduct
-        setProductImage(gambar_url as string)
-        setAddData(selectedProduct)
+        const selectedProduct = { ...response.data.data.product[0] };
+        const { gambar_url } = selectedProduct;
+        setProductImage(gambar_url as string);
+        setAddData(selectedProduct);
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -126,7 +159,7 @@ export default function AddProduct() {
       execToast(ToastStatus.ERROR, JSON.stringify(error));
       throw error;
     }
-  }
+  }  
 
 //   async function addProductHandler(): Promise<ProductStruct> {
 //     try {
@@ -167,8 +200,33 @@ function addProductHandler(): Promise<ProductStruct> {
         throw error;
       });
   }
-  function editProductHandler(): Promise<ProductStruct> {
-    const productID = searchParams.get('id');
+//   function editProductHandler(): Promise<ProductStruct> {
+//     const productID = searchParams.get('id');
+//     return axios.put<ApiResponse<ProductStruct>>('/editProduct', {
+//       ...addData,
+//       gambar_url: productImage,
+//       id_produk: productID,
+//     })
+//       .then(response => {
+//         if (response.data.status) {
+//           execToast(ToastStatus.SUCCESS, response.data.message);
+//           router.push("/products");
+//         } else {
+//           execToast(ToastStatus.ERROR, response.data.message);
+//         }
+//         return response.data.data;
+//       })
+//       .catch(error => {
+//         execToast(ToastStatus.ERROR, JSON.stringify(error));
+//         throw error;
+//       });
+//   }  
+
+function editProductHandler(): Promise<ProductStruct> {
+    const productID = typeof window !== 'undefined' 
+      ? new URLSearchParams(window.location.search).get('id') 
+      : null;
+  
     return axios.put<ApiResponse<ProductStruct>>('/editProduct', {
       ...addData,
       gambar_url: productImage,
@@ -214,12 +272,28 @@ function addProductHandler(): Promise<ProductStruct> {
 //     }
 //   }
 
-  React.useEffect(() => {
-    if(searchParams.get('id') && searchParams.get('id') !== "") {
-        fetchSingleProductHandler()
-    }
-  }, [])
+//   React.useEffect(() => {
+//     if(searchParams.get('id') && searchParams.get('id') !== "") {
+//         fetchSingleProductHandler()
+//     }
+//   }, [])
 
+  React.useEffect(() => {
+    const id = typeof window !== 'undefined' 
+      ? new URLSearchParams(window.location.search).get('id') 
+      : null;
+  
+    if (id && id !== "") {
+      fetchSingleProductHandler();
+    }
+  }, []);
+  React.useEffect(() => {
+    const addParam = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('add')
+      : null;
+  
+    setIsAdd(addParam === "1");
+  }, []);
   return (
    <Box sx={{backgroundColor: "white"}}>
     <AppBar />
@@ -468,9 +542,9 @@ function addProductHandler(): Promise<ProductStruct> {
                 </Grid>
             </Grid>
     <Footer />
-        <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense>
+        {/* <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense> */}
    </Box>
   );
 }
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 // export const dynamic = "force-no-static";

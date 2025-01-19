@@ -59,11 +59,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function EditAddEvent() {
-  const searchParams = useSearchParams()
-  const param = searchParams.get("key");
+  // const searchParams = useSearchParams()
+  // const param = searchParams.get("key");
 
 
-  const isAdd : boolean = searchParams.get('add') === "1"
+  // const isAdd : boolean = searchParams.get('add') === "1"
+  const [isAdd, setIsAdd] = React.useState<boolean>(false);
 
   const router = useRouter()
   const count = useSelector((state: RootState) => state.counter.value)
@@ -85,20 +86,52 @@ export default function EditAddEvent() {
     }));
   };
   
+  // async function fetchSingleEventHandler(): Promise<FetchEventStruct> {
+  //   try {
+  //     const eventID = searchParams.get('id')
+  //     const response = await axios.get<ApiResponse<FetchEventStruct>>('/fetchEvent', {
+  //       params: {
+  //           eventID
+  //       }
+  //     });
+  
+  //     if (response.data.status) {
+  //       const selectedEvent = {...response.data.data.event[0]}
+  //       const {gambar_url} = selectedEvent
+  //       setEventImage(gambar_url as string)
+  //       setAddEventData(selectedEvent)
+  //     } else {
+  //       execToast(ToastStatus.ERROR, response.data.message);
+  //     }
+  
+  //     return response.data.data;
+  //   } catch (error) {
+  //     execToast(ToastStatus.ERROR, JSON.stringify(error));
+  //     throw error;
+  //   }
+  // }
+
   async function fetchSingleEventHandler(): Promise<FetchEventStruct> {
     try {
-      const eventID = searchParams.get('id')
+      const eventID =
+        typeof window !== 'undefined'
+          ? new URLSearchParams(window.location.search).get('id')
+          : null;
+  
+      if (!eventID) {
+        execToast(ToastStatus.ERROR, 'Event ID tidak ditemukan.');
+        return Promise.reject('Event ID missing.');
+      }
+  
       const response = await axios.get<ApiResponse<FetchEventStruct>>('/fetchEvent', {
-        params: {
-            eventID
-        }
+        params: { eventID },
       });
   
       if (response.data.status) {
-        const selectedEvent = {...response.data.data.event[0]}
-        const {gambar_url} = selectedEvent
-        setEventImage(gambar_url as string)
-        setAddEventData(selectedEvent)
+        const selectedEvent = { ...response.data.data.event[0] };
+        const { gambar_url } = selectedEvent;
+        setEventImage(gambar_url as string);
+        setAddEventData(selectedEvent);
       } else {
         execToast(ToastStatus.ERROR, response.data.message);
       }
@@ -108,7 +141,7 @@ export default function EditAddEvent() {
       execToast(ToastStatus.ERROR, JSON.stringify(error));
       throw error;
     }
-  }
+  }  
 
   // async function addEventHandler(): Promise<EventStruct> {
   //   try {
@@ -149,8 +182,32 @@ export default function EditAddEvent() {
         throw error;
       });
   }
+  // function editEventHandler(): Promise<EventStruct> {
+  //   const id_event = searchParams.get('id');
+  //   return axios.put<ApiResponse<EventStruct>>('/editEvent', {
+  //     ...addEventData,
+  //     gambar_url: eventImage,
+  //     id_event: id_event,
+  //   })
+  //     .then(response => {
+  //       if (response.data.status) {
+  //         execToast(ToastStatus.SUCCESS, response.data.message);
+  //       } else {
+  //         execToast(ToastStatus.ERROR, response.data.message);
+  //       }
+  //       return response.data.data;
+  //     })
+  //     .catch(error => {
+  //       execToast(ToastStatus.ERROR, JSON.stringify(error));
+  //       throw error;
+  //     });
+  // }
+
   function editEventHandler(): Promise<EventStruct> {
-    const id_event = searchParams.get('id');
+    const id_event = typeof window !== 'undefined' 
+      ? new URLSearchParams(window.location.search).get('id') 
+      : null;
+  
     return axios.put<ApiResponse<EventStruct>>('/editEvent', {
       ...addEventData,
       gambar_url: eventImage,
@@ -169,7 +226,8 @@ export default function EditAddEvent() {
         throw error;
       });
   }
-    
+  
+
   // async function editEventHandler(): Promise<EventStruct> {
   //   try {
   //     const id_event = searchParams.get('id')
@@ -194,12 +252,28 @@ export default function EditAddEvent() {
   //   }
   // }
 
-  React.useEffect(() => {
-    if(searchParams.get('id') && searchParams.get('id') !== "") {
-        fetchSingleEventHandler()
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   if(searchParams.get('id') && searchParams.get('id') !== "") {
+  //       fetchSingleEventHandler()
+  //   }
+  // }, [])
 
+  React.useEffect(() => {
+    const id = typeof window !== 'undefined' 
+      ? new URLSearchParams(window.location.search).get('id') 
+      : null;
+  
+    if (id && id !== "") {
+      fetchSingleEventHandler();
+    }
+  }, []);
+  React.useEffect(() => {
+    const addParam = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('add')
+      : null;
+  
+    setIsAdd(addParam === "1");
+  }, []);
   return (
    <Box sx={{backgroundColor: "white"}}>
     <AppBar />
@@ -361,9 +435,9 @@ export default function EditAddEvent() {
                 </Grid>
             </Grid>
     <Footer />
-      <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense>
+      {/* <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense> */}
    </Box>
   );
 }
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 // export const dynamic = "force-no-static";
