@@ -11,7 +11,10 @@ const nextConfig = {
         ],
         unoptimized: true, // Menonaktifkan optimasi gambar
     },
-    output: 'export', // Tetap menggunakan output statis
+    // output: 'export', // Tetap menggunakan output statis
+    // experimental: {
+    //     appDir: true, // Menggunakan App Router
+    // },
 };
 
 export default nextConfig;

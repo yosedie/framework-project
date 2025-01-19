@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/jsx-key */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
@@ -7,6 +11,7 @@ import { ProductStruct, FetchProductStruct, ApiResponse } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
+import { Suspense } from "react";
 
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
@@ -61,6 +66,9 @@ const productsName = ["Test", "Test2"]
 
 export default function AddProduct() {
   const searchParams = useSearchParams()
+  const param = searchParams.get("key");
+
+
   const isAdd : boolean = searchParams.get('add') === "1"
 
   const router = useRouter()
@@ -120,51 +128,91 @@ export default function AddProduct() {
     }
   }
 
-  async function addProductHandler(): Promise<ProductStruct> {
-    try {
-      const response = await axios.post<ApiResponse<ProductStruct>>('/addProduct', {
-        ...addData, 
-        gambar_url: productImage
+//   async function addProductHandler(): Promise<ProductStruct> {
+//     try {
+//       const response = await axios.post<ApiResponse<ProductStruct>>('/addProduct', {
+//         ...addData, 
+//         gambar_url: productImage
+//       });
+  
+//       if (response.data.status) {
+//         execToast(ToastStatus.SUCCESS, response.data.message)
+//         router.push("/products")
+//       } else {
+//         execToast(ToastStatus.ERROR, response.data.message);
+//       }
+  
+//       return response.data.data;
+//     } catch (error) {
+//       execToast(ToastStatus.ERROR, JSON.stringify(error));
+//       throw error;
+//     }
+//   }  
+function addProductHandler(): Promise<ProductStruct> {
+    return axios.post<ApiResponse<ProductStruct>>('/addProduct', {
+      ...addData,
+      gambar_url: productImage,
+    })
+      .then(response => {
+        if (response.data.status) {
+          execToast(ToastStatus.SUCCESS, response.data.message);
+          router.push("/products");
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message);
+        }
+        return response.data.data;
+      })
+      .catch(error => {
+        execToast(ToastStatus.ERROR, JSON.stringify(error));
+        throw error;
       });
-  
-      if (response.data.status) {
-        execToast(ToastStatus.SUCCESS, response.data.message)
-        router.push("/products")
-      } else {
-        execToast(ToastStatus.ERROR, response.data.message);
-      }
-  
-      return response.data.data;
-    } catch (error) {
-      execToast(ToastStatus.ERROR, JSON.stringify(error));
-      throw error;
-    }
+  }
+  function editProductHandler(): Promise<ProductStruct> {
+    const productID = searchParams.get('id');
+    return axios.put<ApiResponse<ProductStruct>>('/editProduct', {
+      ...addData,
+      gambar_url: productImage,
+      id_produk: productID,
+    })
+      .then(response => {
+        if (response.data.status) {
+          execToast(ToastStatus.SUCCESS, response.data.message);
+          router.push("/products");
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message);
+        }
+        return response.data.data;
+      })
+      .catch(error => {
+        execToast(ToastStatus.ERROR, JSON.stringify(error));
+        throw error;
+      });
   }  
 
-  async function editProductHandler(): Promise<ProductStruct> {
-    try {
-      const productID = searchParams.get('id')
-      const response = await axios.put<ApiResponse<ProductStruct>>('/editProduct', {
-        ...addData,
-        gambar_url: productImage,
-        id_produk: productID,
-      });
+//   async function editProductHandler(): Promise<ProductStruct> {
+//     try {
+//       const productID = searchParams.get('id')
+//       const response = await axios.put<ApiResponse<ProductStruct>>('/editProduct', {
+//         ...addData,
+//         gambar_url: productImage,
+//         id_produk: productID,
+//       });
   
-      if (response.data.status) {
-        // const token = response.data.data.jwt_token;
-        // const role = response.data.data.role;
-        execToast(ToastStatus.SUCCESS, response.data.message)
-        router.push("/products")
-      } else {
-        execToast(ToastStatus.ERROR, response.data.message);
-      }
+//       if (response.data.status) {
+//         // const token = response.data.data.jwt_token;
+//         // const role = response.data.data.role;
+//         execToast(ToastStatus.SUCCESS, response.data.message)
+//         router.push("/products")
+//       } else {
+//         execToast(ToastStatus.ERROR, response.data.message);
+//       }
   
-      return response.data.data;
-    } catch (error) {
-      execToast(ToastStatus.ERROR, JSON.stringify(error));
-      throw error;
-    }
-  }
+//       return response.data.data;
+//     } catch (error) {
+//       execToast(ToastStatus.ERROR, JSON.stringify(error));
+//       throw error;
+//     }
+//   }
 
   React.useEffect(() => {
     if(searchParams.get('id') && searchParams.get('id') !== "") {
@@ -387,6 +435,8 @@ export default function AddProduct() {
                                     </FormControl>
                                 )
                             }
+                            <Suspense fallback={<div>Loading...</div>}>
+
                             <Button 
                                 variant="contained" 
                                 onClick={
@@ -400,6 +450,8 @@ export default function AddProduct() {
                                 }}>
                                 {isAdd ? "Add" : "Edit"} Product
                             </Button>
+
+                            </Suspense>
                             <Button
                                 color={"warning"}
                                 variant="contained" 
@@ -410,11 +462,15 @@ export default function AddProduct() {
                                 }}>
                                 Go Back
                             </Button>
+                            
                         </Box>
                     </Item>
                 </Grid>
             </Grid>
     <Footer />
+        <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense>
    </Box>
   );
 }
+export const dynamic = "force-dynamic";
+// export const dynamic = "force-no-static";

@@ -7,6 +7,7 @@ import { EventStruct, FetchEventStruct, ApiResponse } from '../types/types';
 import { execToast, ToastStatus } from '../util/toastify/toast';
 
 import React from 'react';
+import { Suspense } from "react";
 
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
@@ -59,6 +60,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function EditAddEvent() {
   const searchParams = useSearchParams()
+  const param = searchParams.get("key");
+
+
   const isAdd : boolean = searchParams.get('add') === "1"
 
   const router = useRouter()
@@ -106,50 +110,89 @@ export default function EditAddEvent() {
     }
   }
 
-  async function addEventHandler(): Promise<EventStruct> {
-    try {
-      const response = await axios.post<ApiResponse<EventStruct>>('/addEvent', {
-        ...addEventData, 
-        gambar_url: eventImage
+  // async function addEventHandler(): Promise<EventStruct> {
+  //   try {
+  //     const response = await axios.post<ApiResponse<EventStruct>>('/addEvent', {
+  //       ...addEventData, 
+  //       gambar_url: eventImage
+  //     });
+  
+  //     if (response.data.status) {
+  //       execToast(ToastStatus.SUCCESS, response.data.message)
+  //       router.push("/manageevent")
+  //     } else {
+  //       execToast(ToastStatus.ERROR, response.data.message);
+  //     }
+  
+  //     return response.data.data;
+  //   } catch (error) {
+  //     execToast(ToastStatus.ERROR, JSON.stringify(error));
+  //     throw error;
+  //   }
+  // }  
+  function addEventHandler(): Promise<EventStruct> {
+    return axios.post<ApiResponse<EventStruct>>('/addEvent', {
+      ...addEventData,
+      gambar_url: eventImage,
+    })
+      .then(response => {
+        if (response.data.status) {
+          execToast(ToastStatus.SUCCESS, response.data.message);
+          router.push("/manageevent");
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message);
+        }
+        return response.data.data;
+      })
+      .catch(error => {
+        execToast(ToastStatus.ERROR, JSON.stringify(error));
+        throw error;
       });
-  
-      if (response.data.status) {
-        execToast(ToastStatus.SUCCESS, response.data.message)
-        router.push("/manageevent")
-      } else {
-        execToast(ToastStatus.ERROR, response.data.message);
-      }
-  
-      return response.data.data;
-    } catch (error) {
-      execToast(ToastStatus.ERROR, JSON.stringify(error));
-      throw error;
-    }
-  }  
-
-  async function editEventHandler(): Promise<EventStruct> {
-    try {
-      const id_event = searchParams.get('id')
-      const response = await axios.put<ApiResponse<EventStruct>>('/editEvent', {
-        ...addEventData,
-        gambar_url: eventImage,
-        id_event: id_event,
-      });
-  
-      if (response.data.status) {
-        // const token = response.data.data.jwt_token;
-        // const role = response.data.data.role;
-        execToast(ToastStatus.SUCCESS, response.data.message)
-      } else {
-        execToast(ToastStatus.ERROR, response.data.message);
-      }
-  
-      return response.data.data;
-    } catch (error) {
-      execToast(ToastStatus.ERROR, JSON.stringify(error));
-      throw error;
-    }
   }
+  function editEventHandler(): Promise<EventStruct> {
+    const id_event = searchParams.get('id');
+    return axios.put<ApiResponse<EventStruct>>('/editEvent', {
+      ...addEventData,
+      gambar_url: eventImage,
+      id_event: id_event,
+    })
+      .then(response => {
+        if (response.data.status) {
+          execToast(ToastStatus.SUCCESS, response.data.message);
+        } else {
+          execToast(ToastStatus.ERROR, response.data.message);
+        }
+        return response.data.data;
+      })
+      .catch(error => {
+        execToast(ToastStatus.ERROR, JSON.stringify(error));
+        throw error;
+      });
+  }
+    
+  // async function editEventHandler(): Promise<EventStruct> {
+  //   try {
+  //     const id_event = searchParams.get('id')
+  //     const response = await axios.put<ApiResponse<EventStruct>>('/editEvent', {
+  //       ...addEventData,
+  //       gambar_url: eventImage,
+  //       id_event: id_event,
+  //     });
+  
+  //     if (response.data.status) {
+  //       // const token = response.data.data.jwt_token;
+  //       // const role = response.data.data.role;
+  //       execToast(ToastStatus.SUCCESS, response.data.message)
+  //     } else {
+  //       execToast(ToastStatus.ERROR, response.data.message);
+  //     }
+  
+  //     return response.data.data;
+  //   } catch (error) {
+  //     execToast(ToastStatus.ERROR, JSON.stringify(error));
+  //     throw error;
+  //   }
+  // }
 
   React.useEffect(() => {
     if(searchParams.get('id') && searchParams.get('id') !== "") {
@@ -286,6 +329,8 @@ export default function EditAddEvent() {
                                 multiline
                                 maxRows={3}
                             />
+                            <Suspense fallback={<div>Loading...</div>}>
+
                             <Button 
                                 variant="contained" 
                                 onClick={
@@ -299,6 +344,8 @@ export default function EditAddEvent() {
                                 }}>
                                 {isAdd ? "Add" : "Edit"} Event
                             </Button>
+                            
+                            </Suspense>
                             <Button
                                 color={"warning"}
                                 variant="contained" 
@@ -314,6 +361,9 @@ export default function EditAddEvent() {
                 </Grid>
             </Grid>
     <Footer />
+      <Suspense fallback={<div>Loading...</div>}><div>{param}</div>;</Suspense>
    </Box>
   );
 }
+export const dynamic = "force-dynamic";
+// export const dynamic = "force-no-static";

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
@@ -63,7 +65,9 @@ export default function Login() {
     alamat: "",
     status: "pending",
   })
-  const searchParams = useSearchParams()
+//   const searchParams = useSearchParams();
+//   const param = searchParams.get("key");
+//   return <div>{param}</div>;
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -220,3 +224,5 @@ export default function Login() {
    </Box>
   );
 }
+// export const dynamic = "force-dynamic";
+// export const dynamic = "force-no-static";
