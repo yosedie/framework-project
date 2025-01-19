@@ -1,3 +1,9 @@
+hosting menggunakan google cloud
+front-end
+https://axial-autonomy-448211-q0.et.r.appspot.com/
+back-end
+https://new-nasional-backend-4ojsxyqlsa-et.a.run.app/
+
 # framework-project + SDP
 #tutorial inisialisasi singkat:
 npm install nodemon -g
