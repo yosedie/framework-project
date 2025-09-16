@@ -113,7 +113,7 @@ export default function HorizontalNonLinearStepper() {
   return (
     <Box sx={{ width: '100%', padding: "2.5% 5%" }}>
       <Typography variant='h5' sx={{ mt: 2, mb: 1, py: 1 }} textAlign={"right"}>
-        Bagaimana cara belanja di <span style={{fontWeight: "bold"}}>New Nasional ?</span>
+        Bagaimana cara belanja di <span style={{fontWeight: "bold"}}>New Nasional (Diamond Electronic) ?</span>
       </Typography>
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (

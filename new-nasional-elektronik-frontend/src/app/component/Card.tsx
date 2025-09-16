@@ -37,6 +37,7 @@ type ImgMediaCardProps = {
   fullWidth?: boolean;
   withImage?: boolean;
   marginTopParam?: string;
+  buttonColor?: string;
   onClickCard?: (data: any) => void;
   onClickSecondaryCard?: (data: any) => void;
   onClickAddQuantity?: (data: any) => void;
@@ -66,6 +67,7 @@ export default function ImgMediaCard({
   fullWidth,
   withImage,
   marginTopParam,
+  buttonColor,
   onClickCard,
   onClickSecondaryCard,
   onClickAddQuantity,
@@ -259,6 +261,7 @@ export default function ImgMediaCard({
                           size="small" 
                           sx={{
                             margin: "0 auto",
+                            backgroundColor: buttonColor || undefined,
                           }}
                           fullWidth 
                           onClick={onClickCard}
@@ -272,6 +275,7 @@ export default function ImgMediaCard({
                           size="small" 
                           sx={{
                             margin: "0 auto",
+                            backgroundColor: buttonColor || undefined,
                           }}
                           fullWidth 
                           onClick={onClickSecondaryCard}

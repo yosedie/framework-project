@@ -570,12 +570,13 @@ export default function Products() {
                             <>
                                 <Grid size={3}>
                                     <Item>
-                                        <Card
+                    <Card
                                             key={`${data.id_produk}_${index}`}
                                             title={data.nama_produk}
                                             description={data.deskripsi.trim()}
                                             image_url={data.gambar_url}
                                             withImage
+                                            buttonColor={(role === 'user' || role === '') ? '#cc0000' : undefined}
                                             onClickCard={() => {
                                               if(role && role.length > 0) {
                                                 if(role === "user") {

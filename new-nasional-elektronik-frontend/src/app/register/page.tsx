@@ -225,7 +225,7 @@ export default function Register() {
                             variant="outlined" 
                             onChange={handleChange} 
                         />
-                        <Button variant="contained" sx={{marginTop: "2.5%"}} onClick={registerHandler}>Register</Button>
+                        <Button variant="contained" sx={{marginTop: "2.5%", backgroundColor: '#cc0000' }} onClick={registerHandler}>Register</Button>
                         <Typography variant="subtitle2" component="h6" sx={{color: "black", marginTop: "1%"}}>
                             Dengan mendaftar, saya setuju dengan <br />
                             <span onClick={handleOpen} style={{cursor: "pointer", color: "blueviolet", textDecoration: "underline"}}>
@@ -254,10 +254,10 @@ export default function Register() {
                             height={400}
                         />
                         <Typography variant="h6" component="h6" sx={{color: "black"}}>
-                            Jual beli murah hanya di National Electronic
+                            Jual beli murah hanya di Diamond Electronic
                         </Typography>
                         <Typography variant="overline" component="h6" sx={{color: "black"}}>
-                            Gabung dan rasakan kemudahan bertransaksi di National Electronic
+                            Gabung dan rasakan kemudahan bertransaksi di Diamond Electronic
                         </Typography>
                     </Box>
                 </Item>

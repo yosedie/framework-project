@@ -168,10 +168,10 @@ export default function Login() {
                                 height={400}
                             />
                             <Typography variant="h6" component="h6" sx={{color: "black"}}>
-                                Jual beli murah hanya di National Electronic
+                                Jual beli murah hanya di Diamond Electronic
                             </Typography>
                             <Typography variant="overline" component="h6" sx={{color: "black"}}>
-                                Gabung dan rasakan kemudahan bertransaksi di National Electronic
+                                Gabung dan rasakan kemudahan bertransaksi di Diamond Electronic
                             </Typography>
                         </Box>
                     </Item>
@@ -209,7 +209,7 @@ export default function Login() {
                                 sx={{ marginBottom: "1.25%" }} 
                                 onChange={handleChange} 
                             />
-                            <Button variant="contained" onClick={loginHandler}>
+                            <Button variant="contained" onClick={loginHandler} sx={{ backgroundColor: '#cc0000' }}>
                                 Login
                             </Button> <br />
 

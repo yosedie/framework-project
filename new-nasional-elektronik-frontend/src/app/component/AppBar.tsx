@@ -74,7 +74,8 @@ function ResponsiveAppBar() {
     };
 
     return (
-    <AppBar position="static">
+    <>
+    <AppBar position="fixed" sx={{ backgroundColor: '#cc0000' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
         <Image
@@ -240,6 +241,9 @@ function ResponsiveAppBar() {
         </Toolbar>
       </Container>
     </AppBar>
+    {/* Spacer to prevent content from being hidden behind fixed AppBar */}
+    <Toolbar />
+    </>
   );
 }
 export default ResponsiveAppBar;

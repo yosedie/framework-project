@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Footer() {
   const router = useRouter()
   return (
-    <AppBar position="static" sx={{marginTop: "auto", padding: "2.5%"}}>
+  <AppBar position="static" sx={{ marginTop: "auto", padding: "2.5%", backgroundColor: '#cc0000' }}>
       <Container maxWidth="xl">
         <Grid container spacing={2}>
           <Grid size={4}>
@@ -79,7 +79,7 @@ function Footer() {
               />
               <Typography variant="body1" color='white'>
                 <b>
-                  @ New Nasional Elektronik 2024
+                  @ Diamond Elektronic 2025
                 </b>
               </Typography>
             </Item>

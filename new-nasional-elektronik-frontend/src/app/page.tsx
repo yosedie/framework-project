@@ -85,7 +85,7 @@ export default function Home() {
       <StepperHome />
       <StepperHome2 />
       <Typography variant='h5' sx={{ mt: 2, mb: 1, py: 1 }} textAlign={"center"}>
-        Dimana toko <span style={{fontWeight: "bold"}}>New Nasional ?</span>
+        Dimana toko <span style={{fontWeight: "bold"}}>New Nasional (Diamond Electronic) ?</span>
       </Typography>
       <Box 
         sx={{ 
