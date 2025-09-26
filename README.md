@@ -1,6 +1,6 @@
-#NewNational(DiamondElectronic)
+## NewNational(DiamondElectronic)
 
-#Quick initialization tutorial:
+Quick initialization tutorial:
 npm install nodemon -g
 npm install fastify@4
 npm install @fastify/formbody@7.4.0
