@@ -1,7 +1,6 @@
-hosting menggunakan google cloud platform
+#NewNational(DiamondElectronic)
 
-# framework-project + SDP
-#tutorial inisialisasi singkat:
+#Quick initialization tutorial:
 npm install nodemon -g
 npm install fastify@4
 npm install @fastify/formbody@7.4.0
@@ -10,81 +9,76 @@ npm install mongoose
 npm install fastify-log
 ...
 
+## Description(Framework Side)
+This framework is designed to simplify web application development by providing tools, libraries, and structures for building scalable and maintainable applications.
 
-## Deskripsi
-Framework ini dirancang untuk mempermudah pengembangan aplikasi web dengan menyediakan alat, pustaka, dan struktur untuk membangun aplikasi yang skalabel dan mudah dikelola.
+### Features
+- MVC architecture support
+- Built-in routing and templating
+- RESTful API integration
+- Database abstraction layer
+- User authentication management
 
-### Fitur
-- Dukungan arsitektur MVC
-- Routing dan templating bawaan
-- Integrasi RESTful API
-- Lapisan abstraksi database
-- Manajemen autentikasi pengguna
-
-### Instalasi
+### Installation
 ```bash
 npm install
 ```
 
-### Penggunaan
+### Usage
 ```bash
 npm start
 ```
 
 ---
 
-# Proyek Pengembangan Perangkat Lunak
+## Description(DevOps Side)
+This project focuses on modular design, scalability, and ease of maintenance, aimed at enterprise applications.
 
-## Deskripsi
-Proyek pengembangan perangkat lunak ini berfokus pada desain modular, skalabilitas, dan kemudahan perawatan, ditujukan untuk aplikasi enterprise.
+### Features
+- Modular design for extensions
+- Microservices architecture
+- CI/CD integration
+- Cloud-native application support
 
-### Fitur
-- Desain modular untuk ekstensi
-- Arsitektur microservices
-- Integrasi CI/CD
-- Dukungan aplikasi cloud-native
-
-### Instalasi
+### Installation
 ```bash
 npm install
 ```
 
-### Menjalankan Proyek
+### Running the Project
 ```bash
 npm run build
 npm start
 ```
 
-### Kontribusi
-1. Fork repositori
-2. Buat branch baru
-3. Commit perubahan
-4. Buat pull request
+### Contributions
+1. Fork the repository
+2. Create a new branch
+3. Commit changes
+4. Create a pull request
 
 ---
 
-# Pengujian Perangkat Lunak
+## Description(Testing)
+This testing suite is designed to automate unit, integration, and end-to-end (E2E) testing for web and desktop applications.
 
-## Deskripsi
-Suite pengujian ini dirancang untuk mengotomatisasi unit test, integrasi, dan pengujian end-to-end (E2E) untuk aplikasi web dan desktop.
+### Features
+- Cross-browser testing
+- Unit, integration, and E2E automation
+- Test coverage reporting
+- Test integration in CI/CD
 
-### Fitur
-- Pengujian lintas browser
-- Otomatisasi unit, integrasi, dan E2E
-- Laporan cakupan pengujian
-- Integrasi pengujian di CI/CD
-
-### Instalasi
+### Installation
 ```bash
 npm install
 ```
 
-### Menjalankan Pengujian
+### Running Tests
 ```bash
 npm test
 ```
 
-### Laporan Cakupan
+### Coverage Reporting
 ```bash
 npm run coverage
 ```
